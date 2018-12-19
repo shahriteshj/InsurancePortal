@@ -1,0 +1,24 @@
+User 
+Admin Profile
+Staff Profile
+Customer Profile
+Insurance
+Claim 
+
+==> FLOW
+Customer Query -> Customer-> Staff  Staff to eirther close or fwd to Admin   Admin -> staff will close admins' ticket
+
+
+==> FLOW - CUSTOMER NEW PLAN FLOW
+Customer Choose/Buy Plan -> Admin -> Approved  or Reject
+
+==> FLOW - CUSTOMER RENEW PLAN FLOW
+Customer Renew Plan -> Admin -> Approved  or Reject [After renewing imp to change the insurance number] 
+
+==> FLOW - CUSTOMER Claim PLAN FLOW
+Customer Claim Plan -> Admin -> Approved or Reject
+
+
+
+Track Status - It will show insurance + claim status details
+
