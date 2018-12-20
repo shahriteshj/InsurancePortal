@@ -13,18 +13,19 @@ ACTORS =>
 						
 			STAFF  
 				-> MANAGER  
-							- Login
-							- Insurance Policy APPROVAL / Rejection
-							- Claim APPROVAL / Rejection
-							- Query Resolution
-							- REPORTS GENERATION -> REPORTS CUSTOMER LEVEL, INSURANCE LEVEL, Claim Level
+						-> Login
+						-> Insurance Policy APPROVAL / Rejection
+						-> Claim APPROVAL / Rejection
+						-> Query Resolution
+						-> REPORTS GENERATION -> REPORTS CUSTOMER LEVEL, INSURANCE LEVEL, Claim Level
 
 				-> OPERATION 
-							- Login
-							- Query Resolution
+						-> Login
+						-> Query Resolution
+						
 				-> INSPECTOR 
-							- Login
-							- View Claims. Submit Comments
+						-> Login
+						-> View Claims. Submit Comments
 				
 			ADMIN	
 				-> User Account Management -> Account unlock, User Reports 
