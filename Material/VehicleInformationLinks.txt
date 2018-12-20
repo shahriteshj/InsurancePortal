@@ -8,3 +8,10 @@ https://general.bajajallianz.com/MotorInsurance/onlineportal/motorNew/buy-new-po
 
 Class Diagram Links
 https://www.freeprojectz.com/uml/vehicle-insurance-management-system-class-diagram
+
+UML Diagram Links
+https://www.freeprojectz.com/uml-diagram/vehicle-insurance-management-system-uml-diagram
+
+
+Use Case diagram
+https://creately.com/diagram/example/hgc20txp2/MOTOR%20INSURANCE%20USE%20CASE%20DIAGRAM%20
