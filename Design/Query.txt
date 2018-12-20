@@ -5,9 +5,10 @@ OPS -> 	View List of queries assigned -> Select a query and provide response -> 
 		
 		
 Manager -> View List of queries assinged -> Select 1 query and provide response -> Close Query
+			View List of queries -> Select a query and assign to Manager / Inspector
 
 Inspector -> View List of queries assinged -> Select 1 query and provide response -> Close Query
-
+			View List of queries -> Select a query and assign to Manager / Inspector
 
 
 
