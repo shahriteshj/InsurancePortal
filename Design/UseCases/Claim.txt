@@ -1,0 +1,89 @@
+Customer -> Raises a Claim ->
+
+Inspector -> View List of claims assinged -> Select 1 claim and provide comments -> send it to Manager
+
+Manager -> View List of claims assinged -> Select 1 claim and approved/reject
+
+Customer -> View claim History
+
+======================================================================
+INFORMATION ABOUT INSURED
+======================================================================
+	claim id (Auto Generated)
+	Policy No: 
+	Name: 
+	Correspondence Address
+	City:
+	Pincode:
+	Mobile No.:
+	Email ID:
+	PAN:
+	Aadhaar:
+	CKYC No.:
+======================================================================
+INFORMATION ABOUT INSURED VEHICLE
+======================================================================
+	Registration No.:
+	Chassis No.:
+	Hypothecation / Vehicle Loan
+======================================================================
+DETAILS ABOUT THE DRIVER (At the material time of accident)
+======================================================================
+	Name:
+	Driver is  [] Owner		[] Paid driver 	[] Relative / Friend 	
+	Contact No.:
+	Driving License Number:
+======================================================================
+DETAILS OF ACCIDENT / THEFT
+======================================================================
+	Date:
+	Time:		am / pm
+	Location:
+	City:
+	State:
+	Number of persons travelling:
+	Give brief description of the accident
+	Was any third party responsible / liable for the accident / theft?			[]Yes	[]No
+	If yes, please provide a copy of FIR Details (FIR number) 
+	Do you wish to provide any other information?								[]Yes	[]No		If yes, you may please attach a separate sheet.
+	Please enclose legible copies of the following documents, duly attested by the insured:
+		[] Registration certificate [] Driving license (of the driver) [] FIR if lodged [] Fire Brigade Report if lodged [] Cancelled cheque
+		
+	Incase of commercial vehicle submit the following additional documents
+
+		[] Permit [] Fitness certificate [] LR/GR [] Road Tax Receipt
+	
+
+	I/We hereby agree, affirm and declare that :
+	
+	Place:
+	
+	Date: 																		Signature / Thumb Impression of the Insured
+	
+	
+
+=========================================================================
+SATISFACTION NOTE
+=========================================================================
+Claim No.:
+Vehicle No.:
+Policy No.:
+
+
+
+Date:
+
+=========================================================================
+DISCHARGE VOUCHER
+=========================================================================
+Claim No.:
+Vehicle No.:
+INR.
+Date:
+Policy No.
+Date:
+=========================================================================
+
+Claim Entity
+ClaimDao - Methods	
+ClaimService -Services
