@@ -5,10 +5,10 @@ ACTORS =>
 						-> Registration
 				-> EXISTING CUSTOMER
 						-> Login
+						-> Buy New
 						-> View Existing Policies & Claims
 						-> Renew
 						-> Claim -> Claim Form
-						-> Buy New
 						-> Raise Query -> View Query History
 						
 			STAFF  
@@ -33,7 +33,3 @@ ACTORS =>
 				
 			CLAIM FORM - CLAIM FORM SHOULD BE GENERATE
 
-Verification of the claim and sanction of the claim
-
-
-SCOPE - ONE TIME PAYMENT INSTALLATION

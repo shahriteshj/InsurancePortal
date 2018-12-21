@@ -12,3 +12,5 @@ New Customer -> Click on Buy New Policy ->  Enter Vehicle details -> View Quote
 
 New Customer -> Retrieve existing Quote -> 	Show existing details as per quote id -> Enter Personal Details -> Payment Page	-> Home Page
 		
+
+Manager -> View list of unapproved Insurance policies -> Approve / Reject
