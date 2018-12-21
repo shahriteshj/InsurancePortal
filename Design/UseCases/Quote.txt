@@ -1,0 +1,4 @@
+Customer -> Click on getQuote -> Page to enter Personal Details -> Page to enter Vehicle details -> Provide Quote
+		-> Show registeraton Page -> Payment Page
+		
+		

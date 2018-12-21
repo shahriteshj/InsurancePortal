@@ -1,0 +1,23 @@
+Registration
+========================
+Customer -> Registers to create userId and password
+			
+Admin -> Registers staff based on request
+
+Registeration fields
+
+Name
+Contact No
+UserName (email Id)
+Password
+Confirm Password
+Security Question
+Security Answer
+Role
+
+Login
+========================
+Customer/OPS/Manager/Inspector -> Login via email and password -> Login successful -> Home Page
+		 -> Login via email and password -> Login unsuccessful -> Login Page
+		 -> User to enter username and click Forgot Password -> Provide Security answer and new password -> Password set successful page with link to Login Page -> Login Page
+		 
