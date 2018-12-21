@@ -1,0 +1,14 @@
+Logged in Customer
+Existing Customer -> Click on Buy New Policy ->  Enter Vehicle details -> View Quote -> Payment Page
+
+
+
+New Customer -> Click on Buy New Policy ->  Enter Vehicle details -> View Quote
+		   -> Enter Personal Details  ->  Payment Page -> Home Page
+		   
+New Customer -> Click on Buy New Policy ->  Enter Vehicle details -> View Quote
+		   ->  Save Quote
+		   
+
+New Customer -> Retrieve existing Quote -> 	Show existing details as per quote id -> Enter Personal Details -> Payment Page	-> Home Page
+		
