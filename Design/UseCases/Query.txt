@@ -24,7 +24,7 @@ Query Type (Policy, Claim, Other) (Form)
 Query Description (Form)
 Query Response 
 Creation Date (Backend)
-Assigned To 
+Assigned To  (Backend)
 Status (Form)
 
 QueryDao - Methods
