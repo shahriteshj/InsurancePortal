@@ -1,0 +1,27 @@
+package com.jp.insurance.entities;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USER")
+public class User {
+
+	private Integer userId;
+	private String username;
+	private String password;
+	private Integer roleId;
+	private Integer questionId;
+	private String securityAnswer;
+	private Integer failedLoginAttempt;
+	private char accountLocked;
+	private Date creationDate;
+	private Date lastModifiedDate;
+	private Datetime lastSuccessfulLoginDate
+	
+	
+	
+	
+}

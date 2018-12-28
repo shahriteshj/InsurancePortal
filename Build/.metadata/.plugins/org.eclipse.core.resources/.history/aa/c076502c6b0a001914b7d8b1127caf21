@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="USER")
 public class User {
 
-	private Long userId;
+	private Integer userId;
 	private String username;
 	private String password;
 	private Integer roleId;
@@ -26,10 +26,10 @@ public class User {
 
 	@Id
 	@Column(name="userId")
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	
@@ -81,7 +81,7 @@ public class User {
 		this.failedLoginAttempt = failedLoginAttempt;
 	}
 	
-	@Column(name="accountLocked")
+	@Column(name="")
 	public char getAccountLocked() {
 		return accountLocked;
 	}
@@ -89,7 +89,7 @@ public class User {
 		this.accountLocked = accountLocked;
 	}
 	
-	@Column(name="creationDate")
+	@Column(name="")
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -97,7 +97,7 @@ public class User {
 		this.creationDate = creationDate;
 	}
 	
-	@Column(name="lastModifiedDate")
+	@Column(name="")
 	public Date getLastModifiedDate() {
 		return lastModifiedDate;
 	}
@@ -105,7 +105,7 @@ public class User {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 	
-	@Column(name="lastSuccessfulLoginDate")
+	@Column(name="")
 	public Date getLastSuccessfulLoginDate() {
 		return lastSuccessfulLoginDate;
 	}
@@ -113,7 +113,7 @@ public class User {
 		this.lastSuccessfulLoginDate = lastSuccessfulLoginDate;
 	}
 	
-	@Column(name="modifiedBy")
+	@Column(name="")
 	public String getModifiedBy() {
 		return modifiedBy;
 	}

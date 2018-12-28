@@ -1,0 +1,7 @@
+package com.jp.insurance.daos;
+
+import java.io.Serializable;
+
+public class UserDao implements Serializable, IUserDao {
+
+}

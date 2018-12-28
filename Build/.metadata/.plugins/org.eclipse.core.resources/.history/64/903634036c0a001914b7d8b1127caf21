@@ -1,0 +1,21 @@
+package com.jp.insurance.daos;
+
+import java.io.Serializable;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("userDao")
+public class UserDao implements Serializable, IUserDao {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6945600290811655543L;
+
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+}
