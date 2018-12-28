@@ -31,5 +31,4 @@ ACTORS =>
 				-> User Account Management -> Staff Account creation, Account unlock, User Reports 
 				
 				
-			CLAIM FORM - CLAIM FORM SHOULD BE GENERATE
-
+			
