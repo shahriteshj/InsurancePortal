@@ -1,0 +1,5 @@
+package com.jp.insurance.daos;
+
+public interface IRoleDao {
+
+}

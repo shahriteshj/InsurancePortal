@@ -1,0 +1,5 @@
+package com.jp.insurance.entities;
+
+public class Role {
+
+}

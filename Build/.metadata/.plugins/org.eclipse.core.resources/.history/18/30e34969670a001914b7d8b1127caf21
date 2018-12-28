@@ -1,0 +1,17 @@
+package com.jp.insurance.daos;
+
+import java.io.Serializable;
+
+import org.springframework.stereotype.Repository;
+
+@Repository("roleDao")
+public class RoleDao implements Serializable, IRoleDao {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1395374604844166104L;
+	
+	
+
+}

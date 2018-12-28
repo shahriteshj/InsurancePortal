@@ -1,0 +1,42 @@
+package com.jp.insurance.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Role")
+public class Role {
+
+	private Integer roleId;
+	private String role;
+	private String description;
+	
+	
+	@Id
+	@Column("ROLEID")
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+	
+	@Column(name="role")
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	@Column(name="description")
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+	
+}

@@ -1,0 +1,17 @@
+package com.jp.insurance.daos;
+
+import java.util.List;
+
+import com.jp.insurance.entities.SecurityQuestion;
+import com.jp.insurance.exceptions.InsuranceException;
+
+@Repository("secQuesMstDao")
+public class SecQuesMstDao implements ISecQuesMstDao {
+
+	@Override
+	public List<SecurityQuestion> getQuestionList() throws InsuranceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

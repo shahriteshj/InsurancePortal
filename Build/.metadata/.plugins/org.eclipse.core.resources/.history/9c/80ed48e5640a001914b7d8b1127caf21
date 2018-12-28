@@ -49,11 +49,4 @@ public class CustomerDao implements Serializable, ICustomerDao {
 		}
 		return newCustomer;
 	}
-
-	@Override
-	public Customer getCustomerById(Long customerId) throws InsuranceException {
-		String sql = "SELECT c FROM Customer c where customerId = '" + customerId + "'";
-		TypedQuery<Customer> qry = entityManager.createQuery(sql, Customer.class);
-		Customer customer = (Customer) qry.getResultList();
-		return customer;	}
 }
