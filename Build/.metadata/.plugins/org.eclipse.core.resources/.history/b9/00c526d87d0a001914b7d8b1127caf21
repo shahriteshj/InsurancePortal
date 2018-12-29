@@ -1,0 +1,12 @@
+package com.jp.insurance.services;
+
+import java.io.Serializable;
+
+public class UserService implements Serializable, IUserService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1579546557142523147L;
+
+}

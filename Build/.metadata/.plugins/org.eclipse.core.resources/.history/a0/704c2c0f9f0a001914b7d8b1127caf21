@@ -15,7 +15,5 @@ public interface IPolicyService {
 			throws InsuranceException;
 
 	public Policy addNewPolicy(Policy policy) throws InsuranceException;
-	
-	
 
 }
