@@ -1,0 +1,155 @@
+package com.jp.insurance.controllers;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.jp.insurance.entities.Cities;
+import com.jp.insurance.entities.CustomerVehicle;
+import com.jp.insurance.entities.Payment;
+import com.jp.insurance.entities.Policy;
+import com.jp.insurance.entities.States;
+import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.IPolicyService;
+import com.jp.insurance.services.IStateCityService;
+
+@Controller
+public class TestController {
+
+	@Autowired
+	@Qualifier("policyService")
+	private IPolicyService policyService;
+	
+	@Autowired
+	@Qualifier("stateCityService")
+	private IStateCityService stateCityService;
+
+	@RequestMapping("addPolicyExistingCust.po")
+	public String addPolicyExistingCust() {
+		System.out.println("In addPolicyExistingCust().");
+
+		CustomerVehicle customerVehicle = new CustomerVehicle();
+		customerVehicle.setCc("1900");
+		customerVehicle.setChasisNo("123456");
+		customerVehicle.setCustomerId(1L);
+		customerVehicle.setEngineNo("123456789");
+		customerVehicle.setFuelType("Petrol");
+		customerVehicle.setMake("Hyundai");
+		customerVehicle.setManufacturingYear(2015);
+		customerVehicle.setModel("i20");
+		customerVehicle.setRegistrationDate(new Date("01/01/2015"));
+		customerVehicle.setSubModel("Magna");
+		customerVehicle.setVehicleRegCity("Mumbai");
+		customerVehicle.setVehicleRegNo("1234567890");
+		
+		
+		Policy policy = new Policy();
+		policy.setCustomerId(1L);
+		//policy.setVehicleId(1L);
+		Date startDate = new Date("01/01/2019");
+		Date endDate = new Date("12/31/2019");
+		policy.setPolicyStartDate(startDate);
+		policy.setPolicyEndDate(endDate);
+		// System.out.println(policy);
+
+		Payment payment = new Payment();
+		payment.setCardNo("4325652398741256");
+		payment.setCardExpirtDate("01/20");
+		payment.setNameOnCard("John Smith");
+		payment.setPaymentDate(new Date());
+		payment.setPolicyAmount(6532F);
+		
+		
+		
+		try {
+			policyService.addNewPolicyToExistingCustomer(policy, customerVehicle, payment);
+		} catch (InsuranceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "HomePage";
+	}
+
+
+	@RequestMapping("addPolicy.po")
+	public String addPolicy() {
+		System.out.println("In addPolicy().");
+
+		// DateTimeFormatter formatter =
+		// DateTimeFormatter.ofPattern("d/MM/yyyy");
+		/*
+		 * LocalDate startDate = LocalDate.parse("01/01/2019",formatter);
+		 * LocalDate endDate = LocalDate.parse("31/12/2019",formatter);
+		 */
+
+		Policy policy = new Policy();
+		policy.setCustomerId(1L);
+		policy.setVehicleId(1L);
+		Date startDate = new Date("01/01/2019");
+		Date endDate = new Date("31/12/2019");
+		policy.setPolicyStartDate(startDate);
+		policy.setPolicyEndDate(endDate);
+		// System.out.println(policy);
+
+		try {
+			policyService.addNewPolicy(policy);
+		} catch (InsuranceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "HomePage";
+	}
+
+	@RequestMapping("getStateCity.po")
+	public String getStateCity() {
+		System.out.println("In getStateCity().");
+		
+		try {
+			List<States> states = stateCityService.getStateList();
+			System.out.println(states);
+		} catch (InsuranceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "HomePage";
+	}
+	
+	@RequestMapping("getCitybyState.po")
+	public String getCityByState() {
+		System.out.println("In getCityByState().");
+		
+		try {
+			List<Cities> cityList = stateCityService.getCityListByStateName("Maharashtra");
+			System.out.println(cityList);
+		} catch (InsuranceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "HomePage";
+	}
+
+	@RequestMapping("homePage.po")
+	public String getCustomerMainMenu() {
+		System.out.println("getCustomerMainMenu");
+		
+		try {
+			List<Cities> cityList = stateCityService.getCityListByStateName("Maharashtra");
+			System.out.println(cityList);
+		} catch (InsuranceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "HomePage";
+	}
+
+}

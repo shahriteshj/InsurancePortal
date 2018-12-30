@@ -7,13 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.springframework.stereotype.Repository;
-
 import com.jp.insurance.entities.VehicleMaster;
 import com.jp.insurance.exceptions.InsuranceException;
 
-
-@Repository("vehicleMasterDao")
 public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 
 	/**
