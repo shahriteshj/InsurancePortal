@@ -93,7 +93,8 @@
   <a href="#">Contact Us</a>
  </div>
 
-<h3>Customer Menu Bar</h3>
+<h3>Dropdown Menu inside a Navigation Bar</h3>
+<p>Hover over the "Dropdown" link to see the dropdown menu.</p>
 
 </body>
 </html>

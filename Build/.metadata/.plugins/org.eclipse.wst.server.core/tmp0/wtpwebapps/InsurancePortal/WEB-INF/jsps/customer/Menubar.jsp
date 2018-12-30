@@ -81,12 +81,19 @@
       <a href="#">Buy new Policy</a>
     </div>
   </div> 
-  <a href="#news">Raise a Query</a>
-  <a href="#news">Contact Us</a>
+    <div class="dropdown">
+    <button class="dropbtn">Queries 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="queryForm.qry">Raise a Query</a>
+      <a href="queryList.qry">View my queries</a>
+    </div>
+  </div> 
+  <a href="#">Contact Us</a>
  </div>
 
-<h3>Dropdown Menu inside a Navigation Bar</h3>
-<p>Hover over the "Dropdown" link to see the dropdown menu.</p>
+<h3>Customer Menu Bar</h3>
 
 </body>
 </html>
