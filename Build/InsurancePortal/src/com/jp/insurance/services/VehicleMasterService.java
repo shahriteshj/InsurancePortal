@@ -20,7 +20,7 @@ public class VehicleMasterService implements Serializable, IVehicleMasterService
 	 */
 	private static final long serialVersionUID = -320999877190312009L;
 
-	private IVehicleMasterDao vehicleMasterDao;;
+	private IVehicleMasterDao vehicleMasterDao;
 
 	public VehicleMasterService() throws InsuranceException {
 
