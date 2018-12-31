@@ -31,6 +31,15 @@ public class RoleDao implements Serializable, IRoleDao {
 		return roleList;
 		
 	}
+	
+	@Override
+	public List<String> getRoleNameList() throws InsuranceException {
+		String sql = "SELECT r.name FROM Role r";
+		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		List<String> roleNameList = qry.getResultList();
+		return roleNameList;
+		
+	}
 
 	@Override
 	public Role getRoleIdByName(String name) throws InsuranceException {

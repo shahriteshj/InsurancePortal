@@ -9,6 +9,8 @@ public interface IRoleDao {
 	
 	public List<Role> getRoleList() throws InsuranceException;
 	
+	public List<String> getRoleNameList() throws InsuranceException;
+	
 	public Role getRoleIdByName(String name) throws InsuranceException;
 
 	public Role getRoleNameById(Integer roleId) throws InsuranceException;
