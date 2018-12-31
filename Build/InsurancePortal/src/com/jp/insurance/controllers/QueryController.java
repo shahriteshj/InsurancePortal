@@ -1,5 +1,6 @@
 package com.jp.insurance.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -120,8 +121,8 @@ public class QueryController {
             return "query/QueryPage";
         } else {
         	try {
-        		queryObj.setStatus("OPEN");
-        		queryObj.setAssignedTo("OPERATIONS");
+        		queryObj.setStatus("IN PROGRESS");
+        		queryObj.setCreationDate(Calendar.getInstance().getTime());
         		queryService.addNewQuery(queryObj);
     			return "query/QuerySuccess";
     		} catch (InsuranceException e) {

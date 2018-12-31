@@ -62,7 +62,7 @@
  		
     </springForm:form>
 	<br>
-	<a href="showQueryStatus.qry"><p style="text-align:center">Check Query Status</a>
+	<a href="showQueryStatus.qry">Check Query Status</a>
 	
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jp.insurance.daos.IQueryDao;
+import com.jp.insurance.daos.IRoleDao;
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
 
@@ -15,6 +16,7 @@ import com.jp.insurance.exceptions.InsuranceException;
 public class QueryService implements IQueryService {
 	
 	private IQueryDao queryDao;
+	private IRoleDao roleDao;
 	
 		
 	public QueryService() {
@@ -23,9 +25,10 @@ public class QueryService implements IQueryService {
 
 	
 	@Autowired
-	public QueryService(@Qualifier("queryDao") IQueryDao queryDao) {
+	public QueryService(@Qualifier("queryDao") IQueryDao queryDao,@Qualifier("roleDao") IRoleDao roleDao ) {
 		System.out.println("In side Query side constructor");
 		this.queryDao = queryDao;
+		this.roleDao = roleDao;
 	}
 
 	@Override

@@ -9,7 +9,7 @@
 	<h6></h6>
 	<p align="center"><i>Query Id for this request is :${command.queryId}.</i></p>
 	<p align="center"><i>Thanks for raising a Query.</i></p><br>
-<a  href="queryDetails.qry?queryId=${command.queryId}"><p style="text-align:center">Check Query Status</a> &nbsp;&nbsp; <a href="QueryPage.qry">Raise New Query</a>
+	<span><a href="queryDetails.qry?queryId=${command.queryId}">Check Query Status</a></span> &nbsp;&nbsp; <a href="QueryPage.qry">Raise New Query</a>
 	 
 	 
 </body>
