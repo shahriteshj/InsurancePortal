@@ -1,6 +1,8 @@
 package com.jp.insurance.controllers;
 
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +62,8 @@ public class QueryController {
 	}
 	
 	@RequestMapping("queryList.qry")
-	public ModelAndView getQueryList() {
+	public ModelAndView getQueryList(Model model) {
+		
 		System.out.println("In getQueryList()");
 		ModelAndView mAndV = new ModelAndView();
 		try {
