@@ -86,7 +86,7 @@ public class Claim {
 		this.rejectedReason = rejectedReason;
 	}
 	
-	@OneToOne(mappedBy="employee", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="claim", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "ACCIDENTID") // Name of column to be created in CLAIM
 	public AccidentDetails getAccidentDetails() {
 		return accidentDetails;

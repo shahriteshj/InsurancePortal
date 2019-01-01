@@ -116,5 +116,29 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 		Float price = Float.valueOf(strPrice);
 		return price;
 	}
+	
+	@Override
+	public List<String> getVehicleMake() throws InsuranceException {
+		String sql = "SELECT v.make FROM VehicleMaster v";
+		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		List<String> make = qry.getResultList();
+		return make;
+	}
+
+	@Override
+	public List<String> getVehicleModel() throws InsuranceException {
+		String sql = "SELECT v.model FROM VehicleMaster v";
+		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		List<String> model = qry.getResultList();
+		return model;
+	}
+
+	@Override
+	public List<String> getVehicleSubmodel() throws InsuranceException {
+		String sql = "SELECT v.submodel FROM VehicleMaster v";
+		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		List<String> submodel = qry.getResultList();
+		return submodel;
+	}
 
 }

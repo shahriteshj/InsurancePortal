@@ -24,4 +24,10 @@ public interface IVehicleMasterDao {
 	public String getVehicleCCByMakeModelSubmodel(String make, String model, String submodel) throws InsuranceException;
 	
 	public Float getVehiclePriceByMakeModelSubmodel(String make, String model, String submodel) throws InsuranceException;
+	
+	public List<String> getVehicleMake() throws InsuranceException;
+	
+	public List<String> getVehicleModel() throws InsuranceException;
+	
+	public List<String> getVehicleSubmodel() throws InsuranceException;
 }
