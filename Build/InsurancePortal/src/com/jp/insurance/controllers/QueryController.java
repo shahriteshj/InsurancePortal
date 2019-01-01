@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
-import com.jp.insurance.services.IQueryService;
+import com.jp.insurance.services.interfaces.IQueryService;
 
 
 /*http://localhost:8081/InsurancePortal/policy/homePage.hr*/

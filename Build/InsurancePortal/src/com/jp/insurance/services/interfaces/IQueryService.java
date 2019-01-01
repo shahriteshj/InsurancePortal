@@ -1,4 +1,4 @@
-package com.jp.insurance.services;
+package com.jp.insurance.services.interfaces;
 
 import java.util.List;
 

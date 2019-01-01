@@ -1,4 +1,4 @@
-package com.jp.insurance.daos;
+package com.jp.insurance.daos.interfaces;
 
 import java.util.List;
 import com.jp.insurance.entities.Query;

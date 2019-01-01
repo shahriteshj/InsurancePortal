@@ -1,4 +1,4 @@
-package com.jp.insurance.services;
+package com.jp.insurance.services.interfaces;
 
 import com.jp.insurance.entities.CustomerVehicle;
 import com.jp.insurance.exceptions.InsuranceException;

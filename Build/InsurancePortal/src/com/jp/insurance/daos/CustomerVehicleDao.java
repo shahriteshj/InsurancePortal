@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.jp.insurance.daos.interfaces.ICustomerVehicleDao;
 import com.jp.insurance.entities.CustomerVehicle;
 import com.jp.insurance.exceptions.InsuranceException;
 

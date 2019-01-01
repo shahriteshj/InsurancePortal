@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.jp.insurance.daos.IStateCityDao;
 import com.jp.insurance.daos.StateCityDao;
+import com.jp.insurance.daos.interfaces.IStateCityDao;
 import com.jp.insurance.entities.Cities;
 import com.jp.insurance.entities.States;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IStateCityService;
 
 @Service("stateCityService")
 public class StateCityService implements IStateCityService, Serializable {

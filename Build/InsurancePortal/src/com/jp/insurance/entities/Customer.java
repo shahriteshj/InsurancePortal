@@ -31,7 +31,6 @@ public class Customer {
 	@Id
 	@SequenceGenerator(name = "CUSTOMERID_GEN", sequenceName = "customerId_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMERID_GEN")
-	// @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "CustomerId")
 	public Long getCustomerId() {
 		return customerId;

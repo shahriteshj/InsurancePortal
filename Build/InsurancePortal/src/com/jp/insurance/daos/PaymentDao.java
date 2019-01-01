@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import com.jp.insurance.daos.interfaces.IPaymentDao;
 import com.jp.insurance.entities.Payment;
 import com.jp.insurance.exceptions.InsuranceException;
 

@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+
+import com.jp.insurance.daos.interfaces.IQueryDao;
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
 

@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.jp.insurance.daos.IVehicleMasterDao;
 import com.jp.insurance.daos.VehicleMasterDao;
+import com.jp.insurance.daos.interfaces.IVehicleMasterDao;
 import com.jp.insurance.entities.CustomerVehicle;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IPolicyQuoteService;
 
 @Service("policyQuoteService")
 public class PolicyQuoteService implements Serializable, IPolicyQuoteService {

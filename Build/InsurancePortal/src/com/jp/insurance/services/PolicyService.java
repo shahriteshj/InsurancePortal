@@ -7,15 +7,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jp.insurance.daos.ICustomerDao;
-import com.jp.insurance.daos.ICustomerVehicleDao;
-import com.jp.insurance.daos.IPaymentDao;
-import com.jp.insurance.daos.IPolicyDao;
+import com.jp.insurance.daos.interfaces.ICustomerDao;
+import com.jp.insurance.daos.interfaces.ICustomerVehicleDao;
+import com.jp.insurance.daos.interfaces.IPaymentDao;
+import com.jp.insurance.daos.interfaces.IPolicyDao;
 import com.jp.insurance.entities.Customer;
 import com.jp.insurance.entities.CustomerVehicle;
 import com.jp.insurance.entities.Payment;
 import com.jp.insurance.entities.Policy;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IPolicyService;
 
 @Service("policyService")
 public class PolicyService implements IPolicyService {

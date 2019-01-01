@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jp.insurance.daos.IQueryDao;
-import com.jp.insurance.daos.IRoleDao;
+import com.jp.insurance.daos.interfaces.IQueryDao;
+import com.jp.insurance.daos.interfaces.IRoleDao;
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IQueryService;
 
 @Service("queryService")
 public class QueryService implements IQueryService {

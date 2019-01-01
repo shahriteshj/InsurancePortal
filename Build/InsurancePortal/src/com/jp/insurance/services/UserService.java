@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jp.insurance.daos.IUserDao;
 import com.jp.insurance.daos.UserDao;
+import com.jp.insurance.daos.interfaces.IUserDao;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IUserService;
 
 @Service("userService")
 public class UserService implements Serializable, IUserService {
