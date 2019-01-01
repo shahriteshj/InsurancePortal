@@ -1,0 +1,13 @@
+.bg {
+    background-image: url("../../assets/images/home.jpg");
+    height: 400px;
+    width:1200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  body, html {
+    height: 100%;
+  }
+  

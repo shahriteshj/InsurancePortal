@@ -1,0 +1,43 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Register</h2>
+  <form #registerFrm="ngForm" (ngSubmit)="Register(registerFrm)" ngNativeValidate >
+        <div class="form-group">
+           <label for="Name"> 
+            Name:
+           </label> 
+          <input type="text" name="name" pattern="[a-zA-Z0-9]+"  
+          required class="form-control" ngModel #nameControl="ngModel">
+            <div *ngIf="nameControl?.touched && nameControl?.invalid" class="alert alert-danger">
+            <div *ngIf="nameControl.errors?.required">Name is required</div>
+            <div *ngIf="nameControl.errors?.pattern">Please enter valid Name</div>
+          </div>  
+        </div>
+
+        <div class="form-group">
+            <label for="username">
+              Username:
+            </label>
+            <input type="text" name="username" ngModel pattern="[a-zA-Z]+" #usernameControl="ngModel"
+              required class="form-control">
+            <div *ngIf="usernameControl?.touched && usernameControl?.invalid" class="alert alert-danger">
+              <div *ngIf="usernameControl.errors?.required">Username is required</div>
+              <div *ngIf="usernameControl.errors?.pattern">Please enter valid Username</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">
+              Password:
+            </label> 
+            <input type="text" name="password" ngModel pattern="[a-zA-Z]+" #passwordControl="ngModel" required class="form-control">
+            <div *ngIf="passwordControl?.touched && passwordControl?.invalid" class="alert alert-danger">
+              <div *ngIf="passwordControl.errors?.required">Password is required</div>
+              <div *ngIf="passwordControl.errors?.pattern">Please enter valid Password</div>
+            </div>
+          </div>
+        <div class="form-group">
+            <button type="submit" name="button" class="btn btn-primary" [disabled]="registerFrm.invalid">Submit</button>
+            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+         </div>
+      </form>
+    </div>
+  

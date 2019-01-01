@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'InsurancePortal';
+  title = 'AmazingCart';
+  static userLogged:boolean=false;
+
+  static setUserLogged(flag:boolean){
+    AppComponent.userLogged=flag;
+  }
+
 }

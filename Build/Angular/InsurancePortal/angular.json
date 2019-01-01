@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "InsurancePortal": {
+    "AmazingCart": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/InsurancePortal",
+            "outputPath": "dist/AmazingCart",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -57,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "InsurancePortal:build"
+            "browserTarget": "AmazingCart:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "InsurancePortal:build:production"
+              "browserTarget": "AmazingCart:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "InsurancePortal:build"
+            "browserTarget": "AmazingCart:build"
           }
         },
         "test": {
@@ -102,7 +103,7 @@
         }
       }
     },
-    "InsurancePortal-e2e": {
+    "AmazingCart-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -111,11 +112,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "InsurancePortal:serve"
+            "devServerTarget": "AmazingCart:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "InsurancePortal:serve:production"
+              "devServerTarget": "AmazingCart:serve:production"
             }
           }
         },
@@ -131,5 +132,5 @@
       }
     }
   },
-  "defaultProject": "InsurancePortal"
+  "defaultProject": "AmazingCart"
 }
