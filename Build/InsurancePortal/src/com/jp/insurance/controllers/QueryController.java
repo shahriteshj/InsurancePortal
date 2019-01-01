@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -59,13 +60,50 @@ public class QueryController {
 	
 	}
 	
-	@RequestMapping("queryList.qry")
+/*	@RequestMapping("queryList.qry")
 	public ModelAndView getQueryList(Model model) {
 		
 		System.out.println("In getQueryList()");
 		ModelAndView mAndV = new ModelAndView();
 		try {
 			List<Query> queryList = queryService.getQueryList();
+			System.out.println(queryList);
+			mAndV.addObject("queryList",queryList);			
+			mAndV.setViewName("query/QueryList");
+			
+		} catch (InsuranceException e) {			
+			e.printStackTrace();
+		}
+		return mAndV;		
+	}	
+	*/
+	
+	@RequestMapping("queryList.qry")
+	public ModelAndView getQueryList(HttpSession session) {
+		List<Query> queryList = null;
+		System.out.println("In getQueryList()");
+		ModelAndView mAndV = new ModelAndView();
+		String emailId = (String) session.getAttribute("username");
+		String role = (String) session.getAttribute("role");
+		  System.out.println(emailId);
+		  System.out.println(role);
+		  
+		try {		
+			
+			switch(role) {
+				case "OPERATIONS" :
+					queryList = queryService.getQueryByRole(role);
+					break;
+				
+				case "CUSTOMER" :
+					queryList = queryService.getQueryByEmailId(emailId);
+					break;
+					
+				case "MANAGER" :
+					queryList = queryService.getQueryList();
+					break;
+			}
+			
 			System.out.println(queryList);
 			mAndV.addObject("queryList",queryList);			
 			mAndV.setViewName("query/QueryList");
