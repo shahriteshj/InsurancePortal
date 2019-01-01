@@ -1,7 +1,0 @@
-package com.jp.insurance.services;
-
-import java.io.Serializable;
-
-public class UserService implements Serializable {
-
-}

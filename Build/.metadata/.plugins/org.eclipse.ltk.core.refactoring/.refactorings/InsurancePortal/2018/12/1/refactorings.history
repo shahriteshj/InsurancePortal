@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;Menubar.jsp&apos; to &apos;customer&apos;" description="Move &apos;Menubar.jsp&apos; to &apos;customer&apos;" destination="WebContent/WEB-INF/jsps/customer" element1="WebContent/WEB-INF/jsps/Menubar.jsp" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1546178618845" updateReferences="true"/>
-</session>

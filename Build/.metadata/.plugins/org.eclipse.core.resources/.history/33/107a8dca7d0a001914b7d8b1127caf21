@@ -1,9 +1,0 @@
-package com.jp.insurance.services;
-
-import java.io.Serializable;
-
-import com.jp.insurance.daos.IUserDao;
-
-public class UserService implements Serializable, IUserService {
-
-}

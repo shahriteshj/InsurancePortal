@@ -1,8 +1,0 @@
-package com.jp.insurance.entities;
-
-
-@Entity
-@Table(name="USER")
-public class User {
-
-}

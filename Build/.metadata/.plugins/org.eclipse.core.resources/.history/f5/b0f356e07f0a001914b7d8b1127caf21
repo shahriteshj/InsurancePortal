@@ -1,9 +1,0 @@
-package com.jp.insurance.services;
-
-import com.jp.insurance.entities.User;
-import com.jp.insurance.exceptions.InsuranceException;
-
-public interface IUserService {
-
-	public User changePassword(User user) throws InsuranceException
-}
