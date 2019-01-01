@@ -1,0 +1,14 @@
+Darshan
+	-	Create Customer, Manager and Operations controller
+	-	For Customer controller, create Model by emailId and Role.
+	- 	Redirect jsp to Menubar.jsp 
+	
+	-  In  QueryController get the Model in getQuueryList method.
+	-  Conditions apply based on role and emailId
+		- For first getByRole.
+			- If is Customer -> getQueryListByEmailID
+			- If it is MAnager -> getQueryListRole
+			- If it is Operation -> getQueryListRole
+			
+    - In QueryDetails.jsp based on the Role display the items
+	
