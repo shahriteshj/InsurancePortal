@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>      
+    pageEncoding="ISO-8859-1"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>      
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -10,25 +11,52 @@
 <%-- 		<jsp:include page="Head01.jsp"></jsp:include>
 		<jsp:include page="Head02.jsp"></jsp:include> --%>
 			<%-- Welcome Mr./Ms. ${ sessionScope.userFullName }
-			<a href="logout.do">Logout</a> --%>
-			<table border = "1">
-				<tr>
-			 		<th>NAME</th>
-			 		<th>EMAIL</th>
-			 		<th>DESCRIPTION</th>
-			 		<th>QUERY TYPE</th>			 					 		
-			 		<th>STATUS</th>		
-				</tr>
-				
-				<tr>
-					<td>${requestScope.queryDetails.name}</td>
-					<td>${requestScope.queryDetails.emailId}</td>
-					<td>${requestScope.queryDetails.queryDescription}</td>
-					<td>${requestScope.queryDetails.queryType}</td>
-					<td>${requestScope.queryDetails.status}</td>
-				</tr>				
-			</table>	
+			<a href="logout.do">Logout</a> --%> 
 			
+		<c:set var = "mySession" value = "${request.getSession().getAttribute(role)}" />
+		
+		<c:if test = "${mySession eq CUSTOMER}">		
+					
+				<table border = "1">
+					<tr>
+				 		<th>NAME</th>
+				 		<th>EMAIL</th>
+				 		<th>DESCRIPTION</th>
+				 		<th>QUERY TYPE</th>			 					 		
+				 		<th>STATUS</th>		
+					</tr>
+					
+					<tr>
+						<td>${requestScope.queryDetails.name}</td>
+						<td>${requestScope.queryDetails.emailId}</td>
+						<td>${requestScope.queryDetails.queryDescription}</td>
+						<td>${requestScope.queryDetails.queryType}</td>
+						<td>${requestScope.queryDetails.status}</td>
+					</tr>				
+				</table>				
+		</c:if>
+		
+			<c:if test = "${mySession eq MANAGER}">		
+					
+				<table border = "1">
+					<tr>
+				 		<th>NAME</th>
+				 		<th>EMAIL</th>
+				 		<th>DESCRIPTION</th>
+				 		<th>QUERY TYPE</th>			 					 		
+				 		<th>STATUS</th>	
+				 		<th>MANAGER TAB</th>	
+					</tr>
+					
+					<tr>
+						<td>${requestScope.queryDetails.name}</td>
+						<td>${requestScope.queryDetails.emailId}</td>
+						<td>${requestScope.queryDetails.queryDescription}</td>
+						<td>${requestScope.queryDetails.queryType}</td>
+						<td>${requestScope.queryDetails.status}</td>
+					</tr>				
+				</table>				
+		</c:if>			
 			<!-- Providing HyperLink to provide list of the employee -->
 			<a href="queryList.qry">Go back to List</a> 		
 		</body>

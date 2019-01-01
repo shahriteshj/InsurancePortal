@@ -39,6 +39,6 @@
 				 
 	</table> 
 	 
-	 <a href="homePage.hr">Go to Home Page</a>
+	 <a href="homePage.po">Go to Home Page</a>
 </body>
 </html>

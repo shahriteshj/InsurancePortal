@@ -40,8 +40,8 @@ public class QueryService implements IQueryService {
 
 	@Override
 	public List<Query> getQueryByEmailId(String emailId) throws InsuranceException {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("In QueryService metho");
+		return queryDao.getQueryByEmailId(emailId);
 	}
 
 
@@ -54,8 +54,7 @@ public class QueryService implements IQueryService {
 
 	@Override
 	public List<Query> getQueryByRole(String assignedTo) throws InsuranceException {
-		// TODO Auto-generated method stub
-		return null;
+		return queryDao.getQueryByRole(assignedTo);
 	}
 
 
