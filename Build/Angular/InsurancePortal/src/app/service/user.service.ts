@@ -14,13 +14,22 @@ export class UserService {
     return this.http.get('http://localhost:3000/User');
   }
 
+  // authenticateUser(username:string,password:string){
+  //   return this.http.get("http://localhost:3000/User?username="+username+"&password="+password).pipe(
+  //   map(user => {
+  //               // login successful if there's a jwt token in the response
+  //               if (user) {
+  //                   localStorage.setItem('currentUser', JSON.stringify(user));
+  //               }
+  //               return user;
+  //           }));
+
+  // }
+
   authenticateUser(username:string,password:string){
-    return this.http.get("http://localhost:3000/User?username="+username+"&password="+password).pipe(
+    return this.http.post("/InsurancePortal/login/authenticateUser",{ username: username, password: password }).pipe(
     map(user => {
-                // login successful if there's a jwt token in the response
-                if (user) {
                     localStorage.setItem('currentUser', JSON.stringify(user));
-                }
                 return user;
             }));
 

@@ -34,9 +34,10 @@ export class LoginComponent implements OnInit {
     this._userService.authenticateUser(this.username, this.password).subscribe(
       data => {
         console.log(data);
-        let strUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.user = strUser[0];
-        if (this.user != undefined) {
+       // let strUser = JSON.parse(localStorage.getItem('currentUser'));
+       // this.user = strUser[0];
+       // if (this.user != undefined) {
+        if(data) {
           console.log("success");
           this.router.navigate(['/menu']);
         } else {
@@ -46,6 +47,8 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
+        console.log("error");
+        console.log(error);
         this.alertService.error(error);
         this.loading = false;
       }
