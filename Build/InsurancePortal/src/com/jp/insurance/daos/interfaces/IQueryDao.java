@@ -1,6 +1,7 @@
 package com.jp.insurance.daos.interfaces;
 
 import java.util.List;
+
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
 
@@ -16,7 +17,9 @@ public interface IQueryDao {
 	
 	public List<Query> getQueryByStatus(String status) throws InsuranceException;
 	
-	public boolean addNewQuery(Query queryObj) throws InsuranceException;
+	public Query addNewQuery(Query queryObj) throws InsuranceException;
+		
+	public Query updateExistingQuery(Query queryObj) throws InsuranceException;
 	
 /*	public boolean modifyExistingQuery(Long queryId) throws InsuranceException;*/
 

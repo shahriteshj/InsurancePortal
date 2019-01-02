@@ -1,9 +1,11 @@
 package com.jp.insurance.daos;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import com.jp.insurance.daos.interfaces.IQueryDao;
@@ -58,18 +60,20 @@ public class QueryDao implements IQueryDao {
 	}
 
 	@Override
-	public boolean addNewQuery(Query queryObj) throws InsuranceException {
+	public Query addNewQuery(Query queryObj) throws InsuranceException {
 		entityManager.persist(queryObj);
 		
-		Query queryNewObj = entityManager.find(Query.class, queryObj.getQueryId());
-		System.out.println(queryNewObj);
-		if(queryNewObj != null) {
-			return true;
-		} else {
-		
-		return false;
-	}
+		return queryObj;
+	
 
 }
+
+	@Override
+	public Query updateExistingQuery(Query queryObj) throws InsuranceException {
+		//Query queryNewObj = entityManager.find(Query.class, queryObj.getQueryId());
+			return entityManager.merge(queryObj);
+		
+		
+	}
 
 }

@@ -67,8 +67,26 @@ public class QueryService implements IQueryService {
 
 	@Override
 	@Transactional
-	public boolean addNewQuery(Query queryObj) throws InsuranceException {
+	public Query addNewQuery(Query queryObj) throws InsuranceException {
 		return queryDao.addNewQuery(queryObj);	
-		 
+	}
+	
+	
+	
+	@Override
+	public List<String> getRoleNameList() throws InsuranceException {
+		return roleDao.getRoleNameList();
+		
+	}
+
+
+	@Override
+	@Transactional
+	public Query updateExistingQuery(Query queryObj) throws InsuranceException {
+		 Query queryNew = getQueryById(queryObj.getQueryId());
+		 queryNew.setAssignedTo(queryObj.getAssignedTo());
+		 queryNew.setQueryResponse(queryObj.getQueryResponse());
+		 queryNew.setStatus(queryObj.getStatus());
+		return queryDao.updateExistingQuery(queryNew);
 	}
 }

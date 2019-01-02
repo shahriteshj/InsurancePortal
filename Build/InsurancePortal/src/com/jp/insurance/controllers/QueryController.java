@@ -27,6 +27,7 @@ import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IQueryService;
 
 
+
 /*http://localhost:8081/InsurancePortal/policy/homePage.hr*/
 @Controller
 public class QueryController {
@@ -35,6 +36,7 @@ public class QueryController {
 	@Qualifier("queryService")
 	private IQueryService queryService;
 	
+
 	@Autowired
 	private Validator validator;
 	
@@ -67,7 +69,7 @@ public class QueryController {
 		System.out.println("In getQueryList()");
 		ModelAndView mAndV = new ModelAndView();
 		String emailId = (String) session.getAttribute("username");
-		String role = (String) session.getAttribute("role");
+		String role = (String) session.getAttribute("roles");
 		  System.out.println(emailId);
 		  System.out.println(role);
 		  
@@ -93,7 +95,8 @@ public class QueryController {
 			System.out.println(queryList);
 			mAndV.addObject("queryList",queryList);			
 			mAndV.setViewName("query/QueryList");
-            session.removeAttribute("role");   
+       /*     session.removeAttribute("username");   
+            session.removeAttribute("roles");   */
             //session.invalidate();
 
 			
@@ -105,13 +108,16 @@ public class QueryController {
 	
 	
 	@RequestMapping("queryDetails.qry")
-	public ModelAndView getQueryDetails(@RequestParam(value="queryId") Long queryId) {
+	public ModelAndView getQueryDetails(@RequestParam(value="queryId") Long queryId, Model model) {
 		System.out.println("In getQueryDetails()");
 		ModelAndView mAndV = new ModelAndView();
 		
-		try {
-			Query query = queryService.getQueryById(queryId);
+		try {			 
+			Query query = queryService.getQueryById(queryId);			
+			List<String> roleNameList = queryService.getRoleNameList();
+			mAndV.addObject("roleNameList",roleNameList);
 			mAndV.addObject("queryDetails",query);
+			model.addAttribute("queryDetails", query);
 			mAndV.setViewName("query/QueryDetails");
 		}  catch(InsuranceException e) {
 			e.printStackTrace();
@@ -123,6 +129,7 @@ public class QueryController {
 	@RequestMapping("queryForm.qry")
 	public String getQueryForm(Model model) {
 			// Define Commond Object
+		
 		Query query = new Query();
 		model.addAttribute("command",query);
 		return "query/QueryPage";		
@@ -152,7 +159,7 @@ public class QueryController {
         		queryObj.setStatus("IN PROGRESS");
         		queryObj.setAssignedTo("OPERATIONS");
         		queryObj.setCreationDate(Calendar.getInstance().getTime());
-        		queryService.addNewQuery(queryObj);
+        		queryService.addNewQuery(queryObj);        		
     			return "query/QuerySuccess";
     		} catch (InsuranceException e) {
     			model.addAttribute("msg", "Error in raising a Query." + e.getMessage());
@@ -161,6 +168,21 @@ public class QueryController {
         }
 		
 	}
+	
+	
+	@RequestMapping("updateQueryForm.qry")
+	public String updateQueryForm(@ModelAttribute("queryDetails") Query queryObj, Model model) {
+		System.out.println(queryObj);	
 
+        	try {
+	        	queryService.updateExistingQuery(queryObj);
+	        	model.addAttribute("msg", "Query updated sucessfully!");
+	        	return "redirect:queryList.qry";
+	    		
+    		} catch (InsuranceException e) {
+    			model.addAttribute("msg", "Error in raising a Query." + e.getMessage());
+    			return "query/QueryList";
+    		}
+        }
 
 }

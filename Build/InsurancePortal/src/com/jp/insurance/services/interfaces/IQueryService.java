@@ -17,7 +17,11 @@ public interface IQueryService {
 	
 	public List<Query> getQueryByStatus(String status) throws InsuranceException;
 	
-	public boolean addNewQuery(Query queryObj) throws InsuranceException;
+	public Query addNewQuery(Query queryObj) throws InsuranceException;
+	
+	public List<String> getRoleNameList() throws InsuranceException;
+	
+	public Query updateExistingQuery(Query queryObj) throws InsuranceException;
 
 
 	
