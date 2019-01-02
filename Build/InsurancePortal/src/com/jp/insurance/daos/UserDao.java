@@ -38,8 +38,13 @@ public class UserDao implements Serializable, IUserDao {
 		String sql = "SELECT u FROM User u where username=:username";
 		TypedQuery<User> qry = entityManager.createQuery(sql, User.class);
 		qry.setParameter("username", username);
-		User user = qry.getSingleResult();
-		return user;
+		List<User> results = qry.getResultList();
+		if (results.isEmpty()) {
+			return null;
+		} else {
+			User user = (User) results.get(0);
+			return user;
+		}
 	}
 
 	@Override
@@ -47,8 +52,14 @@ public class UserDao implements Serializable, IUserDao {
 		String sql = "SELECT u FROM User u where userId=:userId";
 		TypedQuery<User> qry = entityManager.createQuery(sql, User.class);
 		qry.setParameter("userId", userId);
-		User user = qry.getSingleResult();
-		return user;
+		List<User> results = qry.getResultList();
+		if (results.isEmpty()) {
+			return null;
+		} else {
+			User user = (User) results.get(0);
+			return user;
+		}
+
 	}
 
 	@Override
@@ -64,7 +75,7 @@ public class UserDao implements Serializable, IUserDao {
 
 	@Override
 	public User updateUser(User user) throws InsuranceException {
-		User updateUser= entityManager.find(User.class,user.getUserId());
+		User updateUser = entityManager.find(User.class, user.getUserId());
 		updateUser.setAccountLocked(user.getAccountLocked());
 		updateUser.setCreationDate(user.getCreationDate());
 		updateUser.setFailedLoginAttempt(user.getFailedLoginAttempt());
@@ -77,6 +88,5 @@ public class UserDao implements Serializable, IUserDao {
 		entityManager.flush();
 		return updateUser;
 	}
-
 
 }

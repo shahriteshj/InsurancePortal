@@ -1,6 +1,7 @@
 package com.jp.insurance.services;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,9 +17,6 @@ import com.jp.insurance.services.interfaces.IUserService;
 @Service("userService")
 public class UserService implements Serializable, IUserService {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1579546557142523147L;
 
 	private IUserDao userDao;;
@@ -31,13 +29,13 @@ public class UserService implements Serializable, IUserService {
 	public UserService(@Qualifier("userDao") UserDao userDao) throws InsuranceException {
 		this.userDao = userDao;
 	}
-	
+
 	@Override
 	@Transactional
 	public User changePassword(User user) throws InsuranceException {
 		return userDao.updateUser(user);
 	}
-	
+
 	@Override
 	@Transactional
 	public User unLockAccount(User user) throws InsuranceException {
@@ -63,6 +61,32 @@ public class UserService implements Serializable, IUserService {
 	public User updateUser(User user) throws InsuranceException {
 		return userDao.updateUser(user);
 	}
-	
-	
+
+	@Override
+	public User authenticateUser(String username, String password) throws InsuranceException {
+		User user = userDao.getUserByUserName(username);
+		if (user != null) {
+			if (password.equals(user.getPassword())) { // check password
+				if ("Y".equals(user.getAccountLocked())) { // check if account locked
+					//Account Locked
+					user.setResponseText("Account Locked");
+				} else {
+					//successful Login
+					user.setLastSuccessfulLoginDate(Calendar.getInstance().getTime());
+					user.setFailedLoginAttempt(0);
+					userDao.updateUser(user);
+					return user;
+				}
+			} else {
+				//password invalid
+				user.setFailedLoginAttempt(user.getFailedLoginAttempt()+1);
+				if(user.getFailedLoginAttempt()>=5){
+					user.setAccountLocked('Y');
+				}
+				userDao.updateUser(user);
+			}
+		}
+		return null;
+	}
+
 }

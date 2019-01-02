@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="USERS")
@@ -23,6 +24,7 @@ public class User {
 	private Date lastModifiedDate;
 	private Date lastSuccessfulLoginDate;
 	private String modifiedBy;
+	private String responseText;
 
 	@Id
 	@Column(name="userId")
@@ -121,6 +123,13 @@ public class User {
 		this.modifiedBy = modifiedBy;
 	}
 	
+	@Transient
+	public String getResponseText() {
+		return responseText;
+	}
+	public void setResponseText(String responseText) {
+		this.responseText = responseText;
+	}
 	
 	@Override
 	public String toString() {

@@ -16,4 +16,6 @@ public interface IUserService {
 	public User addUser(User user) throws InsuranceException;
 
 	public User updateUser(User user) throws InsuranceException;
+	
+	public User authenticateUser(String username, String password) throws InsuranceException;
 }

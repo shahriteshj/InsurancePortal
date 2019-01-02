@@ -17,6 +17,7 @@ public interface IUserDao {
 	
 	public User updateUser(User user) throws InsuranceException;
 	
+	//public User authenticateUser(String username, String password) throws InsuranceException;
 	
 
 }
