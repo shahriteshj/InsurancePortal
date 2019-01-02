@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jp.insurance.daos.RoleDao;
 import com.jp.insurance.daos.UserDao;
+import com.jp.insurance.daos.interfaces.IRoleDao;
 import com.jp.insurance.daos.interfaces.IUserDao;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
@@ -19,15 +21,18 @@ public class UserService implements Serializable, IUserService {
 
 	private static final long serialVersionUID = 1579546557142523147L;
 
-	private IUserDao userDao;;
+	private IUserDao userDao;
+	private IRoleDao roleDao;
 
 	public UserService() throws InsuranceException {
 
 	}
 
 	@Autowired
-	public UserService(@Qualifier("userDao") UserDao userDao) throws InsuranceException {
+	public UserService(@Qualifier("userDao") UserDao userDao,
+			@Qualifier("roleDao") RoleDao roleDao) throws InsuranceException {
 		this.userDao = userDao;
+		this.roleDao = roleDao;
 	}
 
 	@Override
@@ -63,6 +68,7 @@ public class UserService implements Serializable, IUserService {
 	}
 
 	@Override
+	@Transactional
 	public User authenticateUser(String username, String password) throws InsuranceException {
 		User user = userDao.getUserByUserName(username);
 		if (user != null) {
@@ -74,6 +80,7 @@ public class UserService implements Serializable, IUserService {
 					//successful Login
 					user.setLastSuccessfulLoginDate(Calendar.getInstance().getTime());
 					user.setFailedLoginAttempt(0);
+					user.setResponseText("SUCCESS");
 					userDao.updateUser(user);
 					return user;
 				}
@@ -87,6 +94,11 @@ public class UserService implements Serializable, IUserService {
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public String getRoleById(Integer roleId) throws InsuranceException {
+		return roleDao.getRoleNameById(roleId);
 	}
 
 }

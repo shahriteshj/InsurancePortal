@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   user: User;
   username: string;
   password: string;
+  
+
   constructor(private router: Router, private _userService: UserService,
     private alertService: AlertService) { }
 
@@ -33,11 +35,14 @@ export class LoginComponent implements OnInit {
     this.password = frm.value.password;
     this._userService.authenticateUser(this.username, this.password).subscribe(
       data => {
-        console.log(data);
-       // let strUser = JSON.parse(localStorage.getItem('currentUser'));
-       // this.user = strUser[0];
-       // if (this.user != undefined) {
-        if(data) {
+        
+        this.user = <User>data;
+        //let strUser = JSON.parse(localStorage.getItem('currentUser'));
+        //console.log(strUser);
+        //console.log(data.get("username"));
+        //this.username = strUser[0];
+        //if (this.user != undefined) {
+        if(this.user.responseText=="SUCCESS") {
           console.log("success");
           this.router.navigate(['/menu']);
         } else {

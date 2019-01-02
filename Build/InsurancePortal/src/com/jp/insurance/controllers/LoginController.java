@@ -13,6 +13,7 @@ import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IUserService;
 import com.jp.insurance.utilities.JsonUtilsJackson;
+import com.jp.insurance.view.entities.ViewUser;
 
 @RestController
 public class LoginController {
@@ -20,12 +21,19 @@ public class LoginController {
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
+	
+
+	@RequestMapping(value = "/authenticateUserTest", method = RequestMethod.POST, headers = "Accept=application/json")
+	public String authenticateUserTest(@RequestBody String loginInput) {
+		System.out.println("In authenticateUserTest().");
+		return "Success";
+	}
 
 	@RequestMapping(value = "/authenticateUser", method = RequestMethod.POST, headers = "Accept=application/json")
-	public HashMap<String, Object> authenticateUser(@RequestBody String loginInput) {
+	public ViewUser authenticateUser(@RequestBody String loginInput) {
 		System.out.println("In authenticateUser().");
 		System.out.println(loginInput);
-		HashMap<String, Object> responseMap = new HashMap<String, Object>();
+		ViewUser viewUser = new ViewUser();
 		try {
 
 			HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(loginInput);
@@ -34,14 +42,22 @@ public class LoginController {
 
 			User user = userService.authenticateUser(username, password);
 			if (user != null) {
-				//responseMap.put("responseText", user.getResponseText());
-				responseMap.put("user", user);
+				String role = userService.getRoleById(user.getRoleId());
+				
+				viewUser.setUserId(user.getUserId());
+				viewUser.setUsername(user.getUsername());
+				viewUser.setPassword("");
+				viewUser.setRoleName(role);
+				viewUser.setLastSuccessfulLoginDate(user.getLastSuccessfulLoginDate());
+				viewUser.setResponseText(user.getResponseText());
+				viewUser.setSecurityAnswer(user.getSecurityAnswer());
+				
 			}
 
 		} catch (InsuranceException e) {
 			e.printStackTrace();
 		}
-		return responseMap;
+		return viewUser;
 
 	}
 

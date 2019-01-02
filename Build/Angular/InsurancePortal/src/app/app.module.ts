@@ -21,6 +21,7 @@ import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertService } from './service/alert.service';
 import { ProductService } from './service/product.service';
+import {ExpandMenu} from './directive/expand-menu.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ProductService } from './service/product.service';
     ShoppingItemComponent,
     ProductListComponent,
     LogOutComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    ExpandMenu
   ],
   imports: [
     BrowserModule,

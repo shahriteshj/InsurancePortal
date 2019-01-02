@@ -52,12 +52,12 @@ public class RoleDao implements Serializable, IRoleDao {
 	}
 
 	@Override
-	public Role getRoleNameById(Integer roleId) throws InsuranceException {
+	public String getRoleNameById(Integer roleId) throws InsuranceException {
 		String sql = "SELECT r FROM Role r where roleId=:roleId";
 		TypedQuery<Role> qry = entityManager.createQuery(sql, Role.class);
 		qry.setParameter("roleId", roleId);
 		Role role = qry.getSingleResult();
-		return role;
+		return role.getName();
 	}
 
 }

@@ -1,19 +1,74 @@
 <div>
-  <ul class="nav nav-tabs">
-    <li routerLinkActive="active">
-      <a routerLink="/shoppingcart">Shopping Cart</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="/shoppingitem">Shopping Item</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="/productlist">Product List </a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="/about">About </a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="/logout">Logout</a>
-    </li>
-  </ul>
-</div>
+<nav>
+    <ul class="nav">
+    
+     <li expandMenu> 
+     <a>
+     <span><i class="fa fa-bar-chart"></i></span>
+     <span>Libraries</span>
+     </a>
+     </li>
+     <ul class="nav submenu">
+     <li>
+     <a>
+     <span>Bootstrap</span>
+     </a>
+     </li>
+     <li>
+     <a>
+     <span>Prime Ng</span>
+     </a>
+     </li>
+     <li>
+     <a>
+     <span>Angular Material</span>
+     </a>
+     </li>
+     </ul>
+     </ul>
+    </nav>
+    <nav>
+    <ul class="nav">
+    
+     <li expandMenu> 
+     <a>
+     <span><i class="fa fa-bar-chart"></i></span>
+     <span>Libraries</span>
+     </a>
+     </li>
+     <ul class="nav submenu">
+     <li>
+     <a>
+     <span>Bootstrap</span>
+     </a>
+     </li>
+     <li>
+     <a>
+     <span>Prime Ng</span>
+     </a>
+     </li>
+     <li>
+     <a>
+     <span>Angular Material</span>
+     </a>
+     </li>
+     </ul>
+     </ul>
+    </nav>
+
+
+    <div class="dropdown" mdbDropdown>
+
+        <button mdbDropdownToggle mdbBtn color="primary" class="dropdown-toggle waves-light" type="button"
+          mdbWavesEffect>
+          Dropdown primary
+        </button>
+      
+        <div class="dropdown-menu dropdown-primary">
+          <button class="dropdown-item" href="#">Action</button>
+          <button class="dropdown-item" href="#">Another action</button>
+          <button class="dropdown-item" href="#">Something else here</button>
+          <button class="dropdown-item" href="#">Something else here</button>
+        </div>
+      </div>
+  </div>

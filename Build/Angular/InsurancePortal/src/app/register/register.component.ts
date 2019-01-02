@@ -33,7 +33,12 @@ export class RegisterComponent implements OnInit {
     let user: User = {
       name: registerFrm.value.name,
       username: registerFrm.value.username,
-      password: registerFrm.value.password
+      password: registerFrm.value.password,
+      roleName:"CUSTOMER",
+      questionId:registerFrm.value.questionId,
+      securityAnswer:registerFrm.value.securityAnswer,
+      lastSuccessfulLoginDate:"",
+      responseText:""
     }
     console.log(user);
     

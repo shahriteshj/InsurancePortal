@@ -13,5 +13,5 @@ public interface IRoleDao {
 	
 	public Role getRoleIdByName(String name) throws InsuranceException;
 
-	public Role getRoleNameById(Integer roleId) throws InsuranceException;
+	public String getRoleNameById(Integer roleId) throws InsuranceException;
 }

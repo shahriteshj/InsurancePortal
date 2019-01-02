@@ -17,5 +17,7 @@ public interface IUserService {
 
 	public User updateUser(User user) throws InsuranceException;
 	
+	public String getRoleById(Integer roleId) throws InsuranceException;
+	
 	public User authenticateUser(String username, String password) throws InsuranceException;
 }
