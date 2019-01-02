@@ -110,10 +110,12 @@ public class QueryController {
 	@RequestMapping("queryDetails.qry")
 	public ModelAndView getQueryDetails(@RequestParam(value="queryId") Long queryId, Model model) {
 		System.out.println("In getQueryDetails()");
+		System.out.println(queryId);
 		ModelAndView mAndV = new ModelAndView();
 		
 		try {			 
-			Query query = queryService.getQueryById(queryId);			
+			Query query = queryService.getQueryById(queryId);		
+			System.out.println(query);
 			List<String> roleNameList = queryService.getRoleNameList();
 			mAndV.addObject("roleNameList",roleNameList);
 			mAndV.addObject("queryDetails",query);
