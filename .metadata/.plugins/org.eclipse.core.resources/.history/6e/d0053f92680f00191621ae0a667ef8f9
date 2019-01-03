@@ -54,9 +54,10 @@ public class QueryRestController {
 				System.out.println("In MANAGER CASE");
 				queryList = (Query) queryService.getQueryList();
 				break;
-			}
+		}
 		} catch (InsuranceException e) {
-				e.printStackTrace();
+			
+			e.printStackTrace();
 		}
 		
 		return query;

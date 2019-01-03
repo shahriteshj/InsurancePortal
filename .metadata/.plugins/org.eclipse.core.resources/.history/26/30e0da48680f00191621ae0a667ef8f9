@@ -38,26 +38,29 @@ public class QueryRestController {
 		String role = (String) inputMap.get("roles");
 		System.out.println(emailId);
 		System.out.println(role);
-		try {
+		
 		switch(role) {
-			case "OPERATIONS" :
-				System.out.println("In OPERATIONS CASE");				
+		case "OPERATIONS" :
+			System.out.println("In OPERATIONS CASE");
+			try {
 				queryList = (Query) queryService.getQueryByRole(role);
-				break;
-			
-			case "CUSTOMER" :
-				System.out.println("In CUSTOMER CASE");
-				queryList = (Query) queryService.getQueryByEmailId(emailId);
-				break;
-				
-			case "MANAGER" :
-				System.out.println("In MANAGER CASE");
-				queryList = (Query) queryService.getQueryList();
-				break;
-			}
-		} catch (InsuranceException e) {
+			} catch (InsuranceException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-		}
+			}
+			break;
+		
+		case "CUSTOMER" :
+			System.out.println("In CUSTOMER CASE");
+			queryList = (Query) queryService.getQueryByEmailId(emailId);
+			break;
+			
+		case "MANAGER" :
+			System.out.println("In MANAGER CASE");
+			queryList = (Query) queryService.getQueryList();
+			break;
+	}
+		
 		
 		return query;
 		
