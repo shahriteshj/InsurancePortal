@@ -1,0 +1,85 @@
+package com.jp.insurance.controllers;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.jp.insurance.entities.Query;
+import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IQueryService;
+import com.jp.insurance.utilities.JsonUtilsJackson;
+
+@RestController
+public class QueryRestController {
+
+	
+	@Autowired
+	@Qualifier("queryService")
+	private IQueryService queryService;
+	
+	
+	@RequestMapping(value = "/queryList", method = RequestMethod.POST, headers = "Accept=application/json")
+	public Query getQueryList(@RequestBody String queryInput) {		
+		System.out.println("In getQueryList() method");		
+		System.out.println(queryInput);
+		
+		Query query = new Query();		
+		HashMap<String,Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(queryInput);
+		
+		
+		
+		
+		
+		return query;
+		
+	}
+	
+	
+	@RequestMapping("queryList.qry")
+	public ModelAndView getQueryList(HttpSession session) {
+		List<Query> queryList = null;
+		System.out.println("In getQueryList()");
+		ModelAndView mAndV = new ModelAndView();
+		String emailId = (String) session.getAttribute("username");
+		String role = (String) session.getAttribute("roles");
+		  System.out.println(emailId);
+		  System.out.println(role);
+		  
+		try {		
+			
+			switch(role) {
+				case "OPERATIONS" :
+					System.out.println("In OPERATIONS CASE");
+					queryList = queryService.getQueryByRole(role);
+					break;
+				
+				case "CUSTOMER" :
+					System.out.println("In CUSTOMER CASE");
+					queryList = queryService.getQueryByEmailId(emailId);
+					break;
+					
+				case "MANAGER" :
+					System.out.println("In MANAGER CASE");
+					queryList = queryService.getQueryList();
+					break;
+			}
+			
+			System.out.println(queryList);
+			mAndV.addObject("queryList",queryList);			
+			mAndV.setViewName("query/QueryList");
+			
+		} catch (InsuranceException e) {			
+			e.printStackTrace();
+		}
+		return mAndV;		
+	}	
+}
