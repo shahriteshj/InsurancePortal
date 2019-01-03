@@ -10,6 +10,7 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ShoppingItemComponent } from './shopping-item/shopping-item.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import {BuypolicyComponent} from './buypolicy/buypolicy.component';
 import { AuthGuard } from './guards/auth.guards';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'productlist', component: ProductListComponent, canActivate: [AuthGuard]  },
   { path: 'shoppingitem', component: ShoppingItemComponent, canActivate: [AuthGuard] },
   { path: 'shoppingcart', component: ShoppingCartComponent, canActivate: [AuthGuard]  },
+  { path: 'buypolicy', component: BuypolicyComponent, canActivate: [AuthGuard]  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '' }
 

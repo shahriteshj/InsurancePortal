@@ -51,6 +51,7 @@ public class LoginController {
 				viewUser.setLastSuccessfulLoginDate(user.getLastSuccessfulLoginDate());
 				viewUser.setResponseText(user.getResponseText());
 				viewUser.setSecurityAnswer(user.getSecurityAnswer());
+				System.out.println(viewUser);
 				
 			}
 

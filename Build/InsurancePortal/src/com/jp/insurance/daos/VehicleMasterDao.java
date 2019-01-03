@@ -52,6 +52,14 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 	}
 
 	@Override
+	public List<String> getVehiclesMake() throws InsuranceException{
+		String sql = "SELECT distinct v.make FROM VehicleMaster v";
+		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		List<String> vehicleMakeList = qry.getResultList();
+		return vehicleMakeList;
+	}
+	
+	@Override
 	public List<VehicleMaster> getVehiclesByMakeAndModel(String make, String model) throws InsuranceException {
 		String sql = "SELECT v FROM VehicleMaster v where make=:make and model=:model";
 		TypedQuery<VehicleMaster> qry = entityManager.createQuery(sql, VehicleMaster.class);

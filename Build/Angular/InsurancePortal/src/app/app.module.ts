@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -23,8 +24,8 @@ import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertService } from './service/alert.service';
 import { ProductService } from './service/product.service';
-import {ExpandMenu} from './directive/expand-menu.directive';
-
+import { VehicleMasterService } from './service/vehiclemaster.service';
+import { BuypolicyComponent } from './buypolicy/buypolicy.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {ExpandMenu} from './directive/expand-menu.directive';
     ProductListComponent,
     LogOutComponent,
     MenuBarComponent,
-    ExpandMenu
+    BuypolicyComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,7 +51,7 @@ import {ExpandMenu} from './directive/expand-menu.directive';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [AuthGuard,UserService,AlertService,ProductService],
+  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

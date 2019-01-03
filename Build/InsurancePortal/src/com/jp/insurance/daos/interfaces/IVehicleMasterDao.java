@@ -30,4 +30,6 @@ public interface IVehicleMasterDao {
 	public List<String> getVehicleModel() throws InsuranceException;
 	
 	public List<String> getVehicleSubmodel() throws InsuranceException;
+	
+	public List<String> getVehiclesMake() throws InsuranceException;
 }

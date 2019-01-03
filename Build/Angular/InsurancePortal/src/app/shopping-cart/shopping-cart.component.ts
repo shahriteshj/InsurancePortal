@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/product';
-import { ProductService } from '../service/product.service';
-import { Item } from '../model/Item';
 import { NgForm, AbstractControl, FormGroup } from '@angular/forms';
-import { CartItem } from '../model/CartItem';
+
+import { Query } from '../model/Query';
+import { QueryService } from '../service/query.service';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,38 +12,52 @@ import { CartItem } from '../model/CartItem';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  cartItems: CartItem[] = [];
-  products: Product[];
-  cartItem: CartItem;
+  query:Query;
 
-  constructor(private _productService: ProductService) { }
+  constructor(private _queryService: QueryService) { }
 
   ngOnInit() {
-    this.getProducts().subscribe(products => {
-    this.products = <Product[]>products;
-      let i: number = 1;
-      for (let p of this.products) {
-        let cartItem1: CartItem = {
-          id: i,
-          product: <Product>p,
-          quantity: 0
-        }
-        this.cartItems.push(cartItem1);
-        i = i + 1;
-      }
-    });
-    console.log(this.cartItems);
+   
   }
 
-  getProducts() {
-    return this._productService.getProducts();
-  }
+ 
 
-  AddItem(frm: NgForm) {
+  submitQuery(frm: NgForm) {
 
-    //let frmMap:AbstractControl = frm.controls;
+    
     let group: FormGroup = frm.control
-    this.logKeyValuePairs(group);
+    //this.logKeyValuePairs(group);
+    let user:User;
+    user = JSON.parse(localStorage.getItem("currentUser"));
+    
+    let name1 = user.name;
+    let username1 = user.username;
+    console.log(name1);
+    console.log(username1);
+    
+    let query: Query = {
+      name: name1,
+      emailId: username1,
+      queryType: frm.value.queryType,
+      queryDescription:frm.value.queryDescription,
+      assignedTo:null,
+      queryResponse:null,
+      status:"IN PROGRESS"
+      
+    }
+    console.log(query);
+    
+    this._queryService.addQuery(query)
+      .subscribe(
+        data => {
+          console.log("Success");
+          //this.router.navigate(['/login']);
+        },
+        error => {
+              console.log("Failure");     
+        }
+      );
+
   }
 
   logKeyValuePairs(group: FormGroup): void {
@@ -58,14 +72,6 @@ export class ShoppingCartComponent implements OnInit {
     }
     );
   }
-  // frm.controls.forEach(element => {
-  //   frm.get(element).   
-  // });
-  //   let item: Item = {
-
-  //     name: frm.value.name,
-  //     quantity: Number(frm.value.quantity)
-  //   }
-  // }
+ 
 
 }

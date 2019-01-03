@@ -25,4 +25,6 @@ public List<VehicleMaster> getVehiclesList() throws InsuranceException;
 	
 	public Float getVehiclePriceByMakeModelSubmodel(String make, String model, String submodel) throws InsuranceException;
 	
+	public List<String> getVehiclesMake() throws InsuranceException;
+	
 }

@@ -39,6 +39,11 @@ public class VehicleMasterService implements Serializable, IVehicleMasterService
 	}
 
 	@Override
+	public List<String> getVehiclesMake() throws InsuranceException {
+		return vehicleMasterDao.getVehiclesMake();
+	}
+	
+	@Override
 	public List<VehicleMaster> getVehiclesById(Long vehicleId) throws InsuranceException {
 		return vehicleMasterDao.getVehiclesById(vehicleId);
 	}

@@ -5,11 +5,10 @@
            <label for="username"> 
             UserName:
            </label> 
-          <input type="text" name="username" pattern="[a-zA-Z0-9]+"  
+          <input type="text" name="username"   
           required class="form-control" ngModel #usernameControl="ngModel">
             <div *ngIf="usernameControl?.touched && usernameControl?.invalid" class="alert alert-danger">
             <div *ngIf="usernameControl.errors?.required">UserName is required</div>
-            <div *ngIf="usernameControl.errors?.pattern">Please enter valid UserName</div>
           </div>  
         </div>
 

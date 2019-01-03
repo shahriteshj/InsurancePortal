@@ -29,7 +29,7 @@ import com.jp.insurance.services.interfaces.IQueryService;
 
 
 /*http://localhost:8081/InsurancePortal/policy/homePage.hr*/
-@Controller
+
 public class QueryController {
 	
 	@Autowired
