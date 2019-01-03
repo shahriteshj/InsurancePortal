@@ -7,15 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CustomerController {
-	
-	
-	/*
-	@RequestMapping("homePage.po")
-	public String homePage() {
-		System.out.println("In Home Page");
-		return "customer/Menubar";
-	}*/
-
+		
 	@RequestMapping("homePage.po")
 	public String homePage(HttpSession session) {
 		

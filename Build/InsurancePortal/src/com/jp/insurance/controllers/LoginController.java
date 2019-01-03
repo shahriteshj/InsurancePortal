@@ -1,14 +1,12 @@
 package com.jp.insurance.controllers;
 
 import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IUserService;
@@ -23,11 +21,7 @@ public class LoginController {
 	private IUserService userService;
 	
 
-	@RequestMapping(value = "/authenticateUserTest", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String authenticateUserTest(@RequestBody String loginInput) {
-		System.out.println("In authenticateUserTest().");
-		return "Success";
-	}
+
 
 	@RequestMapping(value = "/authenticateUser", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ViewUser authenticateUser(@RequestBody String loginInput) {
