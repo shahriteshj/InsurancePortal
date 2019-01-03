@@ -34,6 +34,16 @@
               <div *ngIf="passwordControl.errors?.pattern">Please enter valid Password</div>
             </div>
           </div>
+          <div class="form-group">
+            <label for="confirmPassword">
+              Password:
+            </label> 
+            <input type="text" name="confirmPassword" ngModel pattern="[a-zA-Z]+" #passwordControl="ngModel" required class="form-control">
+            <div *ngIf="passwordControl?.touched && passwordControl?.invalid" class="alert alert-danger">
+              <div *ngIf="passwordControl.errors?.required">Password is required</div>
+              <div *ngIf="passwordControl.errors?.pattern">Please enter valid Password</div>
+            </div>
+          </div>
         <div class="form-group">
             <button type="submit" name="button" class="btn btn-primary" [disabled]="registerFrm.invalid">Submit</button>
             <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './material.module';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,10 +43,12 @@ import {ExpandMenu} from './directive/expand-menu.directive';
     ExpandMenu
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule    
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [AuthGuard,UserService,AlertService,ProductService],
   bootstrap: [AppComponent]
