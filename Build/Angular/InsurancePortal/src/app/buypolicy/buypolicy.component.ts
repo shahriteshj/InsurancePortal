@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { VehicleMasterService } from '../service/vehiclemaster.service';
 import { VehicleMaster } from '../model/VehicleMaster';
+import { CustomerVehicle } from '../model/CustomerVehicle';
 
 @Component({
   selector: 'app-buypolicy',
@@ -19,6 +20,7 @@ export class BuypolicyComponent implements OnInit {
   model: string = "";
   submodel: string = "";
   cc: string = "";
+  customerVehicle:CustomerVehicle;
 
 
   constructor(private router: Router, private _VehicleMasterService: VehicleMasterService) { }
@@ -87,31 +89,37 @@ export class BuypolicyComponent implements OnInit {
     } else {
       document.getElementById("nextBtn").innerHTML = "Next";
     }
-    //... and run a function that will display the correct step indicator:
+    
     this.fixStepIndicator(n);
   }
 
   handleClick(event: Event, n: any) {
-    //console.log('Click!', event);
-    //console.log(n);
     this.nextPrev(n);
   }
 
   nextPrev(n) {
     console.log("in nextPrev ", n);
     // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab");
+    var x = document.getElementsByClassName("tab1");
     // Exit the function if any field in the current tab is invalid:
     if (n == 1 && !this.validateForm()) return false;
     // Hide the current tab:
+    //var x = document.getElementsByClassName("tab1");
+    x[this.currentTab].setAttribute("class", "tab");
     //x[this.currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     this.currentTab = this.currentTab + n;
     // if you have reached the end of the form...
-    if (this.currentTab >= x.length + 1) {
+    var x = document.getElementsByClassName("tab");
+    if (this.currentTab >= x.length ) {
       // ... the form gets submitted:
       //document.getElementById("regForm").submit();
       return false;
+    }
+
+    if(this.currentTab==1){
+      // Get policy Quote
+
     }
     // Otherwise, display the correct tab:
     this.showTab(this.currentTab);
@@ -150,16 +158,6 @@ export class BuypolicyComponent implements OnInit {
     //... and adds the "active" class on the current step:
     x[n].className += " active";
   }
-
-  // getVehicleMake(vehicleMasterList: VehicleMaster[]) {
-  //   console.log(vehicleMasterList);
-  //   let make:string[];
-  //   vehicleMasterList.forEach(element => {
-  //     console.log(element.make);
-  //     make.push(element.make);
-  //   });
-  //   this.makeList=make;
-  // }
 
   makeChange(e) {
     console.log(e.target.value);
