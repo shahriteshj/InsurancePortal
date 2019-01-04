@@ -41,8 +41,10 @@ public class QueryRestController {
 		try {
 		switch(role) {
 			case "OPERATIONS" :
-				System.out.println("In OPERATIONS CASE");				
-				queryList = (Query) queryService.getQueryByRole(role);
+				System.out.println("In OPERATIONS CASE");
+				
+					queryList = (Query) queryService.getQueryByRole(role);
+
 				break;
 			
 			case "CUSTOMER" :
@@ -54,9 +56,10 @@ public class QueryRestController {
 				System.out.println("In MANAGER CASE");
 				queryList = (Query) queryService.getQueryList();
 				break;
-			}
+		}
 		} catch (InsuranceException e) {
-				e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return query;

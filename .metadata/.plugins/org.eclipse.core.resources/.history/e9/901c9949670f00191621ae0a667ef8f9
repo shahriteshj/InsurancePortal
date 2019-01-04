@@ -31,33 +31,15 @@ public class QueryRestController {
 	public Query getQueryList(@RequestBody String queryInput) {		
 		System.out.println("In getQueryList() method");		
 		System.out.println(queryInput);
-		Query queryList = null;
+		
 		Query query = new Query();		
 		HashMap<String,Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(queryInput);
 		String emailId = (String) inputMap.get("username");
 		String role = (String) inputMap.get("roles");
 		System.out.println(emailId);
 		System.out.println(role);
-		try {
-		switch(role) {
-			case "OPERATIONS" :
-				System.out.println("In OPERATIONS CASE");				
-				queryList = (Query) queryService.getQueryByRole(role);
-				break;
-			
-			case "CUSTOMER" :
-				System.out.println("In CUSTOMER CASE");
-				queryList = (Query) queryService.getQueryByEmailId(emailId);
-				break;
-				
-			case "MANAGER" :
-				System.out.println("In MANAGER CASE");
-				queryList = (Query) queryService.getQueryList();
-				break;
-			}
-		} catch (InsuranceException e) {
-				e.printStackTrace();
-		}
+		
+		
 		
 		return query;
 		
