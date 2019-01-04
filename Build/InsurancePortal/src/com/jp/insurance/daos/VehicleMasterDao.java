@@ -115,13 +115,13 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 	@Override
 	public Float getVehiclePriceByMakeModelSubmodel(String make, String model, String submodel)
 			throws InsuranceException {
+		System.out.println("Make: "+make + " Model: "+ model + " subModel:  " + submodel );
 		String sql = "SELECT v.price FROM VehicleMaster v where make=:make and model=:model and submodel=:submodel";
-		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
+		TypedQuery<Float> qry = entityManager.createQuery(sql, Float.class);
 		qry.setParameter("make", make);
 		qry.setParameter("model", model);
 		qry.setParameter("submodel", submodel);
-		String strPrice = qry.getSingleResult();
-		Float price = Float.valueOf(strPrice);
+		Float price = qry.getSingleResult();
 		return price;
 	}
 	

@@ -16,10 +16,10 @@ public class CustomerVehicle {
 
 	private Long vehicleId;
 	private Long customerId;
-	private String VehicleRegNo;
+	private String vehicleRegNo;
 	private String make;
 	private String model;
-	private String subModel;
+	private String submodel;
 	private String engineNo;
 	private String chasisNo;
 	private String cc;
@@ -52,11 +52,11 @@ public class CustomerVehicle {
 
 	@Column(name = "VehicleRegNo")
 	public String getVehicleRegNo() {
-		return VehicleRegNo;
+		return vehicleRegNo;
 	}
 
 	public void setVehicleRegNo(String vehicleRegNo) {
-		VehicleRegNo = vehicleRegNo;
+		this.vehicleRegNo = vehicleRegNo;
 	}
 
 	@Column(name = "Make")
@@ -77,13 +77,13 @@ public class CustomerVehicle {
 		this.model = model;
 	}
 
-	@Column(name = "SubModel")
-	public String getSubModel() {
-		return subModel;
+	@Column(name = "Submodel")
+	public String getSubmodel() {
+		return submodel;
 	}
 
-	public void setSubModel(String subModel) {
-		this.subModel = subModel;
+	public void setSubmodel(String submodel) {
+		this.submodel = submodel;
 	}
 
 	@Column(name = "EngineNo")
@@ -152,7 +152,7 @@ public class CustomerVehicle {
 	@Override
 	public String toString() {
 		return "CustomerVehicle [vehicleId=" + vehicleId + ", customerId=" + customerId + ", VehicleRegNo="
-				+ VehicleRegNo + ", make=" + make + ", model=" + model + ", subModel=" + subModel + ", engineNo="
+				+ vehicleRegNo + ", make=" + make + ", model=" + model + ", submodel=" + submodel + ", engineNo="
 				+ engineNo + ", chasisNo=" + chasisNo + ", cc=" + cc + ", fuelType=" + fuelType + ", manufacturingYear="
 				+ manufacturingYear + ", registrationDate=" + registrationDate + ", vehicleRegCity=" + vehicleRegCity
 				+ "]";

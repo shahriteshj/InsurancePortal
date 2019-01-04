@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {TabModule } from 'angular-tabs-component';
 
 
 
@@ -26,6 +27,7 @@ import { AlertService } from './service/alert.service';
 import { ProductService } from './service/product.service';
 import { VehicleMasterService } from './service/vehiclemaster.service';
 import { BuypolicyComponent } from './buypolicy/buypolicy.component';
+import { PolicyService } from './service/policy.service';
 
 @NgModule({
   declarations: [
@@ -48,9 +50,10 @@ import { BuypolicyComponent } from './buypolicy/buypolicy.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    TabModule
   ],
-  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService],
+  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,PolicyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

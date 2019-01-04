@@ -1,41 +1,43 @@
 <app-menu-bar></app-menu-bar>
 <div class="col-md-6 col-md-offset-3">
 <form #regForm="ngForm" (ngSubmit)="action_page">
+    
     <h1>Policy:</h1>
     <!-- One "tab" for each step in the form: -->
+    
     <div class="tab">Vehicle Details:
         
         <table><tr><td>Make</td>
-        <td width="500px"><p><select name="Make" (change)="makeChange($event)" >
+        <td width="500px"><p><select id="Make" name="Make" (change)="makeChange($event)" >
             <option>Select Make</option>
             <option *ngFor="let m of makeList" [ngValue]="m">{{ m }}</option>
           </select></p></td></tr>
-          <tr><td>Model</td><td><p><select name="Model" (change)="modelChange($event)" >
+          <tr><td>Model</td><td><p><select id="Model" name="Model" (change)="modelChange($event)" >
             <option>Select Model</option>
             <option *ngFor="let mo of modelList" [ngValue]="mo">{{ mo }}</option>
           </select></p></td></tr>
-          <tr><td>Submodel</td><td><p><select name="SubModel" (change)="submodelChange($event)">
+          <tr><td>Submodel</td><td><p><select id="SubModel" name="SubModel" (change)="submodelChange($event)">
             <option>Select Submodel</option>
             <option *ngFor="let submo of submodelList" [ngValue]="submo">{{ submo }}</option>
           </select></p></td></tr>
-          <tr><td>CC</td><td><p><input    name="cc" value={{cc}}></p></td></tr>
-          <tr><td>Fuel Type</td><td><p><select name="FuelType" >
+          <tr><td>CC</td><td><p><input id="cc" name="cc"   [(ngModel)]="cc"></p></td></tr>
+          <tr><td>Fuel Type</td><td><p><select id="fuelType" name="fuelType" [(ngModel)]="fuelType" >
             <option value="">Select FuelType</option>
             <option value="PETROL">Petrol</option>
             <option value="DIESEL">Diesel</option>
             <option value="CNG">CNG</option>
           </select></p></td></tr>
-          <tr><td>VehicleRegNo</td><td><p><input    name="VehicleRegNo" ></p></td></tr>
-          <tr><td>engineNo</td><td><p><input    name="engineNo" ></p></td></tr>
-          <tr><td>chasisNo</td><td><p><input    name="chasisNo" ></p></td></tr>
-          <tr><td>manufacturingYear</td><td><p><input    name="manufacturingYear" ></p></td></tr>
-          <tr><td>registrationDate</td><td><p><input    name="registrationDate" ></p></td></tr>
-          <tr><td>vehicleRegCity</td><td><p><input    name="vehicleRegCity" ></p></td></tr>
+          <tr><td>VehicleRegNo</td><td><p><input  id="vehicleRegNo"  name="vehicleRegNo" [(ngModel)]="vehicleRegNo"></p></td></tr>
+          <tr><td>engineNo</td><td><p><input  id="engineNo"  name="engineNo" [(ngModel)]="engineNo"></p></td></tr>
+          <tr><td>chasisNo</td><td><p><input id="chasisNo"   name="chasisNo" [(ngModel)]="chasisNo"></p></td></tr>
+          <tr><td>manufacturingYear</td><td><p><input  id="manufacturingYear"  name="manufacturingYear" [(ngModel)]="manufacturingYear" ></p></td></tr>
+          <tr><td>registrationDate</td><td><p><input  id="registrationDate"  name="registrationDate" [(ngModel)]="registrationDate"></p></td></tr>
+          <tr><td>vehicleRegCity</td><td><p><input  id="vehicleRegCity"  name="vehicleRegCity" [(ngModel)]="vehicleRegCity"></p></td></tr>
         </table>
     </div>
     <div class="tab">Polciy Quote
-        <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
-        <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+        <p>Rs. {{price}}</p>
+        <p></p>
     </div>
     <div class="tab">Payment:
         <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>

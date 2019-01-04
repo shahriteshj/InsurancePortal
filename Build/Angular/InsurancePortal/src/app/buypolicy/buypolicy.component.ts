@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { VehicleMasterService } from '../service/vehiclemaster.service';
 import { VehicleMaster } from '../model/VehicleMaster';
 import { CustomerVehicle } from '../model/CustomerVehicle';
+import { PolicyService } from '../service/policy.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-buypolicy',
@@ -12,18 +14,30 @@ import { CustomerVehicle } from '../model/CustomerVehicle';
 export class BuypolicyComponent implements OnInit {
 
   vehicleMasterList: VehicleMaster[];
+  customerVehicle:CustomerVehicle;
   currentTab = 0;
+
   makeList: string[] = [];
   modelList: string[] = [];
   submodelList: string[] = [];
+  
   make: string = "";
   model: string = "";
   submodel: string = "";
   cc: string = "";
-  customerVehicle:CustomerVehicle;
+  fuelType:string="";
+  vehicleRegNo:string="";
+  engineNo:string="";
+  chasisNo:string="";
+  manufacturingYear:number;
+  registrationDate:string="";
+  vehicleRegCity:string="";
 
+  price:number;
+  datepipe: DatePipe;
 
-  constructor(private router: Router, private _VehicleMasterService: VehicleMasterService) { }
+  constructor(private router: Router, private _VehicleMasterService: VehicleMasterService, 
+    private _policyService:PolicyService) { }
 
   ngOnInit() {
     console.log("in on init");
@@ -35,35 +49,32 @@ export class BuypolicyComponent implements OnInit {
 
   getVehicleMasterList() {
     this._VehicleMasterService.getVehicleList().subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.vehicleMasterList = <VehicleMaster[]>data
-      // this.getVehicleMake(<VehicleMaster[]>data);
+      
     });
   }
 
   getVehicleMake() {
     this._VehicleMasterService.getVehicleMake().subscribe(data => {
-      console.log(data);
       this.makeList = <string[]>data
-      // this.getVehicleMake(<VehicleMaster[]>data);
+      
     });
   }
 
   showTab(n) {
-    console.log("in on showTab " + n);
+    //console.log("in on showTab " + n);
     // This function will display the specified tab of the form...
 
     var x = document.getElementsByClassName("tab1");
-    console.log("tab1 " + x.length);
-
+    
     for (let i = 0; i < x.length; i++) {
       x[i].setAttribute("class", "tab");
     }
 
     var x = document.getElementsByClassName("tab");
     //console.log(x[n]);
-    console.log("tab " + x.length);
-
+    
 
     for (let i = 0; i < x.length; i++) {
       if (i == n) {
@@ -105,7 +116,7 @@ export class BuypolicyComponent implements OnInit {
     if (n == 1 && !this.validateForm()) return false;
     // Hide the current tab:
     //var x = document.getElementsByClassName("tab1");
-    x[this.currentTab].setAttribute("class", "tab");
+    x[0].setAttribute("class", "tab");
     //x[this.currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     this.currentTab = this.currentTab + n;
@@ -117,12 +128,53 @@ export class BuypolicyComponent implements OnInit {
       return false;
     }
 
+    console.log("currentTab: " + this.currentTab);
     if(this.currentTab==1){
       // Get policy Quote
-
+      console.log("inside Loop");
+      this.loadCustomerVehcle();
+      console.log(this.customerVehicle);
+      this._policyService.getQuote(this.customerVehicle).subscribe(quote=>{
+        console.log(quote);
+        this.price=Number(quote)});
     }
     // Otherwise, display the correct tab:
     this.showTab(this.currentTab);
+  }
+
+  loadCustomerVehcle(){
+    console.log(this.chasisNo);
+    let customerVehicle1:CustomerVehicle={
+    make:this.make,
+    model:this.model,
+    submodel:this.submodel,
+    cc:this.cc,
+    fuelType:this.fuelType,
+    engineNo:this.engineNo,
+    chasisNo:this.chasisNo,
+    vehicleRegNo:this.vehicleRegNo,
+    manufacturingYear:this.manufacturingYear,
+    registrationDate:this.registrationDate,
+    vehicleRegCity:this.vehicleRegCity
+    }
+
+    
+    let customerVehicle2:CustomerVehicle={
+      make:"HYUNDAI",
+      model:"i10",
+      submodel:"Dlite",
+      cc:"1866",
+      fuelType:"PETROL",
+      engineNo:"123456789",
+      chasisNo:"123456789",
+      VehicleRegNo:"123456789",
+      manufacturingYear:Number("2016"),
+      registrationDate:"01/01/2016",
+      vehicleRegCity:"Mumbai"
+      }
+
+    this.customerVehicle=customerVehicle2;
+    console.log(this.customerVehicle);
   }
 
   validateForm() {
@@ -149,7 +201,7 @@ export class BuypolicyComponent implements OnInit {
   }
 
   fixStepIndicator(n) {
-    console.log("in first step indicator")
+    
     // This function removes the "active" class of all steps...
     var i, x = document.getElementsByClassName("step");
     for (i = 0; i < x.length; i++) {
@@ -160,12 +212,12 @@ export class BuypolicyComponent implements OnInit {
   }
 
   makeChange(e) {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     this.make = e.target.value;
     let i = 0;
     this.modelList = [];
     this.vehicleMasterList.forEach(element => {
-      console.log(element.make);
+     // console.log(element.make);
 
       if (element.make == e.target.value) {
         this.modelList[i] = element.model;
@@ -173,19 +225,19 @@ export class BuypolicyComponent implements OnInit {
       }
 
     });
-    console.log(this.modelList);
+    //console.log(this.modelList);
     let unique = new Set(this.modelList);
     this.modelList = Array.from(unique);
     this.submodelList = [];
 
   }
   modelChange(evt) {
-    console.log(evt.target.value)
+   // console.log(evt.target.value)
     this.submodel = evt.target.value;
     let i = 0;
     this.submodelList = [];
     this.vehicleMasterList.forEach(element => {
-      console.log(element.make);
+      //console.log(element.make);
 
       if (element.make == this.make) {
         if (element.model == evt.target.value) {
@@ -195,7 +247,7 @@ export class BuypolicyComponent implements OnInit {
       }
 
     });
-    console.log(this.submodelList);
+    //console.log(this.submodelList);
     let unique = new Set(this.submodelList);
     this.submodelList = Array.from(unique);
 
@@ -203,10 +255,10 @@ export class BuypolicyComponent implements OnInit {
   }
 
   submodelChange(event) {
-    console.log(event.target.value);
-
+    //console.log(event.target.value);
+    this.submodel=event.target.value;
     this.vehicleMasterList.forEach(element => {
-      console.log(element.make);
+      //console.log(element.make);
 
       if (element.make == this.make && element.model == this.model) {
         if (element.submodel == event.target.value) {

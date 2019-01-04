@@ -6,21 +6,21 @@ export class CustomerVehicle {
     model:string ;
     submodel: string;
     cc: string;
-    VehicleRegNo:string;
+    vehicleRegNo:string;
     engineNo:string;
     chasisNo:string;
     fuelType:string;
     manufacturingYear:number;
-    registrationDate:Date;
+    registrationDate:string;
     vehicleRegCity:string;
 
-   constructor(make:string,model:string,submodel:string,cc:string,VehicleRegNo:string,engineNo:string,chasisNo:string,
-    fuelType:string,manufacturingYear:number,registrationDate:Date,vehicleRegCity:string,customerId?:number,vehicleId?:number){
+   constructor(make:string,model:string,submodel:string,cc:string,vehicleRegNo:string,engineNo:string,chasisNo:string,
+    fuelType:string,manufacturingYear:number,registrationDate:string,vehicleRegCity:string,customerId?:number,vehicleId?:number){
        this.make=make;
        this.model=model;
        this.submodel=submodel;
        this.cc=cc;
-       this.VehicleRegNo=VehicleRegNo;
+       this.vehicleRegNo=vehicleRegNo;
        this.engineNo=engineNo;
        this.chasisNo=chasisNo;
        this.fuelType=fuelType;

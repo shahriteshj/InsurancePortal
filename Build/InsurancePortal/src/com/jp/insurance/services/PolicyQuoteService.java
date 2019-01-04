@@ -37,7 +37,7 @@ public class PolicyQuoteService implements Serializable, IPolicyQuoteService {
 
 		Float policyPremium=0F;
 		Float marketPrice = vehicleMasterDao.getVehiclePriceByMakeModelSubmodel(customerVehicle.getMake(),
-				customerVehicle.getModel(), customerVehicle.getSubModel());
+				customerVehicle.getModel(), customerVehicle.getSubmodel());
 		Float depreciationPercentage = getDepreciationPercentage(customerVehicle.getManufacturingYear());
 
 		Float Idv = marketPrice * (depreciationPercentage / 100);
