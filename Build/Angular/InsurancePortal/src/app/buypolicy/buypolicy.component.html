@@ -4,12 +4,28 @@
     <h1>Policy:</h1>
     <!-- One "tab" for each step in the form: -->
     <div class="tab">Vehicle Details:
-        <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
-        <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
-        <p><select ng-options="vehicleMaster as vehicleMaster.make for vehicleMaster in vehicleMasterList track by vehicleMaster.make" ng-model="selected"></select></p>
-        <p><select *ngFor="let m of makeList">
-            <option value={{m}}>{{m}}</option>
-        </select> </p>
+        
+        <table><tr><td>Make</td>
+        <td width="500px"><p><select name="Make" (change)="makeChange($event)" >
+            <option>Select Make</option>
+            <option *ngFor="let m of makeList" [ngValue]="m">{{ m }}</option>
+          </select></p></td></tr>
+          <tr><td>Model</td><td><p><select name="Model" (change)="modelChange($event)" >
+            <option>Select Model</option>
+            <option *ngFor="let mo of modelList" [ngValue]="mo">{{ mo }}</option>
+          </select></p></td></tr>
+          <tr><td>Submodel</td><td><p><select name="SubModel" (change)="submodelChange($event)">
+            <option>Select Submodel</option>
+            <option *ngFor="let submo of submodelList" [ngValue]="submo">{{ submo }}</option>
+          </select></p></td></tr>
+          <tr><td>CC</td><td><p><input    name="cc" value={{cc}}></p></td></tr>
+          <tr><td>Fuel Type</td><td><p><select name="FuelType" >
+            <option value="">Select FuelType</option>
+            <option value="PETROL">Petrol</option>
+            <option value="DIESEL">Diesel</option>
+            <option value="CNG">CNG</option>
+          </select></p></td></tr>
+        </table>
     </div>
     <div class="tab">Polciy Quote
         <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>

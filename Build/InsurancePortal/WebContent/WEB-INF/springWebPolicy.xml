@@ -18,6 +18,7 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:property name="viewClass" value="com.jp.insurance.interceptors.JstlView" />
 		<beans:property name="prefix" value="/WEB-INF/jsps/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>

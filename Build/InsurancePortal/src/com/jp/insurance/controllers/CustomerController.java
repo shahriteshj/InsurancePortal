@@ -17,7 +17,7 @@ public class CustomerController {
 		session.setAttribute("username", emailId);
 		
 		System.out.println("In Home Page");
-		return "customer/Menubar";
+		return "HomePage";
 	}
 	
 	@RequestMapping("logout.po")

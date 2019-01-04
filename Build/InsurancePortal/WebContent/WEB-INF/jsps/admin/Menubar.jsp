@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -73,30 +72,20 @@
 <body>
 <div class="navbar">
   <a href="#home">Home</a>
-  <div class="dropdown">
-    <button class="dropbtn">Policies 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">View my policies</a>
-      <a href="#">Buy new Policy</a>
-    </div>
-  </div> 
+
     <div class="dropdown">
-    <button class="dropbtn">Queries 
+    <button class="dropbtn">Users 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="queryForm.qry">Raise a Query</a>
-      <a href="queryList.qry">View my queries</a>
+      <a href="queryForm.qry">View Users</a>
     </div>
   </div> 
   <a href="#">Contact Us</a>
   <a href="#">Logout</a>
  </div>
 
-<h3>Customer Menu Bar</h3>
-${ sessionScope.roles}
-${ sessionScope.username}
+<h3>Admin Menu Bar</h3>
+
 </body>
 </html>

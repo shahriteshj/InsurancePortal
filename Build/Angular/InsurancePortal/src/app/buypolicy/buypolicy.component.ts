@@ -12,23 +12,38 @@ export class BuypolicyComponent implements OnInit {
 
   vehicleMasterList: VehicleMaster[];
   currentTab = 0;
-  makeList: string[];
-  modelList: string[];
+  makeList: string[] = [];
+  modelList: string[] = [];
+  submodelList: string[] = [];
+  make: string = "";
+  model: string = "";
+  submodel: string = "";
+  cc: string = "";
 
 
   constructor(private router: Router, private _VehicleMasterService: VehicleMasterService) { }
 
   ngOnInit() {
     console.log("in on init");
+    this.getVehicleMasterList();
     this.getVehicleMake();
     this.showTab(this.currentTab);
+  }
+
+
+  getVehicleMasterList() {
+    this._VehicleMasterService.getVehicleList().subscribe(data => {
+      console.log(data);
+      this.vehicleMasterList = <VehicleMaster[]>data
+      // this.getVehicleMake(<VehicleMaster[]>data);
+    });
   }
 
   getVehicleMake() {
     this._VehicleMasterService.getVehicleMake().subscribe(data => {
       console.log(data);
       this.makeList = <string[]>data
-     // this.getVehicleMake(<VehicleMaster[]>data);
+      // this.getVehicleMake(<VehicleMaster[]>data);
     });
   }
 
@@ -145,5 +160,63 @@ export class BuypolicyComponent implements OnInit {
   //   });
   //   this.makeList=make;
   // }
+
+  makeChange(e) {
+    console.log(e.target.value);
+    this.make = e.target.value;
+    let i = 0;
+    this.modelList = [];
+    this.vehicleMasterList.forEach(element => {
+      console.log(element.make);
+
+      if (element.make == e.target.value) {
+        this.modelList[i] = element.model;
+        i++;
+      }
+
+    });
+    console.log(this.modelList);
+    let unique = new Set(this.modelList);
+    this.modelList = Array.from(unique);
+    this.submodelList = [];
+
+  }
+  modelChange(evt) {
+    console.log(evt.target.value)
+    this.submodel = evt.target.value;
+    let i = 0;
+    this.submodelList = [];
+    this.vehicleMasterList.forEach(element => {
+      console.log(element.make);
+
+      if (element.make == this.make) {
+        if (element.model == evt.target.value) {
+          this.submodelList[i] = element.submodel;
+          i++;
+        }
+      }
+
+    });
+    console.log(this.submodelList);
+    let unique = new Set(this.submodelList);
+    this.submodelList = Array.from(unique);
+
+
+  }
+
+  submodelChange(event) {
+    console.log(event.target.value);
+
+    this.vehicleMasterList.forEach(element => {
+      console.log(element.make);
+
+      if (element.make == this.make && element.model == this.model) {
+        if (element.submodel == event.target.value) {
+          this.cc = element.cc;
+        }
+      }
+
+    });
+  }
 
 }

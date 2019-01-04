@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -29,7 +30,7 @@ import com.jp.insurance.services.interfaces.IQueryService;
 
 
 /*http://localhost:8081/InsurancePortal/policy/homePage.hr*/
-
+@Controller
 public class QueryController {
 	
 	@Autowired
@@ -49,12 +50,6 @@ public class QueryController {
         System.out.println("Validator is set."+validator.hashCode());
 	}
 
-	
-	@RequestMapping("homePage.hr")
-	public String homePage() {
-		System.out.println("In Home Page");
-		return "HomePage";
-	}
 	
 	@RequestMapping("showQueryStatus.qry")
 	public String checkStatus() {	
@@ -128,12 +123,23 @@ public class QueryController {
 	}
 
 	
-	@RequestMapping("queryForm.qry")
+/*	@RequestMapping("queryForm.qry")
+	//@ModelAttribute("query")
 	public String getQueryForm(Model model) {
 			// Define Commond Object
-		
+		System.out.println("In getQueryForm");
 		Query query = new Query();
-		model.addAttribute("command",query);
+		model.addAttribute("query",query);
+		return "query/QueryPage";		
+	}*/
+	
+	@RequestMapping("queryForm.qry")
+	//@ModelAttribute("query")
+	public String getQueryForm(HttpServletRequest request) {
+			// Define Commond Object
+		System.out.println("In getQueryForm");
+		Query query = new Query();
+		request.setAttribute("query", query);
 		return "query/QueryPage";		
 	}
 

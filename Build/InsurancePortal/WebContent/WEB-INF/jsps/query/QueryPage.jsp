@@ -23,7 +23,7 @@
  		
  	</p>
  	
-    <springForm:form align="center" method="POST" commandName="command"
+    <springForm:form align="center" method="POST" modelAttribute="query"
         action="submitQueryForm.qry">
         <table align="center">
         	
