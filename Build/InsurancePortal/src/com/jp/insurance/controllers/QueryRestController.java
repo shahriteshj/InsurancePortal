@@ -1,12 +1,19 @@
 package com.jp.insurance.controllers;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,85 +28,65 @@ import com.jp.insurance.utilities.JsonUtilsJackson;
 @RestController
 public class QueryRestController {
 
-	
 	@Autowired
 	@Qualifier("queryService")
 	private IQueryService queryService;
-	
-	
-	@RequestMapping(value = "/queryList", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Query getQueryList(@RequestBody String queryInput) {		
-		System.out.println("In getQueryList() method");		
+
+	@RequestMapping(value = "/getQueryList", method = RequestMethod.POST, headers = "Accept=application/json")
+	public List<Query> getQueryList(@RequestBody String queryInput) {
+		System.out.println("In getQueryList() method");
 		System.out.println(queryInput);
-		Query queryList = null;
-		Query query = new Query();		
-		HashMap<String,Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(queryInput);
+		List<Query> queryList = null;
+		Query query = new Query();
+		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(queryInput);
 		String emailId = (String) inputMap.get("username");
 		String role = (String) inputMap.get("roles");
 		System.out.println(emailId);
 		System.out.println(role);
 		try {
-		switch(role) {
-			case "OPERATIONS" :
-				System.out.println("In OPERATIONS CASE");				
-				queryList = (Query) queryService.getQueryByRole(role);
+			switch (role) {
+			case "OPERATIONS":
+				System.out.println("In OPERATIONS CASE");
+				queryList = (List<Query>) queryService.getQueryByRole(role);
 				break;
-			
-			case "CUSTOMER" :
+
+			case "CUSTOMER":
 				System.out.println("In CUSTOMER CASE");
-				queryList = (Query) queryService.getQueryByEmailId(emailId);
+				queryList = (List<Query>) queryService.getQueryByEmailId(emailId);
 				break;
-				
-			case "MANAGER" :
+
+			case "MANAGER":
 				System.out.println("In MANAGER CASE");
-				queryList = (Query) queryService.getQueryList();
+				queryList = (List<Query>) queryService.getQueryList();
 				break;
 			}
 		} catch (InsuranceException e) {
-				e.printStackTrace();
-		}
-		
-		return query;
-		
-	}
-	
-	
-	@RequestMapping("queryList.qry")
-	public ModelAndView getQueryList(HttpSession session) {
-		List<Query> queryList = null;
-		System.out.println("In getQueryList()");
-		ModelAndView mAndV = new ModelAndView();
-		String emailId = (String) session.getAttribute("username");
-		String role = (String) session.getAttribute("roles");
-		  System.out.println(emailId);
-		  System.out.println(role);
-		  
-		try {		
-			
-			switch(role) {
-				case "OPERATIONS" :
-					System.out.println("In OPERATIONS CASE");
-					queryList = queryService.getQueryByRole(role);
-					break;
-				
-				case "CUSTOMER" :
-					System.out.println("In CUSTOMER CASE");
-					queryList = queryService.getQueryByEmailId(emailId);
-					break;
-					
-				case "MANAGER" :
-					System.out.println("In MANAGER CASE");
-					queryList = queryService.getQueryList();
-					break;
-			}
-			
-			System.out.println(queryList);
-			mAndV.addObject("queryList",queryList);			
-			mAndV.setViewName("query/QueryList");
-			
-		} catch (InsuranceException e) {			
 			e.printStackTrace();
 		}
-		return mAndV;		
-	}	
+
+		return queryList;
+
+	}
+
+	@RequestMapping(value = "/submitQuery", method = RequestMethod.POST, headers = "Accept=application/json")
+	public Query submitQueryForm(@RequestBody String input) {
+		System.out.println(input);
+		Query query = new Query();
+		try {
+			HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
+			query.setQueryType((String) inputMap.get("queryType"));
+			query.setEmailId((String) inputMap.get("emailId"));
+			query.setQueryDescription((String) inputMap.get("queryDescription"));
+			query.setStatus("IN PROGRESS");
+			query.setAssignedTo("OPERATIONS");
+			query.setCreationDate(Calendar.getInstance().getTime());
+			System.out.println("Query : " + query);
+			queryService.addNewQuery(query); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return query;
+	}
+
 }

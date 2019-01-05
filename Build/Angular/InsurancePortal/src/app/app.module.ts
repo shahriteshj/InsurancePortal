@@ -25,6 +25,9 @@ import { ProductService } from './service/product.service';
 import { VehicleMasterService } from './service/vehiclemaster.service';
 import { BuypolicyComponent } from './buypolicy/buypolicy.component';
 import { PolicyService } from './service/policy.service';
+import { QueryComponent } from './query/query.component';
+import { ViewQueryComponent } from './view-query/view-query.component';
+import { QueryDetailsComponent } from './query-details/query-details.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { PolicyService } from './service/policy.service';
     ProductListComponent,
     LogOutComponent,
     MenuBarComponent,
-    BuypolicyComponent
+    BuypolicyComponent,
+    QueryComponent,
+    ViewQueryComponent,
+    QueryDetailsComponent
   ],
   imports: [
     BrowserAnimationsModule,

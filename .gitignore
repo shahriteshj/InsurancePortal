@@ -2,3 +2,7 @@
 Build/.metadata/
 Build/.recommenders/
 Build/Servers/
+Build/InsurancePortal/.settings/org.eclipse.m2e.core.prefs
+Build/InsurancePortal/.settings/org.eclipse.wst.validation.prefs
+Build/InsurancePortal/representations.aird
+Build/RemoteSystemsTempFiles/.project

@@ -1,0 +1,43 @@
+<app-menu-bar></app-menu-bar>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">New Query</h3>
+    </div>
+    <div class="panel-body">
+      <form #queryFrm="ngForm" (ngSubmit)="submitQuery(queryFrm)" ngNativeValidate >
+        <div class="form-group">
+           <label for="queryType"> 
+            Query Type:
+           </label> 
+          <select name="queryType"   
+          required class="form-control" ngModel #queryTypeControl="ngModel">
+          <option value="POLICY">Policy</option>
+          <option value="CLAIM">Claim</option>
+          <option value="OTHERS">Others</option>
+          </select>
+            <div *ngIf="queryTypeControl?.touched && queryTypeControl?.invalid" class="alert alert-danger">
+            <div *ngIf="queryTypeControl.errors?.required">Query Type is required</div>
+          </div>  
+        </div>
+
+        <div class="form-group">
+            <label for="queryDescription">
+              Description:
+            </label>
+            <input type="text" name="queryDescription" ngModel #queryDescriptionControl="ngModel"
+              required class="form-control">
+            <div *ngIf="queryDescriptionControl?.touched && queryDescriptionControl?.invalid" class="alert alert-danger">
+              <div *ngIf="queryDescriptionControl.errors?.required">Description is required</div>
+            </div>
+          </div>
+ 
+        <div class="form-group">
+            <button type="submit" name="button" class="btn btn-primary" [disabled]="queryFrm.invalid">Submit</button>
+           <!-- <a [routerLink]="['/login']" class="btn btn-link">Cancel</a> -->
+         </div>
+      </form>
+    </div>
+  </div>
