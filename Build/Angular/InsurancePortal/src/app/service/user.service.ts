@@ -27,12 +27,7 @@ export class UserService {
   // }
 
   authenticateUser(username:string,password:string){
-    return this.http.post("/InsurancePortal/login/authenticateUser",{ username: username, password: password }).pipe(
-    map(user => {
-                    //console.log(user);
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                return user;
-            }));
+    return this.http.post<User>("/InsurancePortal/policy/authenticateUser",{ username: username, password: password });
 
   }
 

@@ -12,10 +12,10 @@ export class VehicleMasterService {
   constructor(private http: HttpClient) { }
 
   getVehicleList() {
-    return this.http.get('/InsurancePortal/login/getAllVehicles');
+    return this.http.get('/InsurancePortal/policy/getAllVehicles');
   }
 
   getVehicleMake() {
-    return this.http.get('/InsurancePortal/login/getVehicleMake');
+    return this.http.get('/InsurancePortal/policy/getVehicleMake');
   }
 }

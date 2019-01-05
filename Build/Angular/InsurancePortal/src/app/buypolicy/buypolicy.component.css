@@ -25,7 +25,16 @@
 	font-size: 17px;
 	font-family: Raleway;
 	border: 1px solid #aaaaaa;
-  }
+	}
+	
+	select
+{
+    background-color: #ffffff;
+}
+
+select.invalid {
+	background-color: #ffdddd;
+}
   
   /* Mark input boxes that gets an error on validation: */
   input.invalid {
