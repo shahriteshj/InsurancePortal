@@ -2,9 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {TabModule } from 'angular-tabs-component';
-
-
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,8 +47,7 @@ import { PolicyService } from './service/policy.service';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule,
-    TabModule
+    HttpClientModule
   ],
   providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,PolicyService],
   bootstrap: [AppComponent]
