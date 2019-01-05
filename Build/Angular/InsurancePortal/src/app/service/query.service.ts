@@ -18,7 +18,7 @@ export class QueryService {
  
 
   addQuery(query:Query){
-    return this.http.post("/InsurancePortal/query/authenticateUser",query);
+    return this.http.post("/InsurancePortal/login/submitQuery",query);
 
   }
 
@@ -34,4 +34,7 @@ export class QueryService {
     return this.http.delete('http://localhost:3000/User/' + id)
   }
 
+  getQueryList(username:String,role:String) {
+    return this.http.post("/InsurancePortal/login/getQueryList",{username:username,roles:role});
+  }
 }

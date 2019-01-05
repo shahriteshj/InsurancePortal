@@ -37,13 +37,13 @@ public class Query {
 		this.queryId = queryId;
 	}
 	
-	@Column(name="NAME")
+/*	@Column(name="NAME")
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 	
 	@NotNull
 	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
@@ -110,7 +110,7 @@ public class Query {
 	
 	@Override
 	public String toString() {
-		return "Query [queryId=" + queryId + ", name=" + name + ", emailId=" + emailId + ", queryType=" + queryType
+		return "Query [queryId=" + queryId + ",  emailId=" + emailId + ", queryType=" + queryType
 				+ ", queryDescription=" + queryDescription + ", queryResponse=" + queryResponse + ", creationDate="
 				+ creationDate + ", assignedTo=" + assignedTo + ", status=" + status + "]";
 	}
