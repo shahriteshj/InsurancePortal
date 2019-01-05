@@ -7,29 +7,30 @@ import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from 'src/app/menu/menu.component';
 import { LogOutComponent } from './log-out/log-out.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ShoppingItemComponent } from './shopping-item/shopping-item.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import {BuypolicyComponent} from './buypolicy/buypolicy.component';
-import { AuthGuard } from './guards/auth.guards';
 import { QueryComponent } from './query/query.component';
 import { ViewQueryComponent } from './view-query/view-query.component';
 import { QueryDetailsComponent } from './query-details/query-details.component';
+import {LoginRouteGuard} from './service/loginGuard.service';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]  },
-  { path: 'about', component: AboutComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
-  { path: 'logout', component: LogOutComponent, canActivate: [AuthGuard]  },
-  { path: 'productlist', component: ProductListComponent, canActivate: [AuthGuard]  },
-  { path: 'shoppingitem', component: ShoppingItemComponent, canActivate: [AuthGuard] },
-  { path: 'addquery', component: QueryComponent, canActivate: [AuthGuard]  },
-  { path: 'buypolicy', component: BuypolicyComponent, canActivate: [AuthGuard]  },
-  { path: 'viewquery', component: ViewQueryComponent, canActivate: [AuthGuard]  },
-  { path: 'queryDetails', component: QueryDetailsComponent, canActivate: [AuthGuard]  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'about', component: AboutComponent },
+  { path: 'admin', component: MenuComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'customer', component: MenuComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'manager', component: MenuComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'operations', component: MenuComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'buypolicy', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'viewpolicy', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'newclaim', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'viewclaim', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'addquery', component: QueryComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'viewquery', component: ViewQueryComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'queryDetails', component: QueryDetailsComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'logout', component: LogOutComponent, canActivate: [LoginRouteGuard]  },
   { path: '**', redirectTo: '' }
 
 ];

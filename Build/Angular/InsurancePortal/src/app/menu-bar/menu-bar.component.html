@@ -6,7 +6,7 @@
     <button class="dropbtn">Polciy</button>
     <div class="dropdown-content">
       <a routerLink="/buypolicy" >Buy New Policy</a>
-      <a href="/viewpolicy">View Policies</a>
+      <a routerLink="/viewpolicy">View Policies</a>
     </div>
   </div>
 
@@ -21,8 +21,8 @@
   <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && sharedDataService.isCustomerUser">
     <button class="dropbtn">Query</button>
     <div class="dropdown-content">
-      <a href="addquery">New Query</a>
-      <a href="viewquery">View Queries</a>
+      <a routerLink="/addquery">New Query</a>
+      <a routerLink="/viewquery">View Queries</a>
     </div>
   </div>
 

@@ -28,6 +28,10 @@ import { PolicyService } from './service/policy.service';
 import { QueryComponent } from './query/query.component';
 import { ViewQueryComponent } from './view-query/view-query.component';
 import { QueryDetailsComponent } from './query-details/query-details.component';
+import { LoginRouteGuard } from './service/loginGuard.service';
+import {QueryService} from './service/query.service';
+import {SharedDataService} from './service/sharedData.service';
+import {UserLoginService} from './service/userLogin.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { QueryDetailsComponent } from './query-details/query-details.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,PolicyService],
+  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,
+    PolicyService,QueryService,SharedDataService,UserLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
