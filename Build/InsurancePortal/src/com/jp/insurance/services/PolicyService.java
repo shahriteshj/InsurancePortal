@@ -53,12 +53,20 @@ public class PolicyService implements IPolicyService {
 
 	@Override
 	@Transactional
-	public Policy addNewPolicyToExistingCustomer(Policy policy, CustomerVehicle customerVehicle, Payment payment)
+	public Policy addNewPolicy(String custEmail,Policy policy, CustomerVehicle customerVehicle, Payment payment)
 			throws InsuranceException {
 
-		if (policy == null || customerVehicle == null || payment == null) {
+		if (custEmail==null || policy == null || customerVehicle == null || payment == null) {
 			throw new InsuranceException("Error in saving Policy");
 		}
+		
+		Customer customer = customerDao.getCustomerByEmailId(custEmail);
+		
+		if(customer==null){
+			throw new InsuranceException("Error in fetching Customer Details");
+		}
+		
+		customerVehicle.setCustomerId(customer.getCustomerId());
 
 		CustomerVehicle newCustomerVehicle = customerVehicleDao.addCustomerVehicle(customerVehicle);
 		if (newCustomerVehicle == null) {
