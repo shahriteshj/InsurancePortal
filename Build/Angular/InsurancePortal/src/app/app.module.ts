@@ -32,6 +32,7 @@ import { LoginRouteGuard } from './service/loginGuard.service';
 import {QueryService} from './service/query.service';
 import {SharedDataService} from './service/sharedData.service';
 import {UserLoginService} from './service/userLogin.service';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -57,10 +58,11 @@ import {UserLoginService} from './service/userLogin.service';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,
-    PolicyService,QueryService,SharedDataService,UserLoginService],
+    PolicyService,QueryService,SharedDataService,UserLoginService,LoginRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
