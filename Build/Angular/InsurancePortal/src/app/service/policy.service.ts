@@ -22,10 +22,11 @@ export class PolicyService {
   }
 
   addPolicy(username:string,customerVehicle:CustomerVehicle,policyPayment:PolicyPayment) {
-    let input = username + JSON.stringify(customerVehicle)+ JSON.stringify(policyPayment);
-    console.log(input);
-    
-    //return this.http.post("/InsurancePortal/policy/addPolicy", "");
+    console.log("in policy service");
+
+    let z=Object.assign({username:username},customerVehicle,policyPayment);
+    console.log(z);
+    return this.http.post("/InsurancePortal/policy/savePolicy", z);
 
   }
 

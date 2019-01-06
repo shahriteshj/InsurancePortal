@@ -1,6 +1,5 @@
 package com.jp.insurance.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,7 +66,7 @@ public class PolicyRestController {
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
 		
 		//load customer details
-		String custEmail = (String) inputMap.get("email");
+		String custEmail = (String) inputMap.get("username");
 		
 		//load customerVehicle data
 		customerVehicle.setCc((String) inputMap.get("cc"));

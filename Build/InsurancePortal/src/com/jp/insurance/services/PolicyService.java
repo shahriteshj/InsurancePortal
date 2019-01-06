@@ -52,7 +52,7 @@ public class PolicyService implements IPolicyService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor=InsuranceException.class)
 	public Policy addNewPolicy(String custEmail,Policy policy, CustomerVehicle customerVehicle, Payment payment)
 			throws InsuranceException {
 
@@ -60,14 +60,14 @@ public class PolicyService implements IPolicyService {
 			throw new InsuranceException("Error in saving Policy");
 		}
 		
-		Customer customer = customerDao.getCustomerByEmailId(custEmail);
+		Customer customer = customerDao.getCustomerByEmailId(custEmail.toUpperCase());
 		
 		if(customer==null){
 			throw new InsuranceException("Error in fetching Customer Details");
 		}
 		
 		customerVehicle.setCustomerId(customer.getCustomerId());
-
+		policy.setCustomerId(customer.getCustomerId());
 		CustomerVehicle newCustomerVehicle = customerVehicleDao.addCustomerVehicle(customerVehicle);
 		if (newCustomerVehicle == null) {
 			throw new InsuranceException("Error in saving Customer Vehicle Details");

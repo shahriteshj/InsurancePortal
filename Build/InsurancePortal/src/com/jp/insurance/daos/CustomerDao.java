@@ -35,8 +35,14 @@ public class CustomerDao implements Serializable, ICustomerDao {
 	public Customer getCustomerByEmailId(String emailId) throws InsuranceException {
 		String sql = "SELECT c FROM Customer c where emailId = '" + emailId + "'";
 		TypedQuery<Customer> qry = entityManager.createQuery(sql, Customer.class);
-		Customer customer = (Customer) qry.getResultList();
-		return customer;
+		List<Customer> results = qry.getResultList();
+		if (results.isEmpty()) {
+			return null;
+		} else {
+			Customer customer = (Customer) results.get(0);
+			return customer;
+		}
+		
 	}
 
 	@Override
