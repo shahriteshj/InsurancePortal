@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jp.insurance.daos.CustomerDao;
 import com.jp.insurance.daos.RoleDao;
 import com.jp.insurance.daos.UserDao;
+import com.jp.insurance.daos.interfaces.ICustomerDao;
 import com.jp.insurance.daos.interfaces.IRoleDao;
 import com.jp.insurance.daos.interfaces.IUserDao;
+import com.jp.insurance.entities.Customer;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IUserService;
@@ -23,16 +26,19 @@ public class UserService implements Serializable, IUserService {
 
 	private IUserDao userDao;
 	private IRoleDao roleDao;
-
+	private ICustomerDao customerDao;
+	
 	public UserService() throws InsuranceException {
 
 	}
 
 	@Autowired
 	public UserService(@Qualifier("userDao") UserDao userDao,
-			@Qualifier("roleDao") RoleDao roleDao) throws InsuranceException {
+			@Qualifier("roleDao") RoleDao roleDao,
+			@Qualifier("customerDao") CustomerDao customerDao) throws InsuranceException {
 		this.userDao = userDao;
 		this.roleDao = roleDao;
+		this.customerDao=customerDao;
 	}
 
 	@Override
@@ -99,6 +105,11 @@ public class UserService implements Serializable, IUserService {
 	@Override
 	public String getRoleById(Integer roleId) throws InsuranceException {
 		return roleDao.getRoleNameById(roleId);
+	}
+	
+	@Override
+	public Customer getCustomerByEmailId(String emailId) throws InsuranceException {
+		return customerDao.getCustomerByEmailId(emailId);
 	}
 
 }

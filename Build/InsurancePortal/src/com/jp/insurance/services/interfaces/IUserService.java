@@ -1,5 +1,6 @@
 package com.jp.insurance.services.interfaces;
 
+import com.jp.insurance.entities.Customer;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
 
@@ -20,4 +21,6 @@ public interface IUserService {
 	public String getRoleById(Integer roleId) throws InsuranceException;
 	
 	public User authenticateUser(String username, String password) throws InsuranceException;
+
+	public Customer getCustomerByEmailId(String emailId) throws InsuranceException;
 }

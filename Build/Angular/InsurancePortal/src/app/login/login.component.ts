@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   user: User;
   username: string;
   password: string;
+  errorMessage:string="";
 
 
   constructor(
@@ -76,7 +77,12 @@ export class LoginComponent implements OnInit {
           }
 
         } else {
-          alert('LoginFailed....');
+          console.log(data.responseText);
+          if(data.responseText!=null){
+          this.errorMessage=data.responseText;}else{
+            this.errorMessage="Username not found";
+          }
+          
           this._router.navigate(['/login']);
           this.loading = false;
         }
@@ -85,6 +91,7 @@ export class LoginComponent implements OnInit {
       error => {
         console.log("error");
         console.log(error);
+        this.errorMessage="Username or password invalid";
         this.loading = false;
       }
     );

@@ -33,6 +33,7 @@ import {QueryService} from './service/query.service';
 import {SharedDataService} from './service/sharedData.service';
 import {UserLoginService} from './service/userLogin.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     BuypolicyComponent,
     QueryComponent,
     ViewQueryComponent,
-    QueryDetailsComponent
+    QueryDetailsComponent,
+    ViewpolicyComponent
   ],
   imports: [
     BrowserAnimationsModule,

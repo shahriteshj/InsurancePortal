@@ -11,6 +11,8 @@ public interface IPolicyService {
 
 	public List<Policy> getPolicyList(String enailId) throws InsuranceException;
 
+	public List<Policy> getPolicyList() throws InsuranceException;
+	
 	public Policy addNewPolicy(String custEmail,Policy policy, CustomerVehicle customerVehicle, Payment payment)
 			throws InsuranceException;
 

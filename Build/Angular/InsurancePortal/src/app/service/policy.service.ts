@@ -30,6 +30,9 @@ export class PolicyService {
 
   }
 
+  getPolicyList(username:String,role:String){
 
+    return this.http.post("/InsurancePortal/policy/getPolicyList",{username:username,role:role});
+  }
 
 }

@@ -3,6 +3,7 @@ package com.jp.insurance.controllers;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -90,6 +91,7 @@ public class PolicyRestController {
 		c.setTime(new Date());
 		policy.setPolicyStartDate(c.getTime());
 		c.add(Calendar.YEAR, 1);
+		c.add(Calendar.DAY_OF_MONTH, -1);
 		policy.setPolicyEndDate(c.getTime());
 		
 		
@@ -106,13 +108,24 @@ public class PolicyRestController {
 		
 	}
 	
-	
-	/*@RequestMapping(value = "/getQuote", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Float getQuote(@RequestBody CustomerVehicle customerVehicle) throws InsuranceException {
-		System.out.println(customerVehicle);
-		//CustomerVehicle customerVehicle = new CustomerVehicle();
-		Float price = policyQuoteService.getPolicyPremium(customerVehicle);
-		return price;
+	@RequestMapping(value = "/getPolicyList", method = RequestMethod.POST, headers = "Accept=application/json")
+	public List<Policy> getPolicyList(@RequestBody String input) throws InsuranceException{
+			
+		List<Policy> policyList=null;
+		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
 		
-	}*/
+		//load user details
+		String username = (String) inputMap.get("username");
+		String role = (String)inputMap.get("role");
+		
+		if(role.equalsIgnoreCase("CUSTOMER")){
+			policyList = policyService.getPolicyList(username);
+		}else if(role.equalsIgnoreCase("MANAGER") || role.equalsIgnoreCase("OPERATIONS")){
+			policyList = policyService.getPolicyList();
+		}
+		
+		return policyList;
+	}
+	
+	
 }

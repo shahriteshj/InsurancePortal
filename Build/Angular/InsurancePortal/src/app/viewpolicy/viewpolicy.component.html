@@ -1,0 +1,77 @@
+<app-menu-bar></app-menu-bar>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div id="policylist" class="container"><br>
+      <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Policy List</h3>
+          </div>
+          <div class="panel-body">
+    
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Policy Id</th>
+          <th>Policy Start Date</th>
+          <th>Policy End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of policyList;">
+
+          <td>{{p.policyId}}</td>
+          <td>{{p.policyStartDate | date:'EEE, d MMM,y' }}</td>
+          <td>{{p.policyEndDate | date:'EEE, d MMM,y'}}</td>
+          <td><button (click)="viewDetails(p.policyId)">View Details</button></td>
+        </tr>
+        <tr *ngIf="!policyList || policyList.length==0">
+          <td colspan="2">No Policies to display</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>
+  <div id="policydetails" class="container"><br>
+    Policy Details:{{policyId}}
+    <button id="backbtn" (click)="showPolicyList()" >Back to List</button>
+    <br><br>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Vehicle Details</h3>
+      </div>
+      <div class="panel-body">
+      </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Payment Details</h3>
+        </div>
+        <div class="panel-body">
+        </div>
+      </div>
+      <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Customer Details</h3>
+          </div>
+          <div class="panel-body">
+          </div>
+        </div>
+  </div>
+</body>
+
+</html>

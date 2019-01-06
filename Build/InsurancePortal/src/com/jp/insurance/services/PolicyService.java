@@ -50,6 +50,13 @@ public class PolicyService implements IPolicyService {
 		}
 		return policyList;
 	}
+	
+	@Override
+	public List<Policy> getPolicyList() throws InsuranceException {
+		List<Policy> policyList = null;
+		policyList = policyDao.getPolicyList();
+		return policyList;
+	}
 
 	@Override
 	@Transactional(rollbackFor=InsuranceException.class)

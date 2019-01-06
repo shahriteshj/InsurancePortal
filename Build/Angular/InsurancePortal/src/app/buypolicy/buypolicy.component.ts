@@ -114,8 +114,10 @@ export class BuypolicyComponent implements OnInit {
       cvv:frm.value.cvv,cardExpiryMonth:frm.value.cardExpiryMonth,cardExpiryYear: frm.value.cardExpiryYear,
       amount: this.price};
         
-    this._policyService.addPolicy(username,this.customerVehicle,policyPayment).subscribe(policyId=>{console.log(policyId;
-      this.policyId=<number>policyId});
+    this._policyService.addPolicy(username,this.customerVehicle,policyPayment).subscribe(policyId=>{console.log(policyId);
+      this.policyId=<number>policyId
+      this.router.navigate(['/policysuccess']);
+    });
 
   }
 
