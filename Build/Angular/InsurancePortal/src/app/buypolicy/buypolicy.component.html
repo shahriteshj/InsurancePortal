@@ -1,11 +1,11 @@
 <app-menu-bar></app-menu-bar>
 <div class="col-md-6 col-md-offset-3">
-<form #regForm="ngForm" (ngSubmit)="submit(regForm)">
+<form #regForm="ngForm" (ngSubmit)="submit(regForm)" ngNativeValidate>
     
     <h1>Policy:</h1>
     <!-- One "tab" for each step in the form: -->
     
-    <div class="tab">Vehicle Details:
+    <div id="tab1" class="tab">Vehicle Details:
         
         <table><tr><td>Make</td>
         <td width="500px"><p><select id="Make" name="Make" (change)="makeChange($event)" required >
@@ -35,19 +35,19 @@
           <tr><td>vehicleRegCity</td><td><p><input  id="vehicleRegCity"  name="vehicleRegCity" [(ngModel)]="vehicleRegCity" required></p></td></tr>
         </table>
     </div>
-    <div class="tab">Polciy Quote
+    <div id="tab2" class="tab">Polciy Quote
         <p>Rs. {{price}}</p>
         <p><input type="hidden" value="test"></p>
     </div>
-    <div class="tab">Payment:
+    <div id="tab3" class="tab">Payment:
         <table>
             <tr><td>Name on Card</td><td>
         <p><input  id="nameOnCard" name="nameOnCard" [(ngModel)]="nameOnCard" required></p></td></tr>
         <tr><td>Card Number</td><td>
-        <p><input id="CardNo" name="CardNo"  [(ngModel)]="CardNo" required></p></td></tr>
+        <p><input id="cardNo" name="cardNo"  [(ngModel)]="cardNo" required></p></td></tr>
         <tr><td>Card Expiry</td><td>
         <p><select id="cardExpiryMonth" name="cardExpiryMonth" [(ngModel)]="cardExpiryMonth" required>
-                <option value="" selected>Select Month</option>
+                <option value="" selected=true>Select Month</option>
                 <option value="01">Jan</option>
                 <option value="02">Feb</option>
                 <option value="03">Mar</option>
@@ -61,9 +61,9 @@
                 <option value="11">Nov</option>
                 <option value="12">Dec</option>
               </select>
-            </p>
-        <p><select id="cardExpiryMonth" name="cardExpiryYear" [(ngModel)]="cardExpiryYear" required>
-                <option value="" selected>Select Year</option>
+            
+        <select id="cardExpiryMonth" name="cardExpiryYear" [(ngModel)]="cardExpiryYear" required>
+                <option value="" selected=true>Select Year</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
@@ -77,10 +77,16 @@
         <p><input id="cvv" name="cvv"  [(ngModel)]="cvv" required></p></td></tr>
     </table>
     </div>
-    <div style="overflow:auto;">
+    <div id="tab4"  style="overflow:auto;">
         <div style="float:right;">
             <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
             <button type="button" id="nextBtn" (click)="handleClick($event,1)">Next</button>
+        </div>
+    </div>
+    <div id="tab5" style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
+            <button type="submit" id="submit"  >Submit</button>
         </div>
     </div>
     <!-- Circles which indicates the steps of the form: -->

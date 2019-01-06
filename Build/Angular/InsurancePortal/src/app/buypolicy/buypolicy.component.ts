@@ -24,28 +24,29 @@ export class BuypolicyComponent implements OnInit {
   modelList: string[] = [];
   submodelList: string[] = [];
 
-  make: string = "";
-  model: string = "";
+  make: string = "HYUNDAI";
+  model: string = "i10";
   submodel: string = "";
-  cc: string = "";
-  fuelType: string = "";
-  vehicleRegNo: string = "";
-  engineNo: string = "";
-  chasisNo: string = "";
+  cc: string = "123";
+  fuelType: string = "PETROL";
+  vehicleRegNo: string = "123";
+  engineNo: string = "123";
+  chasisNo: string = "123";
   manufacturingYear: number;
-  registrationDate: string = "";
-  vehicleRegCity: string = "";
+  registrationDate: string = "01/01/2010";
+  vehicleRegCity: string = "MUMBAI";
 
   price: number;
   datepipe: DatePipe;
 
   //Payment Data
-  policyPayment: PolicyPayment;
-  cardNo: string = "";
-  nameOnCard: string = "";
+  cardNo: string = "1234-5678-9101";
+  nameOnCard: string = "Name";
   cvv: number;
-  cardExpiryMonth: number;
-  cardExpiryYear: number;
+  cardExpiryMonth: number = 10;
+  cardExpiryYear: number = 2020;
+
+  policyId:number;
 
   constructor(private router: Router, private _VehicleMasterService: VehicleMasterService,
     private _policyService: PolicyService) { }
@@ -60,7 +61,6 @@ export class BuypolicyComponent implements OnInit {
 
   getVehicleMasterList() {
     this._VehicleMasterService.getVehicleList().subscribe(data => {
-      //console.log(data);
       this.vehicleMasterList = <VehicleMaster[]>data
 
     });
@@ -74,62 +74,48 @@ export class BuypolicyComponent implements OnInit {
   }
 
   showTab(n) {
-    //console.log("in on showTab " + n);
     // This function will display the specified tab of the form...
 
-    var x = document.getElementsByClassName("tab1");
-
-    for (let i = 0; i < x.length; i++) {
-      x[i].setAttribute("class", "tab");
+    if(n==0){
+      document.getElementById("tab1").style.display="block";
+      document.getElementById("tab2").style.display="none";
+      document.getElementById("tab3").style.display="none";
+      document.getElementById("tab4").style.display="block";
+      document.getElementById("tab5").style.display="none";
+    }else if(n==1){
+      document.getElementById("tab1").style.display="none";
+      document.getElementById("tab2").style.display="block";
+      document.getElementById("tab3").style.display="none";
+      document.getElementById("tab4").style.display="block";
+      document.getElementById("tab5").style.display="none";
+    }else if(n==2){
+      document.getElementById("tab1").style.display="none";
+      document.getElementById("tab2").style.display="none";
+      document.getElementById("tab3").style.display="block";
+      document.getElementById("tab4").style.display="none";
+      document.getElementById("tab5").style.display="block";
     }
-
-    var x = document.getElementsByClassName("tab");
-    //console.log(x[n]);
-
-
-    for (let i = 0; i < x.length; i++) {
-      if (i == n) {
-        //console.log(i+" "+ n);
-        x[i].setAttribute("class", "tab1");
-      } else {
-        //console.log(i+" "+ n);
-        x[i].setAttribute("class", "tab");
-      }
-
-
-
-    }
-    console.log("prev and next " + n + " " + x.length);
     //... and fix the Previous/Next buttons:
     if (n == 0) {
       document.getElementById("prevBtn").style.display = "none";
     } else {
       document.getElementById("prevBtn").style.display = "inline";
     }
-    if (n == (x.length)) {
-      document.getElementById("nextBtn").innerHTML = "Submit";
-      
-    } else {
-      document.getElementById("nextBtn").innerHTML = "Next";
-    }
-
+ 
     this.fixStepIndicator(n);
   }
 
-  submit(){
-    let user:User;
-    user= JSON.parse(localStorage.getItem("currentUser"));
-    let username= user.username;
-
-    this.policyPayment.nameOnCard= this.nameOnCard;
-    this.policyPayment.cardNo=this.cardNo;
-    this.policyPayment.cvv=this.cvv;
-    this.policyPayment.cardExpiryMonth=this.cardExpiryMonth;
-    this.policyPayment.cardExpiryYear=this.cardExpiryYear;
-    this.policyPayment.amount=this.price;
-
+  submit(frm:NgForm):void{
     
-    this._policyService.addPolicy(username,this.customerVehicle,this.policyPayment)
+    let username= localStorage.getItem("username");
+    console.log(username);
+     this.nameOnCard=frm.value.nameOnCard;
+    let policyPayment:PolicyPayment= {cardNo:frm.value.cardNo,nameOnCard:frm.value.nameOnCard,
+      cvv:frm.value.cvv,cardExpiryMonth:frm.value.cardExpiryMonth,cardExpiryYear: frm.value.cardExpiryYear,
+      amount: this.price};
+        
+    this._policyService.addPolicy(username,this.customerVehicle,policyPayment).subscribe(policyId=>{console.log(policyId;
+      this.policyId=<number>policyId});
 
   }
 
@@ -140,27 +126,12 @@ export class BuypolicyComponent implements OnInit {
 
   nextPrev(n) {
     console.log("in nextPrev ", n);
-    // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab1");
-    console.log(x[0]);
     // Exit the function if any field in the current tab is invalid:
     if (n == 1 && !this.validateForm()) return false;
-    // Hide the current tab:
     
-    x[0].setAttribute("class", "tab");
-    //x[this.currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     this.currentTab = this.currentTab + n;
     
-    // if you have reached the end of the form...
-    var x = document.getElementsByClassName("tab");
-    if (this.currentTab >= x.length) {
-      console.log(this.nameOnCard);
-      document.getElementById("nextBtn").setAttribute("type","submit");
-      this.submit();
-      return false;
-    }
-
     console.log("currentTab: " + this.currentTab);
     if (this.currentTab == 1) {
       // Get policy Quote
@@ -174,6 +145,75 @@ export class BuypolicyComponent implements OnInit {
     }
     // Otherwise, display the correct tab:
     this.showTab(this.currentTab);
+  }
+
+
+  validateForm() {
+    // This function deals with validation of the form fields
+    let valid=true;
+    if(this.currentTab==0){
+      valid = this.validateform1(this.currentTab+1);
+    }else if (this.currentTab==1){
+
+    }
+    else if(this.currentTab==2){
+      valid = this.validateform1(this.currentTab+1);
+    }
+      // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+      document.getElementsByClassName("step")[this.currentTab].className += " finish";
+    }
+    return valid; // return the valid status
+  }
+
+  validateform1(n):boolean{
+    var x, y, i, z, valid = true;
+
+    x = document.getElementById("tab"+n);
+    
+      y = x.getElementsByTagName("input");
+      // A loop that checks every input field in the current tab:
+      for (i = 0; i < y.length; i++) {
+        // If a field is empty...
+        if (y[i].value == "") {
+          // add an "invalid" class to the field:
+          y[i].className += " invalid";
+          // and set the current valid status to false
+          valid = false;
+        } else {
+          y[i].className = "";
+        }
+      }
+    
+    z = x.getElementsByTagName("select");
+
+    for (i = 0; i < z.length; i++) {
+      // If a field is empty...
+
+      var sel = z[i].selectedIndex;
+      var opt = z[i].options[sel].value;
+
+      console.log(opt);
+      if (opt == "") {
+        // add an "invalid" class to the field:
+        z[i].className = " invalid";
+        // and set the current valid status to false
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
+  
+  fixStepIndicator(n) {
+
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class on the current step:
+    x[n].className += " active";
   }
 
   loadCustomerVehcle() {
@@ -211,84 +251,12 @@ export class BuypolicyComponent implements OnInit {
     console.log(this.customerVehicle);
   }
 
-  validateForm() {
-    // This function deals with validation of the form fields
-    let valid=true;
-    if(this.currentTab==0){
-      valid = this.validateform1();
-    }else if (this.currentTab==1){
-
-    }
-    else if(this.currentTab==2){
-      valid = this.validateform1();
-    }
-      // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
-      document.getElementsByClassName("step")[this.currentTab].className += " finish";
-    }
-    return valid; // return the valid status
-    //return true;
-  }
-
-  validateform1():boolean{
-    var x, y, i, z, valid = true;
-    x = document.getElementsByClassName("tab1");
-    
-      y = x[0].getElementsByTagName("input");
-      // A loop that checks every input field in the current tab:
-      for (i = 0; i < y.length; i++) {
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field:
-          y[i].className += " invalid";
-          // and set the current valid status to false
-          valid = false;
-        } else {
-          y[i].className = "";
-        }
-      }
-    
-    z = x[0].getElementsByTagName("select");
-
-    for (i = 0; i < z.length; i++) {
-      // If a field is empty...
-
-      var sel = z[i].selectedIndex;
-      var opt = z[i].options[sel].value;
-
-      console.log(opt);
-      if (opt == "") {
-        // add an "invalid" class to the field:
-        z[i].className = " invalid";
-        // and set the current valid status to false
-        valid = false;
-      }
-    }
-    return valid;
-  }
-
-  
-  fixStepIndicator(n) {
-
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-      x[i].className = x[i].className.replace(" active", "");
-    }
-    //... and adds the "active" class on the current step:
-    x[n].className += " active";
-  }
 
   makeChange(e) {
-    //console.log(e.target.value);
-
-    // var x = document.getElementById(id);
-    // x.className="";
     this.make = e.target.value;
     let i = 0;
     this.modelList = [];
     this.vehicleMasterList.forEach(element => {
-      // console.log(element.make);
 
       if (element.make == e.target.value) {
         this.modelList[i] = element.model;
