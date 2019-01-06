@@ -43,5 +43,17 @@ public class PaymentDao implements Serializable, IPaymentDao {
 		}
 		return newPayment;
 	}
+	
+	@Override
+	public Payment getPaymentDetails(Long policyId) throws InsuranceException {
+		String sql = "SELECT c FROM Payment c where policyId="+policyId;
+		TypedQuery<Payment> qry = entityManager.createQuery(sql, Payment.class);
+		List<Payment> paymentList = qry.getResultList();
+		if(paymentList.isEmpty()){
+			return null;
+		}else{
+			return paymentList.get(0);
+		}
+	}
 
 }

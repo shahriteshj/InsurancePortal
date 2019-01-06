@@ -47,7 +47,7 @@
   </div>
   </div>
   <div id="policydetails" class="container"><br>
-    Policy Details:{{policyId}}
+    Policy Details: {{policyId}}
     <button id="backbtn" (click)="showPolicyList()" >Back to List</button>
     <br><br>
     <div class="panel panel-info">
@@ -55,6 +55,7 @@
         <h3 class="panel-title">Vehicle Details</h3>
       </div>
       <div class="panel-body">
+        {{this.customerVehicle.make}}
       </div>
     </div>
     <div class="panel panel-info">
@@ -62,13 +63,15 @@
           <h3 class="panel-title">Payment Details</h3>
         </div>
         <div class="panel-body">
+          {{this.policyPayment.cardNo}}
         </div>
       </div>
-      <div class="panel panel-info">
+      <div class="panel panel-info" >
           <div class="panel-heading">
             <h3 class="panel-title">Customer Details</h3>
           </div>
           <div class="panel-body">
+            {{this.customer.mobileNo}}
           </div>
         </div>
   </div>

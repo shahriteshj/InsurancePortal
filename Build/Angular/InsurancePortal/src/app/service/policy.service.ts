@@ -21,18 +21,30 @@ export class PolicyService {
     return this.http.post('/InsurancePortal/policy/getQuote', customerVehicle);
   }
 
-  addPolicy(username:string,customerVehicle:CustomerVehicle,policyPayment:PolicyPayment) {
+  addPolicy(username: string, customerVehicle: CustomerVehicle, policyPayment: PolicyPayment) {
     console.log("in policy service");
 
-    let z=Object.assign({username:username},customerVehicle,policyPayment);
+    let z = Object.assign({ username: username }, customerVehicle, policyPayment);
     console.log(z);
     return this.http.post("/InsurancePortal/policy/savePolicy", z);
 
   }
 
-  getPolicyList(username:String,role:String){
+  getPolicyList(username: String, role: String) {
 
-    return this.http.post("/InsurancePortal/policy/getPolicyList",{username:username,role:role});
+    return this.http.post("/InsurancePortal/policy/getPolicyList", { username: username, role: role });
+  }
+
+  getCustomerDetails(policyId:number){
+    return this.http.get("/InsurancePortal/policy/getCustomerDetails?policyId="+policyId); 
+  }
+
+  getCustomerVehicleDetails(policyId:number){
+    return this.http.get("/InsurancePortal/policy/getCustomerVehicleDetails?policyId="+policyId); 
+  }
+
+  getPolicyPaymentDetails(policyId:number){
+    return this.http.get("/InsurancePortal/policy/getPolicyPaymentDetails?policyId="+policyId); 
   }
 
 }

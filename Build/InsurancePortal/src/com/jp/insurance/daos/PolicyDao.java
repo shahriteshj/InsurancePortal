@@ -40,6 +40,20 @@ public class PolicyDao implements Serializable, IPolicyDao {
 		return policyList;
 	}
 
+	
+	@Override
+	public Policy getPolicyDetails(Long policyId) throws InsuranceException {
+		String sql = "SELECT p FROM Policy p where policyId = " + policyId;
+		TypedQuery<Policy> qry = entityManager.createQuery(sql, Policy.class);
+		List<Policy> policyList = qry.getResultList();
+		if (policyList.isEmpty()) {
+			return null;
+		} else {
+			return policyList.get(0);
+		}
+	}
+
+	
 	@Override
 	public Policy addPolicy(Policy policy) throws InsuranceException {
 		Policy newPolicy = null;

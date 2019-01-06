@@ -44,4 +44,17 @@ public class CustomerVehicleDao implements Serializable, ICustomerVehicleDao {
 		return newCustomerVehicle;
 	}
 
+	@Override
+	public CustomerVehicle getCustomerVehicleDetails(Long customerId) throws InsuranceException {
+		String sql = "SELECT cv FROM CustomerVehicle cv where customerId="+customerId;
+		TypedQuery<CustomerVehicle> qry = entityManager.createQuery(sql, CustomerVehicle.class);
+		List<CustomerVehicle> custVehicleList = qry.getResultList();
+		if (custVehicleList.isEmpty()) {
+			return null;
+		} else {
+			CustomerVehicle customerVehicle = (CustomerVehicle) custVehicleList.get(0);
+			return customerVehicle;
+		}
+	}
+
 }

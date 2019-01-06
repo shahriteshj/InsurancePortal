@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jp.insurance.entities.Customer;
 import com.jp.insurance.entities.CustomerVehicle;
 import com.jp.insurance.entities.Payment;
 import com.jp.insurance.entities.Policy;
@@ -127,5 +130,23 @@ public class PolicyRestController {
 		return policyList;
 	}
 	
+	@RequestMapping(value = "/getCustomerVehicleDetails", method = RequestMethod.GET, headers = "Accept=application/json")
+	public CustomerVehicle getCustomerVehicleDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+		Policy policy = policyService.getPolicyDetails(policyId);
+		return policyService.getCustomerVehicleDetails(policy.getCustomerId());
+	}
+	
+	@RequestMapping(value = "/getPolicyPaymentDetails", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Payment getPolicyPaymentDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+		return policyService.getPolicyPaymentDetails(policyId);
+	}
+	
+	@RequestMapping(value = "/getCustomerDetails", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Customer getCustomerDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+		Policy policy = policyService.getPolicyDetails(policyId);
+		return policyService.getCustomerDetails(policy.getCustomerId());
+		
+		
+	}
 	
 }

@@ -10,5 +10,7 @@ public interface IPaymentDao {
 	public List<Payment> getPaymentList() throws InsuranceException;
 
 	public Payment addPayment(Payment payment) throws InsuranceException;
+	
+	public Payment getPaymentDetails(Long policyId) throws InsuranceException;
 
 }
