@@ -4,6 +4,7 @@ export class User {
     username: string;
     password: string;
     roleName: string;
+    roleId?:number;
     questionId: number;
     securityAnswer: string;
     lastSuccessfulLoginDate: string;

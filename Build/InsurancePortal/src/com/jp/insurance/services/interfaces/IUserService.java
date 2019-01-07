@@ -14,7 +14,7 @@ public interface IUserService {
 
 	public User getUserByUserName(String username) throws InsuranceException;
 
-	public User addUser(User user) throws InsuranceException;
+	public User addUser(User user,Customer customer) throws InsuranceException;
 
 	public User updateUser(User user) throws InsuranceException;
 	

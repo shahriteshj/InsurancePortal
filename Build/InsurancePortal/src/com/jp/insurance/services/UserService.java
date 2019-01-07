@@ -64,8 +64,11 @@ public class UserService implements Serializable, IUserService {
 	}
 
 	@Override
-	public User addUser(User user) throws InsuranceException {
-		return userDao.addUser(user);
+	@Transactional
+	public User addUser(User user,Customer customer) throws InsuranceException {
+		User newUser =  userDao.addUser(user);
+		customerDao.addCustomer(customer);
+		return newUser;
 	}
 
 	@Override

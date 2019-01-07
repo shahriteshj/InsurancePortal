@@ -1,5 +1,6 @@
 package com.jp.insurance.controllers;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,17 +64,48 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST, headers = "Accept=application/json")
-	public ViewUser registerUser(@RequestBody String input) {
+	public String registerUser(@RequestBody String input) throws InsuranceException {
 		
 		System.out.println("In registerUser().");
 		System.out.println(input);
-		ViewUser viewUser = new ViewUser();
-		
+				
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
 	
+		User user = new User();
+		Customer customer = new Customer();
 		
 		
-		return null;
+		user.setUsername(((String)inputMap.get("username")).toUpperCase());
+		user.setPassword((String)inputMap.get("password"));
+		user.setAccountLocked('N');
+		user.setSecurityAnswer((String)inputMap.get("securityAnswer"));
+		user.setQuestionId((Integer)inputMap.get("questionId"));
+		user.setRoleId((Integer)inputMap.get("roleId"));
+		
+		user.setCreationDate(new Date());
+		user.setFailedLoginAttempt(0);
+		
+		customer.setEmailId((String)inputMap.get("username"));
+		customer.setFirstName((String)inputMap.get("firstName"));
+		customer.setLastName((String)inputMap.get("lastName"));
+		customer.setCity((String)inputMap.get("city"));
+		customer.setState((String)inputMap.get("state"));
+		customer.setPincode((Integer)inputMap.get("pincode"));
+		customer.setGender((String)inputMap.get("gender"));
+		customer.setDOB((Date)inputMap.get("dob"));
+		customer.setAddress1((String)inputMap.get("address1"));
+		customer.setAddress2((String)inputMap.get("address2"));
+		customer.setAddress3((String)inputMap.get("address3"));
+		
+		user = userService.addUser(user,customer);
+		
+		if(user.getUserId()>0){
+			return "Success";
+		}else{
+			return "Failure";
+		}
+		
+		
 	}
 	
 
