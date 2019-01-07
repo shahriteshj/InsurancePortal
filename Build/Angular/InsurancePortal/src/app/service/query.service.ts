@@ -41,4 +41,8 @@ export class QueryService {
   getQueryDetails(queryId:number) {    
     return this.http.get("/InsurancePortal/policy/getQueryDetails?queryId="+queryId);
   }
+
+  updateQueryDetails(query:Query) {
+    return this.http.post("/InsurancePortal/policy/updateQuery",query);
+  }
 }

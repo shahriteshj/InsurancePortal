@@ -3,24 +3,15 @@ package com.jp.insurance.controllers;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.ConstraintViolation;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.jp.insurance.entities.Query;
 import com.jp.insurance.exceptions.InsuranceException;
@@ -83,7 +74,7 @@ public class QueryRestController {
 			query.setAssignedTo("OPERATIONS");
 			query.setCreationDate(Calendar.getInstance().getTime());
 			System.out.println("Query : " + query);
-			queryService.addNewQuery(query); 
+			queryService.addNewQuery(query);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,15 +82,36 @@ public class QueryRestController {
 		return query;
 	}
 
-	
 	@RequestMapping(value = "/getQueryDetails", method = RequestMethod.GET, headers = "Accept=application/json")
 	public Query getQueryDetails(@PathParam("queryId") Long queryId) throws InsuranceException {
-		System.err.println("In Query Details controllers "+queryId);		
+		System.err.println("In Query Details controllers " + queryId);
 		Query query = queryService.getQueryById(queryId);
 		System.out.println(query);
 		return query;
 	}
-	
-	
+
+	@RequestMapping(value = "/updateQuery", method = RequestMethod.POST, headers = "Accept=application/json")
+	public String updateQueryForm(@RequestBody String input) throws InsuranceException {
+		System.out.println(input);
+		Query query = new Query();
+		
+			HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
+			Long lobj = new Long((Integer)inputMap.get("queryId"));
+			query.setQueryId(lobj);
+			query.setAssignedTo((String) inputMap.get("assignedTo"));
+			query.setQueryDescription((String) inputMap.get("queryDescription"));
+			query.setEmailId((String) inputMap.get("emailId"));
+			query.setQueryResponse((String) inputMap.get("queryResponse"));
+			query.setQueryType((String) inputMap.get("queryType"));
+			query.setStatus((String) inputMap.get("status"));
+			queryService.updateExistingQuery(query);
+
+		
+			if(query.getQueryId()>0){
+				return "Success";
+			}else{
+				return "Failure";
+			}
+	}
 
 }

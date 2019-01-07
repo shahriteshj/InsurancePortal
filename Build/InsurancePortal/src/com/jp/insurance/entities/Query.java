@@ -46,9 +46,9 @@ public class Query {
 	}*/
 	
 	@NotNull
-	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+	/*@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\." +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
 		        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",message="{invalid.email}")
-	@Column(name="EMAILID")
+	@Column(name="EMAILID")*/
 	public String getEmailId() {
 		return emailId;
 	}

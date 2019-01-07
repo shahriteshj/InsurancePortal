@@ -17,22 +17,22 @@
       <div class="panel-heading">
         <h3 class="panel-title">Query Lists</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" *ngIf="queries">
 
         <table class="table-hover" style="width:600px;">
           <thead>
             <tr>
               <th>QUERY ID</th>
               <th>TYPE</th>
-              <th>STATUS</th>              
+              <th>STATUS</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let q of queries;">
               <td>{{q.queryId}}</td>
-              <td>{{q.queryType}}</td>              
+              <td>{{q.queryType}}</td>
               <td>{{q.status}}</td>
-              <td><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>            
+              <td><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
             </tr>
             <tr *ngIf="!queries || queries.length==0">
               <td colspan="3">No Queries to display</td>
@@ -44,42 +44,68 @@
   </div>
 
   <div id="queryDetails" class="container"><br>
-    Query Details: {{queryId}}
     <button id="backbtn" (click)="showQueryList()">Back to List</button>
     <br><br>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Email</h3>
+        <h3 class="panel-title"> Query Details : {{queryId}}</h3>
       </div>
-      <div class="panel-body">
-          {{this.query.emailId}}
-      </div>
-    </div>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Description</h3>
-      </div>
-      <div class="panel-body">
-          {{this.query.queryDescription}}
-      </div>
-    </div>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Query Type</h3>
-      </div>
-      <div class="panel-body">
-          {{this.query.queryType}}
-      </div>
-    </div>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Status</h3>
-      </div>
-      <div class="panel-body">
-          {{this.query.status}}
+      <div class="panel-body" *ngIf="query">
+        <table class="table table-hover" style="width:600px;">
+          <tbody>
+            <tr>
+              <td>Email</td>
+              <td>{{this.query.emailId}}</td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>{{this.query.queryDescription}}</td>
+            </tr>
+
+            <tr>
+              <td>Query Type</td>
+              <td>{{this.query.queryType}}</td>
+            </tr>
+            <tr *ngIf="sharedDataService.isCustomerUser">
+              <td>Status</td>
+              <td>{{this.query.status}}</td>
+            </tr>
+
+            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+              <td>Status</td>
+              <td><select path="status" id="" #myStatusValue>
+                  <option value="IN PROGRESS">IN PROGRESS</option>
+                  <option value="CLOSED">CLOSED</option>
+                </select>
+              </td>
+            </tr>
+            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+              <td>Assign to</td>
+              <td><select [(ngModel)]="assignedTo" id="">
+                  <option value=1>ADMIN</option>
+                  <option value=2>CUSTOMER</option>
+                  <option value=3>OPERATIONS</option>
+                  <option value=4>MANAGER</option>
+                  <option value=5>INSPECTOR</option>
+                </select>
+              </td>
+            </tr>
+            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+              <td>Response</td>
+              <td><textarea [(ngModel)]="queryResponse" rows="3" cols="50"></textarea> </td>
+            </tr>
+            <br><br>
+            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+              <td colspan="2"><input type="submit" value="Submit" (click)="updateQuery(this.query)"></td>
+              <td colspan="2"><input type="button" value="Cancel" (click)="showQueryList()"></td>
+            </tr>
+
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+
 </body>
 
 </html>
