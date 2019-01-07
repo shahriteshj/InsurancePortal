@@ -27,7 +27,6 @@ import { BuypolicyComponent } from './buypolicy/buypolicy.component';
 import { PolicyService } from './service/policy.service';
 import { QueryComponent } from './query/query.component';
 import { ViewQueryComponent } from './view-query/view-query.component';
-import { QueryDetailsComponent } from './query-details/query-details.component';
 import { LoginRouteGuard } from './service/loginGuard.service';
 import {QueryService} from './service/query.service';
 import {SharedDataService} from './service/sharedData.service';
@@ -52,7 +51,6 @@ import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
     BuypolicyComponent,
     QueryComponent,
     ViewQueryComponent,
-    QueryDetailsComponent,
     ViewpolicyComponent
   ],
   imports: [

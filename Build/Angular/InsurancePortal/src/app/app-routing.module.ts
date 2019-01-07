@@ -10,7 +10,6 @@ import { LogOutComponent } from './log-out/log-out.component';
 import {BuypolicyComponent} from './buypolicy/buypolicy.component';
 import { QueryComponent } from './query/query.component';
 import { ViewQueryComponent } from './view-query/view-query.component';
-import { QueryDetailsComponent } from './query-details/query-details.component';
 import {LoginRouteGuard} from './service/loginGuard.service';
 import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 
@@ -30,7 +29,6 @@ const routes: Routes = [
   { path: 'viewclaim', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
   { path: 'addquery', component: QueryComponent, canActivate: [LoginRouteGuard]  },
   { path: 'viewquery', component: ViewQueryComponent, canActivate: [LoginRouteGuard]  },
-  { path: 'queryDetails', component: QueryDetailsComponent, canActivate: [LoginRouteGuard]  },
   { path: 'logout', component: LogOutComponent, canActivate: [LoginRouteGuard]  },
   { path: '**', redirectTo: '' }
 

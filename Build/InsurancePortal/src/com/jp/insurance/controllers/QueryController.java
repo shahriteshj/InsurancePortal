@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -103,6 +104,7 @@ public class QueryController {
 	
 	
 	@RequestMapping("queryDetails.qry")
+	
 	public ModelAndView getQueryDetails(@RequestParam(value="queryId") Long queryId, Model model) {
 		System.out.println("In getQueryDetails()");
 		System.out.println(queryId);

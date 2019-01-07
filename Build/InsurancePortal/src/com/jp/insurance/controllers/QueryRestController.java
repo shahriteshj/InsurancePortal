@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,5 +90,16 @@ public class QueryRestController {
 		}
 		return query;
 	}
+
+	
+	@RequestMapping(value = "/getQueryDetails", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Query getQueryDetails(@PathParam("queryId") Long queryId) throws InsuranceException {
+		System.err.println("In Query Details controllers "+queryId);		
+		Query query = queryService.getQueryById(queryId);
+		System.out.println(query);
+		return query;
+	}
+	
+	
 
 }
