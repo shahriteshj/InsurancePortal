@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user';
 import { map } from "rxjs/operators";
+import { Customer } from '../model/Customer';
 
 
 @Injectable({
@@ -31,8 +32,10 @@ export class UserService {
 
   }
 
-  create(user: User) {
-    return this.http.post("http://localhost:3000/User", user);
+  create(user: User,customer:Customer) {
+    let z = Object.assign(user,customer);
+    console.log(z);
+    return this.http.post("/InsurancePortal/policy/registerUser", z);
   }
 
   update(user: User) {

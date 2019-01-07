@@ -3,6 +3,7 @@ import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../service/alert.service';
+import { Customer } from '../model/Customer';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { AlertService } from '../service/alert.service';
 })
 export class RegisterComponent implements OnInit {
   loading = false;
-  users: User[];
+  user:User;
+  customer:Customer;
 
   constructor(private router: Router, private _userService: UserService,
     private alertService: AlertService) { }
@@ -23,36 +25,45 @@ export class RegisterComponent implements OnInit {
   Register(registerFrm) {
 
     this.loading = true;
-    let name = registerFrm.value.name;
-    let username = registerFrm.value.username;
-    let password = registerFrm.value.password;
-    console.log(name);
-    console.log(username);
-    console.log(password);
-    
-    let user: User = {
-      name: registerFrm.value.name,
-      username: registerFrm.value.username,
-      password: registerFrm.value.password,
-      roleName:"CUSTOMER",
-      questionId:registerFrm.value.questionId,
-      securityAnswer:registerFrm.value.securityAnswer,
-      lastSuccessfulLoginDate:"",
-      responseText:""
+
+    let customer:Customer = {
+      firstName: registerFrm.value.firstName,
+    lastName: registerFrm.value.lastName,
+    emailId: registerFrm.value.username,
+    mobileNo: registerFrm.value.mobileNo,
+    address1: registerFrm.value.address1,
+    address2: registerFrm.value.address2,
+    address3: registerFrm.value.address3,
+    gender: registerFrm.value.gender,
+    pincode: registerFrm.value.pincode,
+    state: registerFrm.value.state,
+    city: registerFrm.value.city,
+    DOB: registerFrm.value.DOB
     }
-    console.log(user);
+
+     let user: User = {
+       name: registerFrm.value.name,
+       username: registerFrm.value.username,
+       password: registerFrm.value.password,
+       roleName:"CUSTOMER",
+       questionId:registerFrm.value.questionId,
+       securityAnswer:registerFrm.value.securityAnswer,
+       lastSuccessfulLoginDate:"",
+       responseText:""
+     }
+     console.log(user);
     
-    this._userService.create(user)
-      .subscribe(
-        data => {
-          this.alertService.success('Registration successful', true);
-          this.router.navigate(['/login']);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
-      );
+     this._userService.create(user,customer)
+       .subscribe(
+         data => {
+           this.alertService.success('Registration successful', true);
+           this.router.navigate(['/login']);
+         },
+         error => {
+           this.alertService.error(error);
+           this.loading = false;
+         }
+       );
 
 
   }

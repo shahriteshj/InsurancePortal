@@ -25,23 +25,21 @@ import com.jp.insurance.utilities.JsonUtilsJackson;
 
 @RestController
 public class PolicyRestController {
-	
+
 	@Autowired
 	@Qualifier("policyQuoteService")
 	private IPolicyQuoteService policyQuoteService;
-	
+
 	@Autowired
 	@Qualifier("policyService")
 	private IPolicyService policyService;
-
-	
 
 	@RequestMapping(value = "/getQuote", method = RequestMethod.POST, headers = "Accept=application/json")
 	public Float getQuote(@RequestBody String input) throws InsuranceException {
 		System.out.println(input);
 		CustomerVehicle customerVehicle = new CustomerVehicle();
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
-		
+
 		customerVehicle.setCc((String) inputMap.get("cc"));
 		customerVehicle.setMake((String) inputMap.get("make"));
 		customerVehicle.setModel((String) inputMap.get("model"));
@@ -49,30 +47,29 @@ public class PolicyRestController {
 		customerVehicle.setChasisNo((String) inputMap.get("chasisNo"));
 		customerVehicle.setEngineNo((String) inputMap.get("engineNo"));
 		customerVehicle.setFuelType((String) inputMap.get("fuelType"));
-		customerVehicle.setManufacturingYear((Integer)inputMap.get("manufacturingYear"));
-		customerVehicle.setRegistrationDate(new Date((String)inputMap.get("registrationDate")));
+		customerVehicle.setManufacturingYear((Integer) inputMap.get("manufacturingYear"));
+		customerVehicle.setRegistrationDate(new Date((String) inputMap.get("registrationDate")));
 		customerVehicle.setVehicleRegCity((String) inputMap.get("vehicleRegCity"));
 		customerVehicle.setVehicleRegNo((String) inputMap.get("vehicleRegNo"));
 		System.out.println(customerVehicle);
 		Float price = policyQuoteService.getPolicyPremium(customerVehicle);
 		return price;
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/savePolicy", method = RequestMethod.POST, headers = "Accept=application/json")
 	public Long savePolicy(@RequestBody String input) throws InsuranceException {
 		System.out.println(input);
 		CustomerVehicle customerVehicle = new CustomerVehicle();
 		Policy policy = new Policy();
 		Payment payment = new Payment();
-		
+
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
-		
-		//load customer details
+
+		// load customer details
 		String custEmail = (String) inputMap.get("username");
-		
-		//load customerVehicle data
+
+		// load customerVehicle data
 		customerVehicle.setCc((String) inputMap.get("cc"));
 		customerVehicle.setMake((String) inputMap.get("make"));
 		customerVehicle.setModel((String) inputMap.get("model"));
@@ -80,73 +77,73 @@ public class PolicyRestController {
 		customerVehicle.setChasisNo((String) inputMap.get("chasisNo"));
 		customerVehicle.setEngineNo((String) inputMap.get("engineNo"));
 		customerVehicle.setFuelType((String) inputMap.get("fuelType"));
-		customerVehicle.setManufacturingYear((Integer)inputMap.get("manufacturingYear"));
-		customerVehicle.setRegistrationDate(new Date((String)inputMap.get("registrationDate")));
+		customerVehicle.setManufacturingYear((Integer) inputMap.get("manufacturingYear"));
+		customerVehicle.setRegistrationDate(new Date((String) inputMap.get("registrationDate")));
 		customerVehicle.setVehicleRegCity((String) inputMap.get("vehicleRegCity"));
 		customerVehicle.setVehicleRegNo((String) inputMap.get("vehicleRegNo"));
 		System.out.println(customerVehicle);
-		
-		//load policy data
-		//SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-	    //Date date = new Date();  
-		
+
+		// load policy data
+		// SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy
+		// HH:mm:ss");
+		// Date date = new Date();
+
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		policy.setPolicyStartDate(c.getTime());
 		c.add(Calendar.YEAR, 1);
 		c.add(Calendar.DAY_OF_MONTH, -1);
 		policy.setPolicyEndDate(c.getTime());
-		
-		
-		//load payment data
+
+		// load payment data
 		payment.setCardExpirtDate((String) inputMap.get("cardExpirtDate"));
 		payment.setCardNo((String) inputMap.get("cardNo"));
-		payment.setNameOnCard((String) inputMap.get("nameOnCard"));
+		payment.setNameOnCard((String) inputMap.get("cardExpiryMonth") + "/" + (String) inputMap.get("cardExpiryYear"));
+
 		payment.setPaymentDate(new Date());
-		payment.setPolicyAmount((Float)inputMap.get("policyAmount"));
-		
-		Policy newPolicy =policyService.addNewPolicy(custEmail, policy, customerVehicle, payment);
-		
+		payment.setPolicyAmount((Float) inputMap.get("policyAmount"));
+
+		Policy newPolicy = policyService.addNewPolicy(custEmail, policy, customerVehicle, payment);
+
 		return newPolicy.getPolicyId();
-		
+
 	}
-	
+
 	@RequestMapping(value = "/getPolicyList", method = RequestMethod.POST, headers = "Accept=application/json")
-	public List<Policy> getPolicyList(@RequestBody String input) throws InsuranceException{
-			
-		List<Policy> policyList=null;
+	public List<Policy> getPolicyList(@RequestBody String input) throws InsuranceException {
+
+		List<Policy> policyList = null;
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
-		
-		//load user details
+
+		// load user details
 		String username = (String) inputMap.get("username");
-		String role = (String)inputMap.get("role");
-		
-		if(role.equalsIgnoreCase("CUSTOMER")){
+		String role = (String) inputMap.get("role");
+
+		if (role.equalsIgnoreCase("CUSTOMER")) {
 			policyList = policyService.getPolicyList(username);
-		}else if(role.equalsIgnoreCase("MANAGER") || role.equalsIgnoreCase("OPERATIONS")){
+		} else if (role.equalsIgnoreCase("MANAGER") || role.equalsIgnoreCase("OPERATIONS")) {
 			policyList = policyService.getPolicyList();
 		}
-		
+
 		return policyList;
 	}
-	
+
 	@RequestMapping(value = "/getCustomerVehicleDetails", method = RequestMethod.GET, headers = "Accept=application/json")
-	public CustomerVehicle getCustomerVehicleDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+	public CustomerVehicle getCustomerVehicleDetails(@PathParam("policyId") Long policyId) throws InsuranceException {
 		Policy policy = policyService.getPolicyDetails(policyId);
 		return policyService.getCustomerVehicleDetails(policy.getCustomerId());
 	}
-	
+
 	@RequestMapping(value = "/getPolicyPaymentDetails", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Payment getPolicyPaymentDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+	public Payment getPolicyPaymentDetails(@PathParam("policyId") Long policyId) throws InsuranceException {
 		return policyService.getPolicyPaymentDetails(policyId);
 	}
-	
+
 	@RequestMapping(value = "/getCustomerDetails", method = RequestMethod.GET, headers = "Accept=application/json")
-	public Customer getCustomerDetails(@PathParam("policyId") Long policyId) throws InsuranceException{
+	public Customer getCustomerDetails(@PathParam("policyId") Long policyId) throws InsuranceException {
 		Policy policy = policyService.getPolicyDetails(policyId);
 		return policyService.getCustomerDetails(policy.getCustomerId());
-		
-		
+
 	}
-	
+
 }

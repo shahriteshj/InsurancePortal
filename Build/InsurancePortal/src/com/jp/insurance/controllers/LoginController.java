@@ -60,5 +60,21 @@ public class LoginController {
 		return viewUser;
 
 	}
+	
+	
+	@RequestMapping(value = "/registerUser", method = RequestMethod.POST, headers = "Accept=application/json")
+	public ViewUser registerUser(@RequestBody String input) {
+		
+		System.out.println("In registerUser().");
+		System.out.println(input);
+		ViewUser viewUser = new ViewUser();
+		
+		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
+	
+		
+		
+		return null;
+	}
+	
 
 }

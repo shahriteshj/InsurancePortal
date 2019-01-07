@@ -112,11 +112,11 @@ export class BuypolicyComponent implements OnInit {
      this.nameOnCard=frm.value.nameOnCard;
     let policyPayment:PolicyPayment= {cardNo:frm.value.cardNo,nameOnCard:frm.value.nameOnCard,
       cvv:frm.value.cvv,cardExpiryMonth:frm.value.cardExpiryMonth,cardExpiryYear: frm.value.cardExpiryYear,
-      amount: this.price};
+      policyAmount: this.price};
         
     this._policyService.addPolicy(username,this.customerVehicle,policyPayment).subscribe(policyId=>{console.log(policyId);
       this.policyId=<number>policyId
-      this.router.navigate(['/policysuccess']);
+      this.router.navigate(['/viewpolicy']);
     });
 
   }

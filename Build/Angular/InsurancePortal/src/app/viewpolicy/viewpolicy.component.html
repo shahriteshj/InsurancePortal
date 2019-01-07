@@ -47,31 +47,70 @@
   </div>
   </div>
   <div id="policydetails" class="container"><br>
-    Policy Details: {{policyId}}
-    <button id="backbtn" (click)="showPolicyList()" >Back to List</button>
-    <br><br>
+    <button id="backbtn" (click)="showPolicyList()" >Back to List</button><br><br>
+    <div class="panel panel-info">
+   <div class="panel-heading"> <div class="panel-title" align="center">Policy Id: {{policyId}}
+    
+    </div></div></div>
+    
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">Vehicle Details</h3>
       </div>
-      <div class="panel-body">
-        {{this.customerVehicle.make}}
+      <div class="panel-body" *ngIf="customerVehicle">
+          <table class="table table-hover">
+              <tbody>
+                <tr><td>Make: </td><td>{{this.customerVehicle.make}}</td>
+                  <td>Model: </td><td>{{this.customerVehicle.model}}</td></tr>
+                  <tr><td>Submodel: </td><td>{{this.customerVehicle.submodel}}</td>
+                    <td>CC: </td><td>{{this.customerVehicle.cc}}</td></tr>
+                    <tr><td>engine No: </td><td>{{this.customerVehicle.engineNo}}</td>
+                      <td>Chasis No: </td><td>{{this.customerVehicle.chasisNo}}</td></tr>
+                      <tr><td>Fuel Type: </td><td>{{this.customerVehicle.fuelType}}</td>
+                        <td>Manufacturing Year </td><td>{{this.customerVehicle.manufacturingYear}}</td></tr>
+                        <tr><td>Registration Date: </td><td>{{this.customerVehicle.registrationDate | date:'EEE, d MMM,y'}}</td>
+                          <td>Vehicle Registration City: </td><td>{{this.customerVehicle.vehicleRegCity}}</td></tr>
+                </tbody>
+                </table>
+        
       </div>
     </div>
     <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">Payment Details</h3>
         </div>
-        <div class="panel-body">
-          {{this.policyPayment.cardNo}}
+        <div class="panel-body" *ngIf="policyPayment">
+            <table class="table table-hover">
+              <tbody>
+                <tr><td>Name on Card:</td><td>{{this.policyPayment.nameOnCard}}</td><td>Card Number:</td><td>{{this.policyPayment.cardNo}}</td></tr>
+                
+                <tr><td>Payment Date</td><td>{{this.policyPayment.paymentDate | date:'EEE, d MMM,y'}}</td><td>Amount Paid</td><td>{{this.policyPayment.policyAmount}}</td></tr>
+              </tbody>
+              </table>
+           
+           
         </div>
       </div>
       <div class="panel panel-info" >
           <div class="panel-heading">
             <h3 class="panel-title">Customer Details</h3>
           </div>
-          <div class="panel-body">
-            {{this.customer.mobileNo}}
+          <div class="panel-body" *ngIf="customer">
+              <table class="table table-hover">
+                  <tbody>
+                    <tr><td>Name: </td><td>{{this.customer.firstName}} {{this.customer.lastName}}</td>
+                      <td>Mobile No: </td><td>{{this.customer.mobileNo}}</td></tr>
+                      <tr><td>Address: </td><td>{{this.customer.address1}}<br> {{this.customer.address2}}
+                      <br> {{this.customer.address3}}</td>
+                        <td>BirthDate </td><td>{{this.customer.dob | date:'EEE, d MMM,y'}}</td></tr>  
+                        <tr><td>City: </td><td>{{this.customer.city}}</td>
+                          <td>State: </td><td>{{this.customer.state}}</td></tr>
+                          <tr><td>Pincode: </td><td>{{this.customer.pincode}}</td>
+                            <td>Gender</td><td>{{this.customer.gender}}</td></tr>
+                    </tbody>
+                      </table>
+
+            
           </div>
         </div>
   </div>

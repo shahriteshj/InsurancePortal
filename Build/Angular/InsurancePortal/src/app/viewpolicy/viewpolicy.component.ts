@@ -15,12 +15,11 @@ import { SharedDataService } from '../service/sharedData.service';
 export class ViewpolicyComponent implements OnInit {
 
   policyList: Policy[];
-  customerVehicle: CustomerVehicle={make:"",model:"",submodel:"",cc:"",vehicleRegNo:"",engineNo:"",chasisNo:"",
-  fuelType:"",manufacturingYear:0,registrationDate:"",vehicleRegCity:""};
-  policyPayment: PolicyPayment={cardNo: "", nameOnCard: "", cvv: 0, cardExpiryMonth: 0, cardExpiryYear: 0, amount: 0};
-  customer:Customer={firstName: "", lastName: "", emailId: "", mobileNo: "",
-    address1: "", address2: "", address3: "", gender: "", pincode: 0,
-    state: "", city: "", DOB: new Date()};
+  
+   customerVehicle: CustomerVehicle;
+  policyPayment: PolicyPayment;
+  customer:Customer;
+
   policy: Policy;
   policyId: number;
   constructor(private router: Router, private _policyService: PolicyService,private sharedDataService: SharedDataService) { }
@@ -67,13 +66,13 @@ export class ViewpolicyComponent implements OnInit {
   }
   getPaymentDetails() {
     this._policyService.getPolicyPaymentDetails(this.policyId).subscribe(
-      policyPayment=> this.policyPayment=<PolicyPayment>policyPayment
+      policyPayment=> {console.log(policyPayment);this.policyPayment=<PolicyPayment>policyPayment;}
     );
   }
 
   getCustomerDetails() {
     this._policyService.getCustomerDetails(this.policyId).subscribe(
-      customer=> this.customer=<Customer>customer
+      customer=> {console.log(customer);this.customer=<Customer>customer;}
     );
   }
 }

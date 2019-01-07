@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user';
-import { LocalStorageService } from 'ngx-webstorage';
+import { LocalStorageService, LocalStorage } from 'ngx-webstorage';
 import { SharedDataService } from '../service/sharedData.service';
 
 
@@ -14,13 +14,14 @@ import { SharedDataService } from '../service/sharedData.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  @LocalStorage()
+  public valid: boolean;
   loading = false;
   users: User[];
   user: User;
   username: string;
   password: string;
-  errorMessage:string="";
+  errorMessage: string = "";
 
 
   constructor(
@@ -30,11 +31,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
-
   }
-
 
   Login(frm: NgForm): void {
     let isValid: Boolean = false;
@@ -66,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.sharedDataService.isManagerUser = true;
             isValid = true;
             this._router.navigate(['/manager']);
-          }else if (data.roleName.toLowerCase() == 'customer') {
+          } else if (data.roleName.toLowerCase() == 'customer') {
             this.sharedDataService.isCustomerUser = true;
             isValid = true;
             this._router.navigate(['/customer']);
@@ -78,11 +76,12 @@ export class LoginComponent implements OnInit {
 
         } else {
           console.log(data.responseText);
-          if(data.responseText!=null){
-          this.errorMessage=data.responseText;}else{
-            this.errorMessage="Username not found";
+          if (data.responseText != null) {
+            this.errorMessage = data.responseText;
+          } else {
+            this.errorMessage = "Username not found";
           }
-          
+
           this._router.navigate(['/login']);
           this.loading = false;
         }
@@ -91,13 +90,16 @@ export class LoginComponent implements OnInit {
       error => {
         console.log("error");
         console.log(error);
-        this.errorMessage="Username or password invalid";
+        this.errorMessage = "Username or password invalid";
         this.loading = false;
       }
     );
   }
 
+  public isValid(): boolean {
 
+    return this.localStorage.retrieve("valid");
+  }
 
 
 
