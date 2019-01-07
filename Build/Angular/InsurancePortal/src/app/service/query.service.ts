@@ -18,7 +18,7 @@ export class QueryService {
  
 
   addQuery(query:Query){
-    return this.http.post("/InsurancePortal/login/submitQuery",query);
+    return this.http.post("/InsurancePortal/policy/submitQuery",query);
 
   }
 
@@ -35,6 +35,10 @@ export class QueryService {
   }
 
   getQueryList(username:String,role:String) {
-    return this.http.post("/InsurancePortal/login/getQueryList",{username:username,roles:role});
+    return this.http.post("/InsurancePortal/policy/getQueryList",{username:username,roles:role});
+  }
+
+  getQueryDetails(queryId:number) {    
+    return this.http.get("/InsurancePortal/policy/getQueryDetails?queryId="+queryId);
   }
 }

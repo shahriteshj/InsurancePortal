@@ -11,27 +11,42 @@ import { User } from '../model/user';
 
 export class ViewQueryComponent implements OnInit {
 
-  queries:Query[]=[];
-  user:User;
+  queries: Query[] = [];
+  user: User;
+  query:Query={emailId: "", queryDescription: "", status: "",name: "", queryType: "",queryResponse: "",assignedTo: ""};
   
-  
-
-  constructor(private httpClientService:QueryService) { }
-  queryId:number;
+  constructor(private queryService: QueryService) { }
+  queryId: number;
 
   ngOnInit() {
     this.getQueryList();
+    document.getElementById("queryDetails").style.display = "none";
   }
 
   getQueryList() {
-    let user:User;
+    let user: User;
     user = JSON.parse(localStorage.getItem("currentUser"));
-    
     let role = user.roleName;
     let username = user.username;
     console.log(role);
+    return this.queryService.getQueryList(username, role).subscribe(queries =>
+      this.queries = <Query[]>queries);
+  }
 
-    return this.httpClientService.getQueryList(username,role).subscribe(queries=>
-      this.queries=<Query[]>queries);
+  viewQueryDetails(id: number) {
+    document.getElementById("queryList").style.display = "none";
+    document.getElementById("queryDetails").style.display = "block";
+    this.queryId = id;
+     this.getQueryDetails();
+  }
+
+  showQueryList() {
+    document.getElementById("queryList").style.display = "block";
+    document.getElementById("queryDetails").style.display = "none";
+  }
+
+  getQueryDetails() {
+    this.queryService.getQueryDetails(this.queryId)
+    .subscribe(query => this.query = <Query>query);
   }
 }
