@@ -19,6 +19,7 @@ export class ViewQueryComponent implements OnInit {
   //query:Query={emailId: "", queryDescription: "", status: "",name: "", queryType: "",queryResponse: "",assignedTo: ""};
   query:Query;
   _router: any;
+  msg: string = null;
   
     
 
@@ -73,13 +74,17 @@ export class ViewQueryComponent implements OnInit {
         console.log(query)
         if (query == "Success") {
           this._router.navigate(['/viewquery']);
+          this.msg = 'Query is sucessfully updated';
         } else {               
-            console.log("Failed to update query");
+          this._router.navigate(['/viewquery']);
+          this.msg = 'Failed to Update';
+            
         }
     })
   }
 
   updateQuery() {    
    this.updateQueryDetails()
+   this.showQueryList()
   }
 }

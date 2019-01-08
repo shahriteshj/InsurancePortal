@@ -15,7 +15,8 @@
   <div id="queryList" class="container"><br>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Query Lists</h3>
+        <h3 class="panel-title">Query Lists</h3>    
+        <p class="msg_success">{{queries.queryId}} {{ msg }}</p>    
       </div>
       <div class="panel-body" *ngIf="queries">
 
@@ -28,11 +29,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let q of queries;">
-              <td>{{q.queryId}}</td>
-              <td>{{q.queryType}}</td>
-              <td>{{q.status}}</td>
-              <td><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
+            <tr height="50" *ngFor="let q of queries;">
+              <td style="height: 50px">{{q.queryId}}</td>
+              <td style="height: 50px">{{q.queryType}}</td>
+              <td style="height: 50px">{{q.status}}</td>
+              <td style="height: 50px"><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
             </tr>
             <tr *ngIf="!queries || queries.length==0">
               <td colspan="3">No Queries to display</td>
@@ -73,8 +74,7 @@
               </tr>
 
               <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
-                <td>Status</td>
-                <!-- <td><select id="status" name="status" [(ngModel)]="status" >  -->
+                <td>Status</td>                
                 <td><select id="status" name="query.status" [(ngModel)]="query.status">
                     <option value="IN PROGRESS">IN PROGRESS</option>
                     <option value="CLOSED">CLOSED</option>
