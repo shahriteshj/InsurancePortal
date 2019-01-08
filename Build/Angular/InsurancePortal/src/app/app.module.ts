@@ -13,9 +13,6 @@ import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guards';
 import { MenuComponent } from './menu/menu.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { ShoppingItemComponent } from './shopping-item/shopping-item.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { LogOutComponent } from './log-out/log-out.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { UserService } from './service/user.service';
@@ -33,6 +30,7 @@ import {SharedDataService} from './service/sharedData.service';
 import {UserLoginService} from './service/userLogin.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
+import {MasterDataService} from './service/masterDataservice';
 
 @NgModule({
   declarations: [
@@ -43,9 +41,6 @@ import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
     AboutComponent,
     RegisterComponent,
     MenuComponent,
-    ShoppingCartComponent,
-    ShoppingItemComponent,
-    ProductListComponent,
     LogOutComponent,
     MenuBarComponent,
     BuypolicyComponent,
@@ -62,7 +57,7 @@ import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
     NgxWebstorageModule.forRoot()
   ],
   providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,
-    PolicyService,QueryService,SharedDataService,UserLoginService,LoginRouteGuard],
+    PolicyService,QueryService,SharedDataService,UserLoginService,LoginRouteGuard,MasterDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

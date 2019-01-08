@@ -1,7 +1,13 @@
 package com.jp.insurance.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jp.insurance.entities.Customer;
+import com.jp.insurance.entities.Role;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
+import com.jp.insurance.services.interfaces.IStateCityService;
 import com.jp.insurance.services.interfaces.IUserService;
 import com.jp.insurance.utilities.JsonUtilsJackson;
 import com.jp.insurance.view.entities.ViewUser;
@@ -25,7 +33,9 @@ public class LoginController {
 	private IUserService userService;
 	
 
-
+	@Autowired
+	@Qualifier("stateCityService")
+	private IStateCityService stateCityService;
 
 	@RequestMapping(value = "/authenticateUser", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ViewUser authenticateUser(@RequestBody String loginInput) {
@@ -64,7 +74,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST, headers = "Accept=application/json")
-	public String registerUser(@RequestBody String input) throws InsuranceException {
+	public String registerUser(@RequestBody String input) throws InsuranceException, ParseException {
 		
 		System.out.println("In registerUser().");
 		System.out.println(input);
@@ -79,34 +89,59 @@ public class LoginController {
 		user.setPassword((String)inputMap.get("password"));
 		user.setAccountLocked('N');
 		user.setSecurityAnswer((String)inputMap.get("securityAnswer"));
-		user.setQuestionId((Integer)inputMap.get("questionId"));
-		user.setRoleId((Integer)inputMap.get("roleId"));
+		Integer id =Integer.parseInt((String)inputMap.get("questionId"));
+		
+		user.setQuestionId(id);
+		String roleName = (String)inputMap.get("roleName");
+		Role role = userService.getRoleByName(roleName);
+		user.setRoleId(role.getRoleId());
 		
 		user.setCreationDate(new Date());
 		user.setFailedLoginAttempt(0);
 		
-		customer.setEmailId((String)inputMap.get("username"));
+		customer.setEmailId(((String)inputMap.get("username")).toUpperCase());
 		customer.setFirstName((String)inputMap.get("firstName"));
 		customer.setLastName((String)inputMap.get("lastName"));
 		customer.setCity((String)inputMap.get("city"));
 		customer.setState((String)inputMap.get("state"));
-		customer.setPincode((Integer)inputMap.get("pincode"));
+		id =Integer.parseInt((String)inputMap.get("pincode"));
+		System.out.println(id);
+		customer.setPincode(id);
 		customer.setGender((String)inputMap.get("gender"));
-		customer.setDOB((Date)inputMap.get("dob"));
+		Date date1=new SimpleDateFormat("yyyy-MM-dd").parse((String)inputMap.get("DOB"));
+		System.out.println(date1);
+		customer.setDOB(date1);
 		customer.setAddress1((String)inputMap.get("address1"));
 		customer.setAddress2((String)inputMap.get("address2"));
 		customer.setAddress3((String)inputMap.get("address3"));
+		customer.setMobileNo((String)inputMap.get("mobileNo"));
 		
 		user = userService.addUser(user,customer);
 		
 		if(user.getUserId()>0){
-			return "Success";
+			return "SUCCESS";
 		}else{
-			return "Failure";
+			return "FAILURE";
 		}
 		
 		
 	}
 	
-
+	
+	@RequestMapping(value = "/stateList", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<String> getStateList() throws InsuranceException {
+		return stateCityService.getStateList();
+		
+	}
+	
+	
+	@RequestMapping(value = "/cityList", method = RequestMethod.GET, headers = "Accept=application/json")
+	public List<String> getCityList(@PathParam("stateName") String stateName) throws InsuranceException {
+		List<String> cityList = stateCityService.getCityListbyStateName(stateName);
+		Collections.sort(cityList);
+		
+		return cityList;
+		
+	}
+	
 }

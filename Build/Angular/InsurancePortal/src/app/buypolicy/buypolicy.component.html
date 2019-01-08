@@ -1,99 +1,198 @@
 <app-menu-bar></app-menu-bar>
-<div class="col-md-6 col-md-offset-3">
-<form #regForm="ngForm" (ngSubmit)="submit(regForm)" ngNativeValidate>
-    
-    <h1>Policy:</h1>
-    <!-- One "tab" for each step in the form: -->
-    
-    <div id="tab1" class="tab">Vehicle Details:
-        
-        <table><tr><td>Make</td>
-        <td width="500px"><p><select id="Make" name="Make" (change)="makeChange($event)" required >
-            <option value="">Select Make</option>
-            <option *ngFor="let m of makeList" [ngValue]="m">{{ m }}</option>
-          </select></p></td></tr>
-          <tr><td>Model</td><td><p><select id="Model" name="Model" (change)="modelChange($event)" required>
-            <option value="">Select Model</option>
-            <option *ngFor="let mo of modelList" [ngValue]="mo">{{ mo }}</option>
-          </select></p></td></tr>
-          <tr><td>Submodel</td><td><p><select id="SubModel" name="SubModel" (change)="submodelChange($event)" required>
-            <option value="">Select Submodel</option>
-            <option *ngFor="let submo of submodelList" [ngValue]="submo">{{ submo }}</option>
-          </select></p></td></tr>
-          <tr><td>CC</td><td><p><input id="cc" name="cc"   [(ngModel)]="cc" required></p></td></tr>
-          <tr><td>Fuel Type</td><td><p><select id="fuelType" name="fuelType" [(ngModel)]="fuelType" required>
-            <option value="">Select FuelType</option>
-            <option value="PETROL">Petrol</option>
-            <option value="DIESEL">Diesel</option>
-            <option value="CNG">CNG</option>
-          </select></p></td></tr>
-          <tr><td>VehicleRegNo</td><td><p><input  id="vehicleRegNo"  name="vehicleRegNo" [(ngModel)]="vehicleRegNo" required></p></td></tr>
-          <tr><td>engineNo</td><td><p><input  id="engineNo"  name="engineNo" [(ngModel)]="engineNo" required></p></td></tr>
-          <tr><td>chasisNo</td><td><p><input id="chasisNo"   name="chasisNo" [(ngModel)]="chasisNo" required></p></td></tr>
-          <tr><td>manufacturingYear</td><td><p><input  id="manufacturingYear"  name="manufacturingYear" [(ngModel)]="manufacturingYear" required></p></td></tr>
-          <tr><td>registrationDate</td><td><p><input  id="registrationDate"  name="registrationDate" [(ngModel)]="registrationDate" required></p></td></tr>
-          <tr><td>vehicleRegCity</td><td><p><input  id="vehicleRegCity"  name="vehicleRegCity" [(ngModel)]="vehicleRegCity" required></p></td></tr>
-        </table>
-    </div>
-    <div id="tab2" class="tab">Polciy Quote
-        <p>Rs. {{price}}</p>
-        <p><input type="hidden" value="test"></p>
-    </div>
-    <div id="tab3" class="tab">Payment:
-        <table>
-            <tr><td>Name on Card</td><td>
-        <p><input  id="nameOnCard" name="nameOnCard" [(ngModel)]="nameOnCard" required></p></td></tr>
-        <tr><td>Card Number</td><td>
-        <p><input id="cardNo" name="cardNo"  [(ngModel)]="cardNo" required></p></td></tr>
-        <tr><td>Card Expiry</td><td>
-        <p><select id="cardExpiryMonth" name="cardExpiryMonth" [(ngModel)]="cardExpiryMonth" required>
-                <option value="" selected=true>Select Month</option>
-                <option value="01">Jan</option>
-                <option value="02">Feb</option>
-                <option value="03">Mar</option>
-                <option value="04">Apr</option>
-                <option value="05">May</option>
-                <option value="06">Jun</option>
-                <option value="07">Jul</option>
-                <option value="08">Aug</option>
-                <option value="09">Sep</option>
-                <option value="10">Oct</option>
-                <option value="11">Nov</option>
-                <option value="12">Dec</option>
-              </select>
-            
-        <select id="cardExpiryMonth" name="cardExpiryYear" [(ngModel)]="cardExpiryYear" required>
-                <option value="" selected=true>Select Year</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-              </select>
-        </p></td></tr>
-        <tr><td>CVV</td><td>
-        <p><input id="cvv" name="cvv"  [(ngModel)]="cvv" required></p></td></tr>
-    </table>
-    </div>
-    <div id="tab4"  style="overflow:auto;">
-        <div style="float:right;">
-            <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
-            <button type="button" id="nextBtn" (click)="handleClick($event,1)">Next</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div id="policylist" class="container"><br>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Policy</h3>
+            </div>
+            <div class="panel-body">
+                <form #regForm="ngForm" (ngSubmit)="submit(regForm)" ngNativeValidate>
+
+
+                    <!-- One "tab" for each step in the form: -->
+
+                    <div id="tab1" class="tab">
+                        <h3>Vehicle Details:</h3>
+
+                        <table class="table table-hover" border="0">
+                            <tr>
+                                <td><label for="Make">Make </label> <span> *</span></td>
+                                <td>
+                                    <p><select id="Make" name="Make" (change)="makeChange($event)" required class="custom-select"
+                                            style="width:200px;">
+                                            <option value="">Make</option>
+                                            <option *ngFor="let m of makeList" [ngValue]="m">{{ m }}</option>
+                                        </select></p>
+                                </td>
+                                <td><label for="Model">Model </label> <span> *</span></td>
+                                <td>
+                                    <p><select id="Model" name="Model" (change)="modelChange($event)" required class="custom-select"
+                                            style="width:200px;">
+                                            <option value="">Model</option>
+                                            <option *ngFor="let mo of modelList" [ngValue]="mo">{{ mo }}</option>
+                                        </select></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Sub-Model </label> <span> *</span></td>
+                                <td>
+                                    <p><select id="SubModel" name="SubModel" (change)="submodelChange($event)" required
+                                            class="custom-select" style="width:200px;">
+                                            <option value="">Submodel</option>
+                                            <option *ngFor="let submo of submodelList" [ngValue]="submo">{{ submo }}</option>
+                                        </select></p>
+                                </td>
+
+                                <td><label>CC </label> <span> *</span></td>
+                                <td>
+                                    <p><input type="text" id="cc" name="cc" [(ngModel)]="cc" required></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Fuel Type </label> <span> *</span></td>
+                                <td>
+                                    <p><select id="fuelType" name="fuelType" [(ngModel)]="fuelType" required class="custom-select"
+                                            style="width:200px;">
+                                            <option value="">FuelType</option>
+                                            <option value="PETROL">Petrol</option>
+                                            <option value="DIESEL">Diesel</option>
+                                            <option value="CNG">CNG</option>
+                                        </select></p>
+                                </td>
+                            
+                                <td><label>Vehicle Registration No. </label><span> *</span></td>
+                                <td>
+                                    <p><input type="text" id="vehicleRegNo" name="vehicleRegNo" [(ngModel)]="vehicleRegNo"
+                                            required></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Engine No. </label><span> *</span></td>
+                                <td>
+                                    <p><input type="text" id="engineNo" name="engineNo" [(ngModel)]="engineNo" required></p>
+                                </td>
+                                <td><label>Chasis No.</label> <span> *</span></td>
+                                <td>
+                                    <p><input type="text" id="chasisNo" name="chasisNo" [(ngModel)]="chasisNo" required></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Manufacturing Year</label> <span> *</span></td>
+                                <td>
+                                    <p><input type="text" id="manufacturingYear" name="manufacturingYear" [(ngModel)]="manufacturingYear"
+                                            required></p>
+                                </td>
+
+                                <td><label>Registration Date </label> <span> *</span></td>
+                                <td>
+                                    <p><input type="date" id="registrationDate" name="registrationDate" [(ngModel)]="registrationDate"
+                                            required></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                    <label>Vehicle Registration City </label><span> *</span></td>
+                    <td>
+                        <p><input type="text" id="vehicleRegCity" name="vehicleRegCity" [(ngModel)]="vehicleRegCity"
+                                required></p>
+                    </td>
+                    
+                        <td></td>
+                        <td></td>
+                    
+                    </tr>
+                    </table>
+            </div>
+            <div id="tab2" class="tab"><h3>Polciy Quote</h3>
+                <p>Rs. {{price}}</p>
+                <p><input type="hidden" value="test"></p>
+            </div>
+            <div id="tab3" class="tab"><h3>Payment Details:</h3>
+                <table>
+                    <tr>
+                        <td><label>Name on Card </label> <span> *</span></td>
+                        <td>
+                            <p><input type="text" id="nameOnCard" name="nameOnCard" [(ngModel)]="nameOnCard" required></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Card Number </label><span> *</span></td>
+                        <td>
+                            <p><input type="text" id="cardNo" name="cardNo" [(ngModel)]="cardNo" required></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Card Expiry</label> <span> *</span></td>
+                        <td>
+                            <p><select id="cardExpiryMonth" name="cardExpiryMonth" [(ngModel)]="cardExpiryMonth"
+                                    required>
+                                    <option value="" selected=true>Select Month</option>
+                                    <option value="01">Jan</option>
+                                    <option value="02">Feb</option>
+                                    <option value="03">Mar</option>
+                                    <option value="04">Apr</option>
+                                    <option value="05">May</option>
+                                    <option value="06">Jun</option>
+                                    <option value="07">Jul</option>
+                                    <option value="08">Aug</option>
+                                    <option value="09">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dec</option>
+                                </select>
+
+                                <select id="cardExpiryMonth" name="cardExpiryYear" [(ngModel)]="cardExpiryYear"
+                                    required>
+                                    <option value="" selected="true">Select Year</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>CVV </label><span> *</span></td>
+                        <td>
+                            <p><input type="text" id="cvv" name="cvv" [(ngModel)]="cvv" required></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="tab4" style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
+                    <button type="button" id="nextBtn" (click)="handleClick($event,1)">Next</button>
+                </div>
+            </div>
+            <div id="tab5" style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
+                    <button type="submit" id="submit">Submit</button>
+                </div>
+            </div>
+            <!-- Circles which indicates the steps of the form: -->
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+            </form>
         </div>
-    </div>
-    <div id="tab5" style="overflow:auto;">
-        <div style="float:right;">
-            <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
-            <button type="submit" id="submit"  >Submit</button>
-        </div>
-    </div>
-    <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align:center;margin-top:40px;">
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-    </div>
-</form>
-</div>

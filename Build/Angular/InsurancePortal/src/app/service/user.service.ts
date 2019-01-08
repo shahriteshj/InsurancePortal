@@ -3,13 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user';
 import { map } from "rxjs/operators";
 import { Customer } from '../model/Customer';
+import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) { }
+  @LocalStorage()
+    public valid: boolean;
+
+  constructor(private localStorage: LocalStorageService,private http: HttpClient) { }
 
   getAll() {
     return this.http.get('http://localhost:3000/User');
@@ -44,6 +48,12 @@ export class UserService {
 
   delete(id: number) {
     return this.http.delete('http://localhost:3000/User/' + id)
+  }
+
+  public isValid () : boolean
+  {
+      
+      return this.localStorage.retrieve("valid");
   }
 
 }

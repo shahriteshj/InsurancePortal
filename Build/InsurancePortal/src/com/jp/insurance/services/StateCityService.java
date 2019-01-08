@@ -34,12 +34,12 @@ public class StateCityService implements IStateCityService, Serializable {
 	}
 
 	@Override
-	public List<Cities> getCityList() throws InsuranceException {
+	public List<String> getCityList() throws InsuranceException {
 		return stateCityDao.getCityList();
 	}
 
 	@Override
-	public List<States> getStateList() throws InsuranceException {
+	public List<String> getStateList() throws InsuranceException {
 		return stateCityDao.getStateList();
 	}
 
@@ -51,6 +51,11 @@ public class StateCityService implements IStateCityService, Serializable {
 			cityList = stateCityDao.getCityListByStateId(state.getId());
 		}
 		return cityList;
+	}
+
+	@Override
+	public List<String> getCityListbyStateName(String stateName) throws InsuranceException {
+		return stateCityDao.getCityListbyStateName(stateName);
 	}
 
 }

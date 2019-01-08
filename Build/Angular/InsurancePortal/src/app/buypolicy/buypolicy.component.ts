@@ -24,17 +24,17 @@ export class BuypolicyComponent implements OnInit {
   modelList: string[] = [];
   submodelList: string[] = [];
 
-  make: string = "HYUNDAI";
-  model: string = "i10";
+  make: string = "";
+  model: string = "";
   submodel: string = "";
-  cc: string = "123";
-  fuelType: string = "PETROL";
-  vehicleRegNo: string = "123";
-  engineNo: string = "123";
-  chasisNo: string = "123";
+  cc: string = "";
+  fuelType: string = "";
+  vehicleRegNo: string = "";
+  engineNo: string = "";
+  chasisNo: string = "";
   manufacturingYear: number;
-  registrationDate: string = "01/01/2010";
-  vehicleRegCity: string = "MUMBAI";
+  registrationDate: string = "";
+  vehicleRegCity: string = "";
 
   price: number;
   datepipe: DatePipe;
@@ -271,6 +271,21 @@ export class BuypolicyComponent implements OnInit {
     this.modelList = Array.from(unique);
     this.submodelList = [];
 
+    let z = document.getElementById("Make");
+    console.log(z);
+    var opt = z['options'];
+    var sel = opt.selectedIndex;
+    let selectedValue = opt[sel].value;
+    //var opt = z.options[sel].value;
+    console.log(selectedValue);
+     if (selectedValue == "") {
+        // add an "invalid" class to the field:
+        z.className = " invalid";
+        // and set the current valid status to false
+      }else{
+        z.className="";
+      }
+
   }
   modelChange(evt) {
     // console.log(evt.target.value)
@@ -292,6 +307,21 @@ export class BuypolicyComponent implements OnInit {
     let unique = new Set(this.submodelList);
     this.submodelList = Array.from(unique);
 
+    let z = document.getElementById("Model");
+    console.log(z);
+    var opt = z['options'];
+    var sel = opt.selectedIndex;
+    let selectedValue = opt[sel].value;
+    //var opt = z.options[sel].value;
+    console.log(selectedValue);
+     if (selectedValue == "") {
+        // add an "invalid" class to the field:
+        z.className = " invalid";
+        // and set the current valid status to false
+      }else{
+        z.className="";
+      }
+
 
   }
 
@@ -308,6 +338,22 @@ export class BuypolicyComponent implements OnInit {
       }
 
     });
+
+    let z = document.getElementById("SubModel");
+    console.log(z);
+    var opt = z['options'];
+    var sel = opt.selectedIndex;
+    let selectedValue = opt[sel].value;
+    //var opt = z.options[sel].value;
+    console.log(selectedValue);
+     if (selectedValue == "") {
+        // add an "invalid" class to the field:
+        z.className = " invalid";
+        // and set the current valid status to false
+      }else{
+        z.className="";
+      }
+
   }
 
 }

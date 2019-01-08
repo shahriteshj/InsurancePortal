@@ -15,6 +15,7 @@ import com.jp.insurance.daos.interfaces.ICustomerDao;
 import com.jp.insurance.daos.interfaces.IRoleDao;
 import com.jp.insurance.daos.interfaces.IUserDao;
 import com.jp.insurance.entities.Customer;
+import com.jp.insurance.entities.Role;
 import com.jp.insurance.entities.User;
 import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IUserService;
@@ -113,6 +114,11 @@ public class UserService implements Serializable, IUserService {
 	@Override
 	public Customer getCustomerByEmailId(String emailId) throws InsuranceException {
 		return customerDao.getCustomerByEmailId(emailId);
+	}
+
+	@Override
+	public Role getRoleByName(String roleName) throws InsuranceException {
+		return roleDao.getRoleIdByName(roleName);
 	}
 
 }

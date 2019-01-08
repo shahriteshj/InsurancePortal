@@ -1,12 +1,8 @@
 package com.jp.insurance.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +11,7 @@ public class States {
 
 	private Integer id;
 	private String name;
-	List<Cities> cityList;
+	//List<Cities> cityList;
 	
 	@Id
 	@Column(name="id")
@@ -35,16 +31,16 @@ public class States {
 		this.name = name;
 	}
 	
-	@OneToMany(mappedBy="state",fetch=FetchType.EAGER)
+	/*@OneToMany(mappedBy="state",fetch=FetchType.EAGER)
 	public List<Cities> getCityList() {
 		return cityList;
 	}
 	public void setCityList(List<Cities> cityList) {
 		this.cityList = cityList;
-	}
+	}*/
 	@Override
 	public String toString() {
-		return "States [id=" + id + ", name=" + name + ", cityList=" + cityList + "]";
+		return "States [id=" + id + ", name=" + name + "]";
 	}
 
 	
