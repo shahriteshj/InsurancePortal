@@ -1,3 +1,18 @@
+<div id="wrapper">
+
+    <div id="menu">
+      <ul>
+        <li><a routerLink="/home" class="active">Home</a></li>
+        <li><a routerLink="/about">About us</a></li>
+        <li><a routerLink="/contactus">Contact us</a></li>
+        <li><a routerLink="/login">Sign In</a></li>
+        <li><a routerLink="/support">Support</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+
+
+
 <div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
   <form #loginFrm="ngForm" (ngSubmit)="Login(loginFrm)" ngNativeValidate >
@@ -37,3 +52,5 @@
 
     </div>
   
+<router-outlet></router-outlet>
+    </div>

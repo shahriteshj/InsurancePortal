@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AmazingCart';
+  title = 'InsureMotion';
   static userLogged:boolean=false;
 
   static setUserLogged(flag:boolean){

@@ -1,0 +1,106 @@
+/* CSS Document */
+/*body starts here*/
+body{margin:0px; padding:0px; background:url(../images/bg-strip.gif) repeat-x;
+      font-family:Tahoma,Arial, Helvetica,sans-serif;font-size:11px;color:#000000;}
+#wrapper{width:1000px; margin:0 auto;}
+.clear{clear:both;margin:0px;padding:0px;}
+a{color:#87BC23;text-decoration:underline;}
+a:hover{text-decoration:none;}
+h1{padding:0px 0px 7px 0px; margin:0px 0px 0px 270px; color:#5B5B5B; font-size:30px; font-weight:100; 
+        background:url(../images/h1_line.gif) left bottom no-repeat;}
+h2{
+	margin:0px;
+	font-size:30px;
+	color:#5B5B5B;
+	background:url(../images/line.gif) left bottom no-repeat;
+	font-weight:100;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+}
+/*body ends here*/
+
+/*bannerzone starts here*/
+#bannerzone{background:url(../images/banner.jpg) no-repeat; height:432px; padding:0px 0px 0px 42px;}
+#logo{padding:50px 0px 0px 0px;}
+.banner_text{padding:65px 640px 20px 0px; color:#fff; line-height:20px;}
+.banner_text a{color:#fff; text-decoration:underline;}
+.banner_text a:hover{text-decoration:none;}
+.white_bold_text{color:#fff; font-size:15px; font-weight:bold;}
+.banner_link{width:144px; float:left; background:url(../images/bullot.gif) 0px 5px no-repeat; padding:0px 0px 0px 10px;}
+.banner_link a{color:#E0FF5C; text-decoration:underline;}
+.banner_link a:hover{text-decoration:none;}
+/*bannerzone ends here*/
+
+/*menuzone starts here*/
+#menu{
+	background:url(../images/menu_bg.gif) repeat-x 0 0;
+	height:65px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 45px;
+}
+#menu ul{margin:0px 0px 0px 0px; padding:0px 0px 22px 0px;}
+#menu li{margin:0px 0px 0px 0px; padding:22px 0px 22px 0px; display:block; float:left; 
+          background:url(../images/menu_border.gif) right  no-repeat; list-style:none;}
+#menu li a{color:#fff; font-size:16px; text-decoration:none; background:url(../images/menu_path.gif) 12px 5px no-repeat; 
+           padding:0px 28px 0px 46px;margin:0px 0px 0px 0px;}
+#menu li a:hover{background:url(../images/menu_hover.gif) no-repeat 0 0; padding:22px 28px 22px 46px; margin:0px 0px 0px 0px;}
+#menu a.active{background:url(../images/menu_hover.gif) no-repeat 0 0; padding:22px 28px 22px 46px;}
+/*menuzone ends here*/
+
+/*primary_container starts here*/
+.primary_container{border-top:4px #fff solid;background:#DBDBDB url(../images/primary_bg.gif) repeat-x;
+                   padding:40px 70px 38px 42px;}
+.pic1{float:left;}		
+.primary_text{padding:25px 10px 0px 265px; line-height:20px;}	   
+.black_bold_text{font-size:15px; font-weight:bold; color:#5B5B5B;}
+/*primary_container ends here*/
+
+/*secondary_container starts here*/
+.secondary_container{padding:29px 70px 37px 72px; background:url(../images/border_bg.gif) left top repeat-x; line-height:20px;}
+.secondary_links{padding:25px 0px 0px 0px; margin:0px 0px 0px 0px; width:187px; float:left;}
+.secondary_links ul{padding:0px 0px 0px 10px; margin:0px 0px 0px 0px;}
+.secondary_links li{padding:0px 0px 10px 10px; margin:0px 0px 0px 0px; list-style:none; 
+              background:url(../images/green_bullot.gif) 0px 5px no-repeat}
+.secondary_links li a{color:#87BC23; text-decoration:underline; font-size:11px;}
+.secondary_links li a:hover{text-decoration:none;}
+.secondary_box1{float:left; width:670px; padding:22px 0px 0px 0px;}
+.secondary_box1_text{padding:0px 0px 30px 135px; line-height:20px;}
+.secondary_box2_text{padding:0px 20px 0px 0px; line-height:20px;}
+/*secondary_container ends here*/
+
+/*footer starts here*/
+#footer{background:#5B5B5B url(../images/footer_bg.gif) left top repeat-x; width:auto; margin:auto;}
+.footer-all{height:auto; width:1000px; margin:auto;}
+.footermenu{padding:25px 0px 20px 0px;margin:0px 0px 0px 0px;float:left;}
+.footermenu ul{padding:2px 0px 0px 81px;margin:0px 0px 0px 0px;}
+.footermenu li{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;display:inline;list-style:none;}
+.footermenu li a{padding:0px 7px 0px 6px;color:#fff;text-decoration:underline;font-size:11px; font-weight:bold;}
+.footermenu li a:hover{text-decoration:none;}
+.copyright{padding:25px 0px 17px 400px;color:#CECECE;float:left;font-size:13px;}
+.whiteline{color:#fff; font-weight:bold;}
+/*footer ends here*/
+
+/* inner pages css start */
+h1.inner{font:33px Myriad Pro, Arial; color:#fff; font-weight:100; margin:0px; padding:25px 0px 10px 0px; background:none}
+.aboutus-img{float:right; border:4px solid #b0a48b;	margin:0px 0px 10px 20px;}
+h5{font:15px Myriad Pro, Arial, Helvetica, sans-serif; color:#5B5B5B; font-weight:bold; padding:0px 0px 5px 0px;	border-bottom:1px dotted #5B5B5B;	margin:0px 0px 10px 0px;}
+h6{font:17px Myriad Pro, Arial, Helvetica, sans-serif; color:#5B5B5B; font-weight:bold; padding:0px 0px 5px 0px;	margin:0px 0px 10px 0px;}
+.aboutcolumnzone{padding:20px 0px 16px 0px;}
+.aboutcolumn1{width:48%; float:left; margin:0px 0px 10px 0px;}
+.aboutcolumn2{width:48%; float:right; margin:0px 0px 10px 0px;}
+.abouticon{float:left; margin:0px 20px 0px 0px;}
+.insidereadmore{padding:10px 0px 10px 0px;}
+input.button{color:#ffffff;	background:#414141;	font:bold 11px Arial, Helvetica, sans-serif; text-decoration:none; padding:10px 10px; margin:0px 5px 5px 0;	border:1px solid #000000;}
+input.button:hover{cursor:pointer; color:#cccccc;}
+.project-img{float:right; margin-left:20px;	border: 6px solid #5B5B5B;}
+.whiteheading{font:30px Myriad Pro, Arial; color:#5B5B5B; font-weight:100;	padding:0px; margin:25px 0px 20px 0px;}
+.ourprojectrow{margin-bottom:20px;	border-bottom:1px dotted #5B5B5B; padding-bottom:10px; width: 95%;}
+.servicecolumnzone{padding:20px 0px 16px 0px;}
+.servicecolumn1{width:48%; float:left; margin:0px 0px 10px 0px;}
+.servicecolumn2{width:48%; float:right;	margin:0px 0px 10px 0px;}
+.blog-posted-row{padding:3px;}
+/* inner pages css ends */

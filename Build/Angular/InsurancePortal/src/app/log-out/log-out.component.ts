@@ -16,7 +16,7 @@ export class LogOutComponent implements OnInit {
     localStorage.removeItem('username');
     localStorage.removeItem('role');
     this.sharedDataService.clear();
-    this.router.navigate(['login']);
+    this.router.navigate(['/home']);
   }
 
  
