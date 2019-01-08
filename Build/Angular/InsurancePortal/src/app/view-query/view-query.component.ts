@@ -20,6 +20,8 @@ export class ViewQueryComponent implements OnInit {
   query:Query;
   _router: any;
   
+    
+
   constructor(private queryService: QueryService,
     private localStorage: LocalStorageService,
     private sharedDataService: SharedDataService) { }
@@ -29,6 +31,9 @@ export class ViewQueryComponent implements OnInit {
     this.getQueryList();
     console.log(this.sharedDataService.isCustomerUser);
     document.getElementById("queryDetails").style.display = "none";
+
+
+    
   }
 
   getQueryList() {
@@ -45,7 +50,7 @@ export class ViewQueryComponent implements OnInit {
     document.getElementById("queryList").style.display = "none";
     document.getElementById("queryDetails").style.display = "block";
     this.queryId = id;
-     this.getQueryDetails();
+     this.getQueryDetails();     
   }
 
   showQueryList() {
@@ -57,23 +62,24 @@ export class ViewQueryComponent implements OnInit {
 
   getQueryDetails() {
     this.queryService.getQueryDetails(this.queryId)
-    .subscribe(query => this.query = <Query>query);
+    .subscribe(query => {console.log(query); this.query = <Query>query;}
+    );
   }
 
   updateQueryDetails() {
     console.log(this.query)
     this.queryService.updateQueryDetails(this.query).subscribe(
-      query => {
+      query => {      
         console.log(query)
-        if (query == "Sucess") {
+        if (query == "Success") {
           this._router.navigate(['/viewquery']);
-        } else {
+        } else {               
             console.log("Failed to update query");
         }
     })
   }
 
-  updateQuery(query) {    
-    console.log(query);
+  updateQuery() {    
+   this.updateQueryDetails()
   }
 }
