@@ -71,8 +71,8 @@ export class RegisterComponent implements OnInit {
       roleName: "CUSTOMER",
       questionId: registerFrm.value.securityQuestion,
       securityAnswer: registerFrm.value.securityAnswer,
-      lastSuccessfulLoginDate: ""
-      // responseText: ""
+      lastSuccessfulLoginDate: "",
+      //responseText: ""
     }
     console.log(user);
     console.log(customer);

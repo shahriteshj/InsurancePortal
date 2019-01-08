@@ -8,7 +8,7 @@ export class User {
     questionId: number;
     securityAnswer: string;
     lastSuccessfulLoginDate: string;
-    responseText: string;
+    responseText?: string;
 
     constructor(name: string, username: string, password: string, roleName: string, questionId: number, securityAnswer: string,lastSuccessfulLoginDate:string,responseText:string, id?: number) {
         id = id;

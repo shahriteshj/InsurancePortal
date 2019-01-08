@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.username = frm.value.username;
     this.password = frm.value.password;
+    console.log(this.username);
+    console.log(this.password);
     this._userService.authenticateUser(this.username, this.password).subscribe(
       (data: any) => {
         console.log(data);
@@ -47,9 +49,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(data));
         localStorage.setItem('username', data.username);
         localStorage.setItem('role', data.roleName);
-        console.log(data.roleName);        
-        // if (data.responseText == "SUCCESS") {
-        if (data.response == "SUCCESS") {
+        console.log(data.roleName);
+         if (data.responseText == "SUCCESS") {
+        //if (data.responseTextText == "SUCCESS") {
+          console.log("I insert in admin")
           if (data.roleName.toLowerCase() == 'admin') {
 
             this.sharedDataService.isAdminUser = true;
@@ -75,10 +78,11 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/user']);
           }
 
-        } else {
-          console.log(data.response);
-          if (data.response != null) {
-            this.errorMessage = data.response;
+        }
+        else {
+          console.log(data.responseText);
+          if (data.responseText != null) {
+            this.errorMessage = data.responseText;
           } else {
             this.errorMessage = "Username not found";
           }
@@ -101,8 +105,6 @@ export class LoginComponent implements OnInit {
 
     return this.localStorage.retrieve("valid");
   }
-
-
 
 }
 

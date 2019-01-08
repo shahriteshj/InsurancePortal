@@ -47,7 +47,7 @@ public class LoginController {
 			HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(loginInput);
 			String username = ((String) inputMap.get("username")).toUpperCase();
 			String password = (String) inputMap.get("password");
-			
+			System.out.println(username + " " + password);
 			User user = userService.authenticateUser(username, password);
 			if (user != null) {
 				String role = userService.getRoleById(user.getRoleId());
