@@ -72,20 +72,20 @@ export class RegisterComponent implements OnInit {
       questionId: registerFrm.value.securityQuestion,
       securityAnswer: registerFrm.value.securityAnswer,
       lastSuccessfulLoginDate: "",
-      responseText: ""
+      // responseText: ""
     }
     console.log(user);
     console.log(customer);
 
     this._userService.create(user, customer)
       .subscribe(
-        data => {
+        (data:any) => {
           console.log("post create");
           console.log(data);
-          if (data == "SUCCESS") {
+          if (data.response == "SUCCESS") {
            
             this.router.navigate(['/login']);
-          } else if (data == "FAILURE") {
+          } else if (data.response == "FAILURE") {
             console.log("failure");
             this.router.navigate(['/register']);
             this.loading = false;

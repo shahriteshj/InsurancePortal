@@ -119,9 +119,11 @@ public class LoginController {
 		user = userService.addUser(user,customer);
 		
 		if(user.getUserId()>0){
-			return "SUCCESS";
+//			return "SUCCESS";
+			return "{\"response\":\"SUCCESS\"}";
 		}else{
-			return "FAILURE";
+//			return "FAILURE";
+			return "{\"response\":\"FAILURE\"}";
 		}
 		
 		

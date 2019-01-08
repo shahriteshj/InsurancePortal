@@ -92,10 +92,10 @@ public class QueryRestController {
 	}
 
 	@RequestMapping(value = "/updateQuery", method = RequestMethod.POST, headers = "Accept=application/json")
-	public JSONObject updateQueryForm(@RequestBody String input) throws InsuranceException {
+	public String updateQueryForm(@RequestBody String input) throws InsuranceException {
 		System.out.println("In Controller update query "+input);
 		Query query = new Query();
-		JSONObject jsonObj = null;
+		//JSONObject jsonObj = null;
 		
 			HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
 			Long lobj = new Long((Integer)inputMap.get("queryId"));
@@ -111,13 +111,16 @@ public class QueryRestController {
 				query.setStatus((String) inputMap.get("status"));
 				
 				queryService.updateExistingQuery(query);
-				jsonObj = new JSONObject("{\"response\":\"Success\"}");
+				/*jsonObj = new JSONObject("{\"response\":\"Success\"}");
 				System.out.println(jsonObj);
-				return jsonObj;
+				return jsonObj;*/
+				return "{\"response\":\"Success\"}";
 			} else {
-				jsonObj = new JSONObject("{\"response\":\"Failure\"}");
+/*				jsonObj = new JSONObject("{\"response\":\"Failure\"}");
 				System.out.println(jsonObj);
 				return jsonObj;
+*/				return "{\"response\":\"Failure\"}";
+
 				
 			}
 	}

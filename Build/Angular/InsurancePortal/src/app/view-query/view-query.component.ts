@@ -18,14 +18,13 @@ export class ViewQueryComponent implements OnInit {
   user: User;
   //query:Query={emailId: "", queryDescription: "", status: "",name: "", queryType: "",queryResponse: "",assignedTo: ""};
   query:Query;
-  _router: any;
   msg: string = null;
   
     
-
   constructor(private queryService: QueryService,
     private localStorage: LocalStorageService,
-    private sharedDataService: SharedDataService) { }
+    private sharedDataService: SharedDataService,
+    private _router:Router) { }
     queryId: number;
 
   ngOnInit() {
@@ -70,13 +69,12 @@ export class ViewQueryComponent implements OnInit {
   updateQueryDetails() {
     console.log(this.query)
     this.queryService.updateQueryDetails(this.query).subscribe(
-      query => {      
-        console.log(query)
-        if (query == "Success") {
+      (query:any) => {      
+        console.log(query)        
+        if (query.response == "Success") {
           this._router.navigate(['/viewquery']);
-          this.msg = 'Query is sucessfully updated';
-        } else {               
-          this._router.navigate(['/viewquery']);
+          this.msg = ': Query is updated sucessfully!!!';
+        } else {                         
           this.msg = 'Failed to Update';
             
         }

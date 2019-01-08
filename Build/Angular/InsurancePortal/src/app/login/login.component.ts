@@ -40,15 +40,16 @@ export class LoginComponent implements OnInit {
     this.username = frm.value.username;
     this.password = frm.value.password;
     this._userService.authenticateUser(this.username, this.password).subscribe(
-      data => {
+      (data: any) => {
         console.log(data);
         this.user = <User>data;
         this.sharedDataService.isUserLoggedIn = true;
         localStorage.setItem('currentUser', JSON.stringify(data));
         localStorage.setItem('username', data.username);
         localStorage.setItem('role', data.roleName);
-        console.log(data.roleName);
-        if (data.responseText == "SUCCESS") {
+        console.log(data.roleName);        
+        // if (data.responseText == "SUCCESS") {
+        if (data.response == "SUCCESS") {
           if (data.roleName.toLowerCase() == 'admin') {
 
             this.sharedDataService.isAdminUser = true;
@@ -75,9 +76,9 @@ export class LoginComponent implements OnInit {
           }
 
         } else {
-          console.log(data.responseText);
-          if (data.responseText != null) {
-            this.errorMessage = data.responseText;
+          console.log(data.response);
+          if (data.response != null) {
+            this.errorMessage = data.response;
           } else {
             this.errorMessage = "Username not found";
           }
