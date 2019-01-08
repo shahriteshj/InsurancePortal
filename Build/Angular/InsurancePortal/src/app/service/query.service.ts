@@ -43,6 +43,7 @@ export class QueryService {
   }
 
   updateQueryDetails(query:Query) {
+    console.log(query);
     return this.http.post("/InsurancePortal/policy/updateQuery",query);
   }
 }

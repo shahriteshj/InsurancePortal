@@ -15,7 +15,8 @@
   <div id="queryList" class="container"><br>
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title">Query Lists</h3>
+        <h3 class="panel-title">Query Lists</h3>    
+        <p class="msg_success">{{queries.queryId}} {{ msg }}</p>    
       </div>
       <div class="panel-body" *ngIf="queries">
 
@@ -28,11 +29,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let q of queries;">
-              <td>{{q.queryId}}</td>
-              <td>{{q.queryType}}</td>
-              <td>{{q.status}}</td>
-              <td><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
+            <tr height="50" *ngFor="let q of queries;">
+              <td style="height: 50px">{{q.queryId}}</td>
+              <td style="height: 50px">{{q.queryType}}</td>
+              <td style="height: 50px">{{q.status}}</td>
+              <td style="height: 50px"><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
             </tr>
             <tr *ngIf="!queries || queries.length==0">
               <td colspan="3">No Queries to display</td>
@@ -51,57 +52,60 @@
         <h3 class="panel-title"> Query Details : {{queryId}}</h3>
       </div>
       <div class="panel-body" *ngIf="query">
-        <table class="table table-hover" style="width:600px;">
-          <tbody>
-            <tr>
-              <td>Email</td>
-              <td>{{this.query.emailId}}</td>
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>{{this.query.queryDescription}}</td>
-            </tr>
+        <form #regForm="ngForm" (ngSubmit)="updateQuery()" ngNativeValidate>
+          <table class="table table-hover" style="width:600px;">
+            <tbody>
+              <tr>
+                <td>Email</td>
+                <td>{{this.query.emailId}}</td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>{{this.query.queryDescription}}</td>
+              </tr>
 
-            <tr>
-              <td>Query Type</td>
-              <td>{{this.query.queryType}}</td>
-            </tr>
-            <tr *ngIf="sharedDataService.isCustomerUser">
-              <td>Status</td>
-              <td>{{this.query.status}}</td>
-            </tr>
+              <tr>
+                <td>Query Type</td>
+                <td>{{this.query.queryType}}</td>
+              </tr>
+              <tr *ngIf="sharedDataService.isCustomerUser">
+                <td>Status</td>
+                <td>{{this.query.status}}</td>
+              </tr>
 
-            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
-              <td>Status</td>
-              <td><select path="status" id="" #myStatusValue>
-                  <option value="IN PROGRESS">IN PROGRESS</option>
-                  <option value="CLOSED">CLOSED</option>
-                </select>
-              </td>
-            </tr>
-            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
-              <td>Assign to</td>
-              <td><select [(ngModel)]="assignedTo" id="">
-                  <option value=1>ADMIN</option>
-                  <option value=2>CUSTOMER</option>
-                  <option value=3>OPERATIONS</option>
-                  <option value=4>MANAGER</option>
-                  <option value=5>INSPECTOR</option>
-                </select>
-              </td>
-            </tr>
-            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
-              <td>Response</td>
-              <td><textarea [(ngModel)]="queryResponse" rows="3" cols="50"></textarea> </td>
-            </tr>
-            <br><br>
-            <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
-              <td colspan="2"><input type="submit" value="Submit" (click)="updateQuery(this.query)"></td>
-              <td colspan="2"><input type="button" value="Cancel" (click)="showQueryList()"></td>
-            </tr>
+              <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+                <td>Status</td>                
+                <td><select id="status" name="query.status" [(ngModel)]="query.status">
+                    <option value="IN PROGRESS">IN PROGRESS</option>
+                    <option value="CLOSED">CLOSED</option>
+                  </select>
+                </td>
+              </tr>
+              <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+                <td>Assign to</td>
+                <td><select id="assignedTo" name="query.assignedTo" [(ngModel)]="query.assignedTo">
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="CUSTOMER">CUSTOMER</option>
+                    <option value="OPERATIONS">OPERATIONS</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="INSPECTOR">INSPECTOR</option>
+                  </select>
+                </td>
+              </tr>
+              <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+                <td>Response</td>
+                <td><textarea name="query.queryResponse" [(ngModel)]="query.queryResponse" rows="3" cols="50"></textarea> </td>
+              </tr>
+              <br><br>
+              <tr *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">
+                <td colspan="2"><input type="submit" value="Submit"></td>
+                <td colspan="2"><input type="button" value="Cancel" (click)="showQueryList()"></td>
+              </tr>
 
-          </tbody>
-        </table>
+            </tbody>
+
+          </table>
+        </form>
       </div>
     </div>
   </div>
