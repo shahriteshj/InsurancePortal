@@ -14,12 +14,12 @@ export class ClaimComponent implements OnInit {
   constructor(private router: Router, private _policyService: PolicyService,private sharedDataService: SharedDataService) { }
 
   ngOnInit() {
-    this.getPolicyListForRenew();
+    this.getPolicyListForClaim();
   }
 
-  getPolicyListForRenew(){
+  getPolicyListForClaim(){
     
-    return this._policyService.getRenewPolicyList(localStorage.getItem("username"), 
+    return this._policyService.getPolicyList(localStorage.getItem("username"), 
     localStorage.getItem("role")).subscribe(policyList => {
       console.log(policyList);
       this.renewPolicyList = <Policy[]>policyList;
