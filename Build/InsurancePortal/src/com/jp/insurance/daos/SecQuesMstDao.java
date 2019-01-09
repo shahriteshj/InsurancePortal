@@ -20,10 +20,10 @@ public class SecQuesMstDao implements Serializable, ISecQuesMstDao {
 	 * 
 	 */
 	private static final long serialVersionUID = -962690696477093043L;
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public List<SecurityQuestion> getQuestionList() throws InsuranceException {
 		String sql = "SELECT s FROM SecurityQuestion s";

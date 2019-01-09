@@ -13,7 +13,6 @@ import com.jp.insurance.daos.interfaces.IVehicleMasterDao;
 import com.jp.insurance.entities.VehicleMaster;
 import com.jp.insurance.exceptions.InsuranceException;
 
-
 @Repository("vehicleMasterDao")
 public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 
@@ -52,13 +51,13 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 	}
 
 	@Override
-	public List<String> getVehiclesMake() throws InsuranceException{
+	public List<String> getVehiclesMake() throws InsuranceException {
 		String sql = "SELECT distinct v.make FROM VehicleMaster v";
 		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
 		List<String> vehicleMakeList = qry.getResultList();
 		return vehicleMakeList;
 	}
-	
+
 	@Override
 	public List<VehicleMaster> getVehiclesByMakeAndModel(String make, String model) throws InsuranceException {
 		String sql = "SELECT v FROM VehicleMaster v where make=:make and model=:model";
@@ -115,7 +114,7 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 	@Override
 	public Float getVehiclePriceByMakeModelSubmodel(String make, String model, String submodel)
 			throws InsuranceException {
-		System.out.println("Make: "+make + " Model: "+ model + " subModel:  " + submodel );
+		System.out.println("Make: " + make + " Model: " + model + " subModel:  " + submodel);
 		String sql = "SELECT v.price FROM VehicleMaster v where make=:make and model=:model and submodel=:submodel";
 		TypedQuery<Float> qry = entityManager.createQuery(sql, Float.class);
 		qry.setParameter("make", make);
@@ -124,7 +123,7 @@ public class VehicleMasterDao implements Serializable, IVehicleMasterDao {
 		Float price = qry.getSingleResult();
 		return price;
 	}
-	
+
 	@Override
 	public List<String> getVehicleMake() throws InsuranceException {
 		String sql = "SELECT v.make FROM VehicleMaster v";

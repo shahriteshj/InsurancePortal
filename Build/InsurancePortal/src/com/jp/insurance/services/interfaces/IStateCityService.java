@@ -8,11 +8,11 @@ import com.jp.insurance.exceptions.InsuranceException;
 public interface IStateCityService {
 
 	public List<String> getCityList() throws InsuranceException;
-	
+
 	public List<String> getStateList() throws InsuranceException;
-	
+
 	public List<String> getCityListbyStateName(String stateName) throws InsuranceException;
-	
+
 	public List<Cities> getCityListByStateName(String stateName) throws InsuranceException;
-	
+
 }

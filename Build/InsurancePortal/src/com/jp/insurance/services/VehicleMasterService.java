@@ -28,11 +28,11 @@ public class VehicleMasterService implements Serializable, IVehicleMasterService
 	}
 
 	@Autowired
-	public VehicleMasterService(@Qualifier("vehicleMasterDao") VehicleMasterDao vehicleMasterDao) throws InsuranceException {
+	public VehicleMasterService(@Qualifier("vehicleMasterDao") VehicleMasterDao vehicleMasterDao)
+			throws InsuranceException {
 		this.vehicleMasterDao = vehicleMasterDao;
 	}
 
-	
 	@Override
 	public List<VehicleMaster> getVehiclesList() throws InsuranceException {
 		return vehicleMasterDao.getVehiclesList();
@@ -42,7 +42,7 @@ public class VehicleMasterService implements Serializable, IVehicleMasterService
 	public List<String> getVehiclesMake() throws InsuranceException {
 		return vehicleMasterDao.getVehiclesMake();
 	}
-	
+
 	@Override
 	public List<VehicleMaster> getVehiclesById(Long vehicleId) throws InsuranceException {
 		return vehicleMasterDao.getVehiclesById(vehicleId);
@@ -85,5 +85,5 @@ public class VehicleMasterService implements Serializable, IVehicleMasterService
 			throws InsuranceException {
 		return vehicleMasterDao.getVehiclePriceByMakeModelSubmodel(make, model, submodel);
 	}
-	
+
 }

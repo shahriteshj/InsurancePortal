@@ -24,16 +24,16 @@ public class StateCityDao implements Serializable, IStateCityDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public List<String> getCityList() throws InsuranceException {
 		String sql = "SELECT c.name FROM Cities c";
 		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
 		List<String> cityList = qry.getResultList();
 		return cityList;
-		
+
 	}
-	
+
 	@Override
 	public List<String> getStateList() throws InsuranceException {
 		String sql = "SELECT s.name FROM States s";
@@ -44,16 +44,16 @@ public class StateCityDao implements Serializable, IStateCityDao {
 
 	@Override
 	public List<String> getCityListbyStateName(String stateName) throws InsuranceException {
-		String sql = "SELECT c.name FROM Cities c, States s where s.name='"+ stateName + "' and c.stateId=s.id";
+		String sql = "SELECT c.name FROM Cities c, States s where s.name='" + stateName + "' and c.stateId=s.id";
 		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
 		List<String> cityList = qry.getResultList();
 		return cityList;
-		
+
 	}
-	
+
 	public List<Cities> getCityListByStateId(Integer stateId) throws InsuranceException {
 		String sql = "SELECT c FROM Cities c WHERE c.state.id = :stateId";
-		TypedQuery<Cities> qry =entityManager.createQuery(sql, Cities.class);
+		TypedQuery<Cities> qry = entityManager.createQuery(sql, Cities.class);
 		qry.setParameter("stateId", stateId);
 		List<Cities> cityList = qry.getResultList();
 		return cityList;
@@ -62,11 +62,10 @@ public class StateCityDao implements Serializable, IStateCityDao {
 	@Override
 	public States getStateId(String stateName) throws InsuranceException {
 		String sql = "SELECT s FROM States s WHERE s.name=:stateName";
-		TypedQuery<States> qry =entityManager.createQuery(sql, States.class);
+		TypedQuery<States> qry = entityManager.createQuery(sql, States.class);
 		qry.setParameter("stateName", stateName);
 		States state = qry.getSingleResult();
 		return state;
 	}
-	
-	
+
 }

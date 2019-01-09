@@ -12,6 +12,6 @@ public interface ICustomerDao {
 	public Customer getCustomerByEmailId(String emailId) throws InsuranceException;
 
 	public Customer getCustomerById(Long customerId) throws InsuranceException;
-	
+
 	public Customer addCustomer(Customer customer) throws InsuranceException;
 }

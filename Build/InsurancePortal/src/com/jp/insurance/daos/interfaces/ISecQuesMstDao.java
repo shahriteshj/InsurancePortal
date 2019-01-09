@@ -7,6 +7,6 @@ import com.jp.insurance.exceptions.InsuranceException;
 
 public interface ISecQuesMstDao {
 
-	public List<SecurityQuestion> getQuestionList() throws InsuranceException; 
-	
+	public List<SecurityQuestion> getQuestionList() throws InsuranceException;
+
 }

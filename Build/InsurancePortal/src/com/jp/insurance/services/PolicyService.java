@@ -50,7 +50,7 @@ public class PolicyService implements IPolicyService {
 		}
 		return policyList;
 	}
-	
+
 	@Override
 	public List<Policy> getPolicyList() throws InsuranceException {
 		List<Policy> policyList = null;
@@ -59,33 +59,33 @@ public class PolicyService implements IPolicyService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=InsuranceException.class)
-	public Policy addNewPolicy(String custEmail,Policy policy, CustomerVehicle customerVehicle, Payment payment)
+	@Transactional(rollbackFor = InsuranceException.class)
+	public Policy addNewPolicy(String custEmail, Policy policy, CustomerVehicle customerVehicle, Payment payment)
 			throws InsuranceException {
 
-		if (custEmail==null || policy == null || customerVehicle == null || payment == null) {
+		if (custEmail == null || policy == null || customerVehicle == null || payment == null) {
 			throw new InsuranceException("Error in saving Policy");
 		}
-		
+
 		Customer customer = customerDao.getCustomerByEmailId(custEmail.toUpperCase());
-		
-		if(customer==null){
+
+		if (customer == null) {
 			throw new InsuranceException("Error in fetching Customer Details");
 		}
-		
+
 		customerVehicle.setCustomerId(customer.getCustomerId());
 		policy.setCustomerId(customer.getCustomerId());
 		CustomerVehicle newCustomerVehicle = customerVehicleDao.addCustomerVehicle(customerVehicle);
 		if (newCustomerVehicle == null) {
 			throw new InsuranceException("Error in saving Customer Vehicle Details");
-		}else{
+		} else {
 			policy.setVehicleId(newCustomerVehicle.getVehicleId());
 		}
 
 		Policy newPolicy = policyDao.addPolicy(policy);
 		if (newPolicy == null) {
 			throw new InsuranceException("Error in saving Policy Details");
-		}else {
+		} else {
 			payment.setPolicyId(newPolicy.getPolicyId());
 		}
 
@@ -116,27 +116,27 @@ public class PolicyService implements IPolicyService {
 	}
 
 	@Override
-	public CustomerVehicle getCustomerVehicleDetails(Long customerId) throws InsuranceException{
-		
+	public CustomerVehicle getCustomerVehicleDetails(Long customerId) throws InsuranceException {
+
 		return customerVehicleDao.getCustomerVehicleDetails(customerId);
-		
+
 	}
-	
+
 	@Override
-	public Payment getPolicyPaymentDetails(Long policyId) throws InsuranceException{
-		
+	public Payment getPolicyPaymentDetails(Long policyId) throws InsuranceException {
+
 		return paymentDao.getPaymentDetails(policyId);
-		
+
 	}
-	
+
 	@Override
-	public Policy getPolicyDetails(Long policyId) throws InsuranceException{
+	public Policy getPolicyDetails(Long policyId) throws InsuranceException {
 		return policyDao.getPolicyDetails(policyId);
 	}
-	
+
 	@Override
-	public Customer getCustomerDetails(Long customerId) throws InsuranceException{
+	public Customer getCustomerDetails(Long customerId) throws InsuranceException {
 		return customerDao.getCustomerById(customerId);
 	}
-	
+
 }

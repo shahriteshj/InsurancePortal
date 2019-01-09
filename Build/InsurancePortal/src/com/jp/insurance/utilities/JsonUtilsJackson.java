@@ -30,6 +30,5 @@ public class JsonUtilsJackson {
 		}
 		return map;
 	}
-	
 
 }

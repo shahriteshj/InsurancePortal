@@ -40,7 +40,6 @@ public class PolicyDao implements Serializable, IPolicyDao {
 		return policyList;
 	}
 
-	
 	@Override
 	public Policy getPolicyDetails(Long policyId) throws InsuranceException {
 		String sql = "SELECT p FROM Policy p where policyId = " + policyId;
@@ -53,7 +52,6 @@ public class PolicyDao implements Serializable, IPolicyDao {
 		}
 	}
 
-	
 	@Override
 	public Policy addPolicy(Policy policy) throws InsuranceException {
 		Policy newPolicy = null;

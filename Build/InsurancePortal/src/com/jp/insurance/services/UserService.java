@@ -28,18 +28,17 @@ public class UserService implements Serializable, IUserService {
 	private IUserDao userDao;
 	private IRoleDao roleDao;
 	private ICustomerDao customerDao;
-	
+
 	public UserService() throws InsuranceException {
 
 	}
 
 	@Autowired
-	public UserService(@Qualifier("userDao") UserDao userDao,
-			@Qualifier("roleDao") RoleDao roleDao,
+	public UserService(@Qualifier("userDao") UserDao userDao, @Qualifier("roleDao") RoleDao roleDao,
 			@Qualifier("customerDao") CustomerDao customerDao) throws InsuranceException {
 		this.userDao = userDao;
 		this.roleDao = roleDao;
-		this.customerDao=customerDao;
+		this.customerDao = customerDao;
 	}
 
 	@Override
@@ -66,8 +65,8 @@ public class UserService implements Serializable, IUserService {
 
 	@Override
 	@Transactional
-	public User addUser(User user,Customer customer) throws InsuranceException {
-		User newUser =  userDao.addUser(user);
+	public User addUser(User user, Customer customer) throws InsuranceException {
+		User newUser = userDao.addUser(user);
 		customerDao.addCustomer(customer);
 		return newUser;
 	}
@@ -83,11 +82,12 @@ public class UserService implements Serializable, IUserService {
 		User user = userDao.getUserByUserName(username);
 		if (user != null) {
 			if (password.equals(user.getPassword())) { // check password
-				if ("Y".equals(user.getAccountLocked())) { // check if account locked
-					//Account Locked
+				if ("Y".equals(user.getAccountLocked())) { // check if account
+															// locked
+					// Account Locked
 					user.setResponseText("Account Locked");
 				} else {
-					//successful Login
+					// successful Login
 					user.setLastSuccessfulLoginDate(Calendar.getInstance().getTime());
 					user.setFailedLoginAttempt(0);
 					user.setResponseText("SUCCESS");
@@ -95,9 +95,9 @@ public class UserService implements Serializable, IUserService {
 					return user;
 				}
 			} else {
-				//password invalid
-				user.setFailedLoginAttempt(user.getFailedLoginAttempt()+1);
-				if(user.getFailedLoginAttempt()>=5){
+				// password invalid
+				user.setFailedLoginAttempt(user.getFailedLoginAttempt() + 1);
+				if (user.getFailedLoginAttempt() >= 5) {
 					user.setAccountLocked('Y');
 				}
 				userDao.updateUser(user);
@@ -105,12 +105,12 @@ public class UserService implements Serializable, IUserService {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public String getRoleById(Integer roleId) throws InsuranceException {
 		return roleDao.getRoleNameById(roleId);
 	}
-	
+
 	@Override
 	public Customer getCustomerByEmailId(String emailId) throws InsuranceException {
 		return customerDao.getCustomerByEmailId(emailId);

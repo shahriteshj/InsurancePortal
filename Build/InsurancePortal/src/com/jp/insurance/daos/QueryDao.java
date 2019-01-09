@@ -17,22 +17,22 @@ public class QueryDao implements IQueryDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public List<Query> getQueryList() throws InsuranceException {
-		String sql = "SELECT q FROM Query_Record q"; 
-		TypedQuery<Query> qry = entityManager.createQuery(sql, Query.class);	
+		String sql = "SELECT q FROM Query_Record q";
+		TypedQuery<Query> qry = entityManager.createQuery(sql, Query.class);
 		List<Query> queryList = qry.getResultList();
 		System.out.println("In getQueryList() dao :" + queryList);
 		return queryList;
-		
+
 	}
-	
+
 	@Override
 	public List<Query> getQueryByEmailId(String emailId) throws InsuranceException {
-		String sql = "SELECT q FROM Query_Record q where EMAILID = '" + emailId +"'";
+		String sql = "SELECT q FROM Query_Record q where EMAILID = '" + emailId + "'";
 		TypedQuery<Query> qry = entityManager.createQuery(sql, Query.class);
-		List<Query> queryList = qry.getResultList();		
+		List<Query> queryList = qry.getResultList();
 		return queryList;
 	}
 
@@ -48,7 +48,7 @@ public class QueryDao implements IQueryDao {
 		TypedQuery<Query> qry = entityManager.createQuery(sql, Query.class);
 		List<Query> queryList = qry.getResultList();
 		return queryList;
-		
+
 	}
 
 	@Override
@@ -62,18 +62,17 @@ public class QueryDao implements IQueryDao {
 	@Override
 	public Query addNewQuery(Query queryObj) throws InsuranceException {
 		entityManager.persist(queryObj);
-		
-		return queryObj;
-	
 
-}
+		return queryObj;
+
+	}
 
 	@Override
 	public Query updateExistingQuery(Query queryObj) throws InsuranceException {
-		//Query queryNewObj = entityManager.find(Query.class, queryObj.getQueryId());
-			return entityManager.merge(queryObj);
-		
-		
+		// Query queryNewObj = entityManager.find(Query.class,
+		// queryObj.getQueryId());
+		return entityManager.merge(queryObj);
+
 	}
 
 }

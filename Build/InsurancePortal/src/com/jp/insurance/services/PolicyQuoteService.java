@@ -35,25 +35,26 @@ public class PolicyQuoteService implements Serializable, IPolicyQuoteService {
 
 	public Float getPolicyPremium(CustomerVehicle customerVehicle) throws InsuranceException {
 
-		Float policyPremium=0F;
+		Float policyPremium = 0F;
 		Float marketPrice = vehicleMasterDao.getVehiclePriceByMakeModelSubmodel(customerVehicle.getMake(),
 				customerVehicle.getModel(), customerVehicle.getSubmodel());
 		Float depreciationPercentage = getDepreciationPercentage(customerVehicle.getManufacturingYear());
 
 		Float Idv = marketPrice * (depreciationPercentage / 100);
-		
+
 		Float totalODPremium = (float) (Idv * 0.0197);
-		
+
 		Integer personalAccidentCover = 100;
 		Integer legalLiabilityPaidToDriver = 50;
 		Integer compulsoryThirdPartyCover = 1110;
-		
-		Float netPremium = totalODPremium + personalAccidentCover+legalLiabilityPaidToDriver+compulsoryThirdPartyCover;
-		
+
+		Float netPremium = totalODPremium + personalAccidentCover + legalLiabilityPaidToDriver
+				+ compulsoryThirdPartyCover;
+
 		Double GST = 0.18;
-		
-		policyPremium = (float) (netPremium*(1+GST));
-		
+
+		policyPremium = (float) (netPremium * (1 + GST));
+
 		return policyPremium;
 
 	}

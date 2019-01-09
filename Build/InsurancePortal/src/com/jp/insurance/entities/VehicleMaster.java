@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="VehicleMaster")
+@Table(name = "VehicleMaster")
 public class VehicleMaster {
 
 	private Long vehicleId;
@@ -15,61 +15,66 @@ public class VehicleMaster {
 	private String submodel;
 	private String cc;
 	private Float price;
-	
+
 	@Id
-	@Column(name="VEHICLEID")
+	@Column(name = "VEHICLEID")
 	public Long getVehicleId() {
 		return vehicleId;
 	}
+
 	public void setVehicleId(Long vehicleId) {
 		this.vehicleId = vehicleId;
 	}
-	
-	@Column(name="MAKE")
+
+	@Column(name = "MAKE")
 	public String getMake() {
 		return make;
 	}
+
 	public void setMake(String make) {
 		this.make = make;
 	}
-	
-	@Column(name="MODEL")
+
+	@Column(name = "MODEL")
 	public String getModel() {
 		return model;
 	}
+
 	public void setModel(String model) {
 		this.model = model;
 	}
-	
-	@Column(name="SUBMODEL")
+
+	@Column(name = "SUBMODEL")
 	public String getSubmodel() {
 		return submodel;
 	}
+
 	public void setSubmodel(String submodel) {
 		this.submodel = submodel;
 	}
-	
-	@Column(name="CC")
+
+	@Column(name = "CC")
 	public String getCc() {
 		return cc;
 	}
+
 	public void setCc(String cc) {
 		this.cc = cc;
 	}
-	
-	@Column(name="PRICE")
+
+	@Column(name = "PRICE")
 	public Float getPrice() {
 		return price;
 	}
+
 	public void setPrice(Float price) {
 		this.price = price;
 	}
+
 	@Override
 	public String toString() {
 		return "VehicleMaster [vehicleId=" + vehicleId + ", make=" + make + ", model=" + model + ", submodel="
 				+ submodel + ", cc=" + cc + ", price=" + price + "]";
 	}
-	
-	
-	
+
 }

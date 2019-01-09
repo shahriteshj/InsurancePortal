@@ -20,26 +20,26 @@ public class RoleDao implements Serializable, IRoleDao {
 	 * 
 	 */
 	private static final long serialVersionUID = 1395374604844166104L;
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@Override
 	public List<Role> getRoleList() throws InsuranceException {
 		String sql = "SELECT r FROM Role r";
 		TypedQuery<Role> qry = entityManager.createQuery(sql, Role.class);
 		List<Role> roleList = qry.getResultList();
 		return roleList;
-		
+
 	}
-	
+
 	@Override
 	public List<String> getRoleNameList() throws InsuranceException {
 		String sql = "SELECT r.name FROM Role r";
 		TypedQuery<String> qry = entityManager.createQuery(sql, String.class);
 		List<String> roleNameList = qry.getResultList();
 		return roleNameList;
-		
+
 	}
 
 	@Override
