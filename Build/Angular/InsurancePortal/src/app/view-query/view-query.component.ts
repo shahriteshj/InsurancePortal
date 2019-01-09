@@ -15,8 +15,7 @@ import { Router } from '@angular/router';
 export class ViewQueryComponent implements OnInit {
 
   queries: Query[] = [];
-  user: User;
-  //query:Query={emailId: "", queryDescription: "", status: "",name: "", queryType: "",queryResponse: "",assignedTo: ""};
+  user: User;  
   query:Query;
   msg: string = null;
   queryId: number;
@@ -72,13 +71,10 @@ export class ViewQueryComponent implements OnInit {
       (query:any) => {      
         console.log(query)        
         if (query.response == "Success") {
-          alert("Query update sucessfully. \n Query Ref: " + query.queryId );
-          this._router.navigate(['/viewquery']);
-          // this.msg = ': Query is updated sucessfully!!!';
+          alert("Query Ref # " + this.queryId +" updated sucessfully.");
+          this._router.navigate(['/viewquery']);          
         } else {                         
           alert("Failed to update query.");
-          //this.msg = 'Failed to Update';
-            
         }
     })
   }
