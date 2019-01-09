@@ -3,7 +3,7 @@
   <div class="panel panel-info">
     <div class="panel-heading">
       <!-- <h3 class="panel-title" *ngIf ="!queryId"><b>Query Lists </b></h3> -->
-      <h3 class="panel-title" ><b>Query Lists </b></h3>
+      <h3 class="panel-title" >Query Lists </h3>
         <!-- <h3 class="panel-title" *ngIf ="queryId"><b>Query Lists : </b> <i>Query Id : {{queryId}} {{ msg }}</i></h3> -->
       <!-- <p class="msg_success">{{queryId}} {{ msg }}</p> -->
     </div>
@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th>QUERY ID</th>
+            <th>NAME</th>
             <th>TYPE</th>
             <th>STATUS</th>
           </tr>
@@ -20,6 +21,7 @@
         <tbody>
           <tr height="50" *ngFor="let q of queries;">
             <td style="height: 50px">{{q.queryId}}</td>
+            <td style="height: 50px">{{q.emailId}}</td>
             <td style="height: 50px">{{q.queryType}}</td>
             <td style="height: 50px">{{q.status}}</td>
             <td style="height: 50px"><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
