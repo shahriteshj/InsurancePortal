@@ -30,7 +30,6 @@ public class QueryRestController {
 		System.out.println("In getQueryList() method");
 		System.out.println(queryInput);
 		List<Query> queryList = null;
-		Query query = new Query();
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(queryInput);
 		String emailId = (String) inputMap.get("username");
 		String role = (String) inputMap.get("roles");
