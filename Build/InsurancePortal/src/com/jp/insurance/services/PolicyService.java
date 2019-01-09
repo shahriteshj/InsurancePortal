@@ -121,6 +121,11 @@ public class PolicyService implements IPolicyService {
 		return customerVehicleDao.getCustomerVehicleDetails(customerId);
 
 	}
+	
+	@Override
+	public CustomerVehicle getCustomerVehicleDetailsByVehicleId(Long vehicleId) throws InsuranceException {
+		return customerVehicleDao.getCustomerVehicleDetailsByVehicleId(vehicleId);
+	}
 
 	@Override
 	public Payment getPolicyPaymentDetails(Long policyId) throws InsuranceException {

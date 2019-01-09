@@ -31,6 +31,7 @@ import {UserLoginService} from './service/userLogin.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 import {MasterDataService} from './service/masterDataservice';
+import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {MasterDataService} from './service/masterDataservice';
     BuypolicyComponent,
     QueryComponent,
     ViewQueryComponent,
-    ViewpolicyComponent
+    ViewpolicyComponent,
+    RenewpolicyComponent
   ],
   imports: [
     BrowserAnimationsModule,

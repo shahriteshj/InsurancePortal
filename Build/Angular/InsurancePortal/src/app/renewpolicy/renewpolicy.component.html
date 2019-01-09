@@ -1,6 +1,3 @@
-
-
-
 <div id="policylist" class="container"><br>
   <div class="panel panel-info">
     <div class="panel-heading">
@@ -19,23 +16,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of policyList;">
+          <tr *ngFor="let p of renewPolicyList;">
 
             <td>{{p.policyId}}</td>
             <td>{{p.policyStartDate | date:'EEE, d MMM,y' }}</td>
             <td>{{p.policyEndDate | date:'EEE, d MMM,y'}}</td>
-            <td *ngIf="p.policyEndDate<this.today">Expired</td>
-            <td *ngIf="p.policyEndDate>this.today">Active</td>
-            <td><button (click)="viewDetails(p.policyId)">View Details</button></td>
+            <td>{{p.status }}</td>
+            <td *ngIf="(p.status=='NEW') && (p.policyStartDate < this.today) 
+                      && (p.policyEndDate>this.today)">ACTIVE</td>
+            <td *ngIf="p.status=='NEW' && p.policyStartDate > this.today">EXPIRED</td>
+            <td *ngIf="(p.status=='RENEWED') && p.policyEndDate < this.today">EXPIRED</td>
+            <td *ngIf="(p.status=='NEW' ) && p.policyStartDate > this.today">FUTURE</td>
+
+            <td><button (click)="showRenewQuote(p.policyId)">Renew Policy</button></td>
           </tr>
-          <tr *ngIf="!policyList || policyList.length==0">
-            <td colspan="2">No Policies to display</td>
+          <tr *ngIf="!renewPolicyList || renewPolicyList.length==0">
+            <td colspan="2">No Policies for Renew</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+
 <div id="policydetails" class="container"><br>
   <button id="backbtn" (click)="showPolicyList()">Back to List</button><br><br>
   <div class="panel panel-info">
@@ -90,23 +94,14 @@
   </div>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title">Payment Details</h3>
+      <h3 class="panel-title">Policy Renewal Quote</h3>
     </div>
     <div class="panel-body" *ngIf="policyPayment">
       <table class="table table-hover">
         <tbody>
           <tr>
-            <td>Name on Card:</td>
-            <td>{{this.policyPayment.nameOnCard}}</td>
-            <td>Card Number:</td>
-            <td>{{this.policyPayment.cardNo}}</td>
-          </tr>
-
-          <tr>
-            <td>Payment Date</td>
-            <td>{{this.policyPayment.paymentDate | date:'EEE, d MMM,y'}}</td>
-            <td>Amount Paid</td>
-            <td>{{this.policyPayment.policyAmount}}</td>
+            <td>New Quote </td>
+            <td>{{this.price}}</td>
           </tr>
         </tbody>
       </table>
@@ -116,35 +111,23 @@
   </div>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title">Customer Details</h3>
+      <h3 class="panel-title">Payment Details</h3>
     </div>
-    <div class="panel-body" *ngIf="customer">
+    <div class="panel-body" *ngIf="policyPayment">
       <table class="table table-hover">
         <tbody>
           <tr>
-            <td>Name: </td>
-            <td>{{this.customer.firstName}} {{this.customer.lastName}}</td>
-            <td>Mobile No: </td>
-            <td>{{this.customer.mobileNo}}</td>
+            <td>Name on Card:</td>
+            <td></td>
+            <td>Card Number:</td>
+            <td></td>
           </tr>
+
           <tr>
-            <td>Address: </td>
-            <td>{{this.customer.address1}}<br> {{this.customer.address2}}
-              <br> {{this.customer.address3}}</td>
-            <td>BirthDate </td>
-            <td>{{this.customer.dob | date:'EEE, d MMM,y'}}</td>
-          </tr>
-          <tr>
-            <td>City: </td>
-            <td>{{this.customer.city}}</td>
-            <td>State: </td>
-            <td>{{this.customer.state}}</td>
-          </tr>
-          <tr>
-            <td>Pincode: </td>
-            <td>{{this.customer.pincode}}</td>
-            <td>Gender</td>
-            <td>{{this.customer.gender}}</td>
+            <td>Payment Date</td>
+            <td></td>
+            <td>Amount Paid</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -152,4 +135,5 @@
 
     </div>
   </div>
+
 </div>

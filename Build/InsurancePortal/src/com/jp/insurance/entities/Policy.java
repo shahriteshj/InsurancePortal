@@ -24,6 +24,8 @@ public class Policy {
 	// @Convert(converter =LocalDateAttributeConverter.class)
 	private Date policyEndDate;
 
+	private String status;
+	
 	@Id
 	@SequenceGenerator(name = "POLICYID_GEN", sequenceName = "policyId_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POLICYID_GEN")
@@ -71,11 +73,24 @@ public class Policy {
 	public void setPolicyEndDate(Date policyEndDate) {
 		this.policyEndDate = policyEndDate;
 	}
+	
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		return "Policy [policyId=" + policyId + ", customerId=" + customerId + ", vehicleId=" + vehicleId
-				+ ", policyStartDate=" + policyStartDate + ", policyEndDate=" + policyEndDate + "]";
+				+ ", policyStartDate=" + policyStartDate + ", policyEndDate=" + policyEndDate + ", status=" + status
+				+ "]";
 	}
+
+	
 
 }

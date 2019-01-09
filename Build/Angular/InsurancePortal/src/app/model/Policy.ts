@@ -4,6 +4,7 @@ export class Policy {
     customerVehicleId?:number;
     policyStartDate:Date;
     policyEndDate:Date;
+    status:string;
     
     constructor(policyStartDate:Date,policyEndDate:Date,customerId?:number,customerVehicleId?:number,policyId?:number){
         this.policyStartDate=policyStartDate;

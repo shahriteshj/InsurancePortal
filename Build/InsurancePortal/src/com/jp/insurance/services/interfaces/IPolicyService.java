@@ -22,6 +22,8 @@ public interface IPolicyService {
 	public Policy getPolicyDetails(Long policyId) throws InsuranceException;
 
 	public CustomerVehicle getCustomerVehicleDetails(Long customerId) throws InsuranceException;
+	
+	public CustomerVehicle getCustomerVehicleDetailsByVehicleId(Long vehicleId) throws InsuranceException;
 
 	public Payment getPolicyPaymentDetails(Long policyId) throws InsuranceException;
 

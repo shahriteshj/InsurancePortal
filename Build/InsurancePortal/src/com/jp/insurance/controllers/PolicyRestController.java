@@ -1,5 +1,6 @@
 package com.jp.insurance.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -94,6 +95,7 @@ public class PolicyRestController {
 		c.add(Calendar.YEAR, 1);
 		c.add(Calendar.DAY_OF_MONTH, -1);
 		policy.setPolicyEndDate(c.getTime());
+		policy.setStatus("NEW");
 
 		// load payment data
 		payment.setCardExpirtDate((String) inputMap.get("cardExpirtDate"));
@@ -127,6 +129,33 @@ public class PolicyRestController {
 
 		return policyList;
 	}
+	
+	
+	@RequestMapping(value = "/getRenewPolicyList", method = RequestMethod.POST, headers = "Accept=application/json")
+	public List<Policy> getRenewPolicyList(@RequestBody String input) throws InsuranceException {
+
+		List<Policy> policyList = null;
+		List<Policy> renewPolicyList = new ArrayList<Policy>();
+		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
+
+		// load user details
+		String username = (String) inputMap.get("username");
+		
+
+	
+			policyList = policyService.getPolicyList(username);
+			System.out.println(policyList);
+			Date today = Calendar.getInstance().getTime();
+			for( Policy policy:policyList){
+				System.out.println(policy);
+				if((policy.getStatus().equalsIgnoreCase("NEW")) && ( today.after(policy.getPolicyStartDate())) && (today.before(policy.getPolicyEndDate()))){
+					renewPolicyList.add(policy);
+				}
+				
+			}
+			System.out.println(renewPolicyList);
+		return renewPolicyList;
+	}
 
 	@RequestMapping(value = "/getCustomerVehicleDetails", method = RequestMethod.GET, headers = "Accept=application/json")
 	public CustomerVehicle getCustomerVehicleDetails(@PathParam("policyId") Long policyId) throws InsuranceException {
@@ -143,6 +172,21 @@ public class PolicyRestController {
 	public Customer getCustomerDetails(@PathParam("policyId") Long policyId) throws InsuranceException {
 		Policy policy = policyService.getPolicyDetails(policyId);
 		return policyService.getCustomerDetails(policy.getCustomerId());
+
+	}
+	
+	@RequestMapping(value = "/getRenewPolicyQuote", method = RequestMethod.GET, headers = "Accept=application/json")
+	public Float getRenewPolicyQuote(@PathParam("policyId") Long policyId) throws InsuranceException {
+		System.out.println(policyId);
+		Policy policy = policyService.getPolicyDetails(policyId);
+		Float price=0f;
+		
+		if(policy!=null){
+			CustomerVehicle customerVehicle = policyService.getCustomerVehicleDetailsByVehicleId(policy.getVehicleId());
+			System.out.println(customerVehicle);
+			 price = policyQuoteService.getPolicyPremium(customerVehicle);
+		}
+		return price;
 
 	}
 

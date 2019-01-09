@@ -22,12 +22,16 @@ export class ViewpolicyComponent implements OnInit {
 
   policy: Policy;
   policyId: number;
+  private today: any;
+  
+
   constructor(private router: Router, private _policyService: PolicyService,private sharedDataService: SharedDataService) { }
 
   ngOnInit() {
     console.log(this.sharedDataService.isCustomerUser);
     document.getElementById("policydetails").style.display = "none";
     this.getPolicyList();
+    this.today = new Date().getTime();
   }
 
   getPolicyList() {
@@ -40,10 +44,6 @@ export class ViewpolicyComponent implements OnInit {
   }
 
 
-
-  getPolicyDetails() {
-
-  }
 
   viewDetails(id: number) {
     document.getElementById("policylist").style.display = "none";

@@ -14,15 +14,16 @@
 <div id="menu" class="panel" *ngIf="(sharedDataService.isUserLoggedIn)">
   <div class="panel-heading">
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && sharedDataService.isCustomerUser">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;">Policy</button>
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;">Policy</button>
       <div class="dropdown-content">
         <a routerLink="/buypolicy">Buy New Policy</a>
         <a routerLink="/viewpolicy">View Policies</a>
+        <a routerLink="/renewpolicy">Renew Policy</a>
       </div>
     </div>
 
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && sharedDataService.isCustomerUser">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;">Claims</button>
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;">Claims</button>
       <div class="dropdown-content">
         <a routerLink="/newclaim">New Claim</a>
         <a routerLink="/viewclaim">View Claims</a>
@@ -30,7 +31,7 @@
     </div>
 
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && sharedDataService.isCustomerUser">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;">Query</button>
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;">Query</button>
       <div class="dropdown-content">
         <a routerLink="/addquery">New Query</a>
         <a routerLink="/viewquery">View Queries</a>
@@ -38,7 +39,7 @@
     </div>
 
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && (sharedDataService.isOperationsUser || sharedDataService.isManagerUser)">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;">Query</button>
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;">Query</button>
       <div class="dropdown-content">
         <a routerLink="/viewquery">View Query</a>
       </div>
@@ -50,14 +51,14 @@
       </div>
     </div>
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn && sharedDataService.isAdminUser">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;">Register</button>
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;">Register</button>
       <div class="dropdown-content">
         <a routerLink="/viewpolicy">Add Employee</a>
         <a routerLink="/viewpolicy">View Employee</a>
       </div>
     </div>
     <div class="dropdown" *ngIf="sharedDataService.isUserLoggedIn">
-      <button class="dropbtn" style="background:url(../images/menu_border.gif) right  no-repeat;"><a routerLink="/logout"
+      <button class="dropbtn" style="background:url(../../assets/images/menu_border.gif) right  no-repeat;"><a routerLink="/logout"
           style="color:white">Logout</a></button>
     </div>
   </div>

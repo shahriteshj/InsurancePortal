@@ -12,5 +12,7 @@ public interface ICustomerVehicleDao {
 	public CustomerVehicle addCustomerVehicle(CustomerVehicle customerVehicle) throws InsuranceException;
 
 	public CustomerVehicle getCustomerVehicleDetails(Long customerId) throws InsuranceException;
+	
+	public CustomerVehicle getCustomerVehicleDetailsByVehicleId(Long vehicleId) throws InsuranceException;
 
 }

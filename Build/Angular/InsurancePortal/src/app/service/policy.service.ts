@@ -11,14 +11,18 @@ import { PolicyPayment } from '../model/PolicyPayment';
 export class PolicyService {
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get('http://localhost:3000/policy');
-  }
+
 
   getQuote(customerVehicle: CustomerVehicle) {
     console.log("In Policy Service");
     console.log(customerVehicle);
     return this.http.post('/InsurancePortal/policy/getQuote', customerVehicle);
+  }
+
+  getQuoteByPolicyId(policyId: number) {
+    console.log("In Policy Service");
+    console.log(policyId);
+    return this.http.get('/InsurancePortal/policy/getRenewPolicyQuote?policyId='+policyId);
   }
 
   addPolicy(username: string, customerVehicle: CustomerVehicle, policyPayment: PolicyPayment) {
@@ -33,6 +37,11 @@ export class PolicyService {
   getPolicyList(username: String, role: String) {
 
     return this.http.post("/InsurancePortal/policy/getPolicyList", { username: username, role: role });
+  }
+
+  getRenewPolicyList(username: String, role: String) {
+
+    return this.http.post("/InsurancePortal/policy/getRenewPolicyList", { username: username, role: role });
   }
 
   getCustomerDetails(policyId:number){
