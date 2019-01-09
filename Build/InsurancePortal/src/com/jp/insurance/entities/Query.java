@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 public class Query {
 
 	private Long queryId;
-	private String name;
 	private String emailId;
 	private String queryType;
 	private String queryDescription;
@@ -37,20 +36,6 @@ public class Query {
 		this.queryId = queryId;
 	}
 
-	/*
-	 * @Column(name="NAME") public String getName() { return name; } public void
-	 * setName(String name) { this.name = name; }
-	 */
-
-	@NotNull
-	/*
-	 * @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-	 * +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-	 * +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-	 * ,message="{invalid.email}")
-	 * 
-	 * @Column(name="EMAILID")
-	 */
 	public String getEmailId() {
 		return emailId;
 	}
