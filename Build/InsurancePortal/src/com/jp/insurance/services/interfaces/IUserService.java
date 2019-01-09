@@ -26,4 +26,6 @@ public interface IUserService {
 	public User authenticateUser(String username, String password) throws InsuranceException;
 
 	public Customer getCustomerByEmailId(String emailId) throws InsuranceException;
+	
+	public User checkUserExists(String username) throws InsuranceException;
 }

@@ -121,4 +121,16 @@ public class UserService implements Serializable, IUserService {
 		return roleDao.getRoleIdByName(roleName);
 	}
 
+	@Override
+	public User checkUserExists(String username) throws InsuranceException {
+		
+		return userDao.getUserByUserName(username);
+	}
+
+	
+
+
+	
+	
+
 }

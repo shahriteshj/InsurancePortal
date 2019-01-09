@@ -82,45 +82,54 @@ public class LoginController {
 		User user = new User();
 		Customer customer = new Customer();
 
-		user.setUsername(((String) inputMap.get("username")).toUpperCase());
-		user.setPassword((String) inputMap.get("password"));
-		user.setAccountLocked('N');
-		user.setSecurityAnswer((String) inputMap.get("securityAnswer"));
-		Integer id = Integer.parseInt((String) inputMap.get("questionId"));
+		String newUserName = (String) inputMap.get("username");
+		newUserName = newUserName.toUpperCase();
+		user = userService.checkUserExists(newUserName);
+		String existingUserName = user.getUsername();
 
-		user.setQuestionId(id);
-		String roleName = (String) inputMap.get("roleName");
-		Role role = userService.getRoleByName(roleName);
-		user.setRoleId(role.getRoleId());
-
-		user.setCreationDate(new Date());
-		user.setFailedLoginAttempt(0);
-
-		customer.setEmailId(((String) inputMap.get("username")).toUpperCase());
-		customer.setFirstName((String) inputMap.get("firstName"));
-		customer.setLastName((String) inputMap.get("lastName"));
-		customer.setCity((String) inputMap.get("city"));
-		customer.setState((String) inputMap.get("state"));
-		id = Integer.parseInt((String) inputMap.get("pincode"));
-		System.out.println(id);
-		customer.setPincode(id);
-		customer.setGender((String) inputMap.get("gender"));
-		Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse((String) inputMap.get("DOB"));
-		System.out.println(date1);
-		customer.setDOB(date1);
-		customer.setAddress1((String) inputMap.get("address1"));
-		customer.setAddress2((String) inputMap.get("address2"));
-		customer.setAddress3((String) inputMap.get("address3"));
-		customer.setMobileNo((String) inputMap.get("mobileNo"));
-
-		user = userService.addUser(user, customer);
-
-		if (user.getUserId() > 0) {
-			// return "SUCCESS";
-			return "{\"response\":\"SUCCESS\"}";
-		} else {
-			// return "FAILURE";
+		if (existingUserName.equals(newUserName)) {
 			return "{\"response\":\"FAILURE\"}";
+		} else {
+			user.setUsername(((String) inputMap.get("username")).toUpperCase());
+			user.setPassword((String) inputMap.get("password"));
+			user.setAccountLocked('N');
+			user.setSecurityAnswer((String) inputMap.get("securityAnswer"));
+			Integer id = Integer.parseInt((String) inputMap.get("questionId"));
+
+			user.setQuestionId(id);
+			String roleName = (String) inputMap.get("roleName");
+			Role role = userService.getRoleByName(roleName);
+			user.setRoleId(role.getRoleId());
+
+			user.setCreationDate(new Date());
+			user.setFailedLoginAttempt(0);
+
+			customer.setEmailId(((String) inputMap.get("username")).toUpperCase());
+			customer.setFirstName((String) inputMap.get("firstName"));
+			customer.setLastName((String) inputMap.get("lastName"));
+			customer.setCity((String) inputMap.get("city"));
+			customer.setState((String) inputMap.get("state"));
+			id = Integer.parseInt((String) inputMap.get("pincode"));
+			System.out.println(id);
+			customer.setPincode(id);
+			customer.setGender((String) inputMap.get("gender"));
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse((String) inputMap.get("DOB"));
+			System.out.println(date1);
+			customer.setDOB(date1);
+			customer.setAddress1((String) inputMap.get("address1"));
+			customer.setAddress2((String) inputMap.get("address2"));
+			customer.setAddress3((String) inputMap.get("address3"));
+			customer.setMobileNo((String) inputMap.get("mobileNo"));
+
+			user = userService.addUser(user, customer);
+
+			if (user.getUserId() > 0) {
+				// return "SUCCESS";
+				return "{\"response\":\"SUCCESS\"}";
+			} else {
+				// return "FAILURE";
+				return "{\"response\":\"FAILURE\"}";
+			}
 		}
 
 	}
@@ -137,6 +146,32 @@ public class LoginController {
 		Collections.sort(cityList);
 
 		return cityList;
+
+	}
+
+	@RequestMapping(value = "/checkUsername", method = RequestMethod.GET, headers = "Accept=application/json")
+	public String checkUsernameExists(@PathParam("username") String username) throws InsuranceException {
+		System.out.println("In checkUsernameExists()");
+		System.out.println(username);
+		User user = new User();
+		String newUserName = username.toUpperCase();
+		if (newUserName != null) {
+			user = userService.checkUserExists(newUserName);
+			if (user == null) {
+				return "{\"response\":\"userNotFound\"}";
+			} else {
+
+				String existingUserName = user.getUsername();
+
+				if (existingUserName.equals(newUserName)) {
+					return "{\"response\":\"userFound\"}";
+				} else {
+					return "{\"response\":\"userNotFound\"}";
+				}
+			}
+
+		}
+		return "{\"response\":\"userNotFound\"}";
 
 	}
 
