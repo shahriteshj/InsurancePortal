@@ -20,6 +20,7 @@ export class RenewpolicyComponent implements OnInit {
   customerVehicle: CustomerVehicle;
   policyPayment: PolicyPayment;
   price:number;
+  policyId:number;
 
   ngOnInit() {
     this.getPolicyListForRenew();
@@ -39,6 +40,7 @@ export class RenewpolicyComponent implements OnInit {
   showRenewQuote(policyId:number){
     document.getElementById("policylist").style.display = "none";
     document.getElementById("policydetails").style.display = "block";
+    this.policyId=policyId;
     this.getcustomerVehicleDetails(policyId);
     this._policyService.getQuoteByPolicyId(policyId).subscribe(quote => {
       console.log(quote);
