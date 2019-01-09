@@ -27,7 +27,8 @@ export class UserService {
   }
 
   checkUsernameExists(username:String){
-    return this.http.get("/InsurancePortal/policy/checkUsername");
+    console.log(username);
+    return this.http.get("/InsurancePortal/policy/checkUsername?username="+username);
   }
 
   update(user: User) {

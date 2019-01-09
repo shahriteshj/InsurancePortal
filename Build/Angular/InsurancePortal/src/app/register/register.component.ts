@@ -17,16 +17,16 @@ export class RegisterComponent implements OnInit {
   loading = false;
   user: User;
   customer: Customer;
-  state:string;
-  city:string;
-  stateList:string[];
-  cityList:string[];
-  regForm:NgForm;
+  state: string;
+  city: string;
+  stateList: string[];
+  cityList: string[];
+  regForm: NgForm;
   formBuilder: any;
-  username:string;
+  username: string;
 
 
-  @ViewChild('usernameControl') el:ElementRef;
+  @ViewChild('usernameControl') el: ElementRef;
 
   constructor(private router: Router, private _userService: UserService,
     private _masterDataService: MasterDataService) { }
@@ -41,12 +41,12 @@ export class RegisterComponent implements OnInit {
     throw new Error("Method not implemented.");
   }
 
-  getStateList(){
-    this._masterDataService.getStateList().subscribe(stateList=>{console.log(stateList);this.stateList=<string[]>stateList});
+  getStateList() {
+    this._masterDataService.getStateList().subscribe(stateList => { console.log(stateList); this.stateList = <string[]>stateList });
   }
 
-  getCityList(stateName:string){
-    this._masterDataService.getCityList(stateName).subscribe(cityList=>{console.log(cityList);this.cityList=<string[]>cityList});
+  getCityList(stateName: string) {
+    this._masterDataService.getCityList(stateName).subscribe(cityList => { console.log(cityList); this.cityList = <string[]>cityList });
   }
 
 
@@ -82,51 +82,52 @@ export class RegisterComponent implements OnInit {
     }
     console.log(user);
     console.log(customer);
-
-    
-
-  }
-
-  usernameControl:string;
-
-  checkUserExists(username:string){
-  //  console.log(e.target.value);
-    console.log(username);
-    // e.target.value="";
-    console.log(this.el);
-    //this.el.value="";
-    this.username="";
-    
-  }
-
-  registerUser(user:User,customer:Customer){
     this._userService.create(user, customer)
-    .subscribe(
-      (data:any) => {
-        console.log("post create");
-        console.log(data);
-        if (data.response == "SUCCESS") {
-         
-          this.router.navigate(['/login']);
-        } else if (data.response == "FAILURE") {
-          console.log("failure");
+      .subscribe(
+        (data: any) => {
+          console.log("post create");
+          console.log(data);
+          if (data.response == "SUCCESS") {
+            this.router.navigate(['/login']);
+          } else if (data.response == "FAILURE") {
+            alert("User Id is already");
+            this.router.navigate(['/register']);
+            this.loading = false;
+          }
+        },
+        error => {
           this.router.navigate(['/register']);
           this.loading = false;
         }
-      },
-      error => {
-        this.router.navigate(['/register']);
-        this.loading = false;
-      }
-    );
+      );
+
+
+  }
+
+  usernameControl: string;
+
+  checkUserExists(username: string) {
+
+    console.log(username);
+    this._userService.checkUsernameExists(username)
+      .subscribe((data: any) => {
+        console.log(data);
+        if (data.response == "userFound") {
+          this.username = "";
+        }
+      });
+  }
+
+  registerUser(user: User, customer: Customer) {
+
 
   }
 
   stateChange(e) {
     this.state = e.target.value;
     let selectedOptions = e.target['options'];
-   let selectedIndex = selectedOptions.selectedIndex;
-   let selectElementText = selectedOptions[selectedIndex].text;
+    let selectedIndex = selectedOptions.selectedIndex;
+    let selectElementText = selectedOptions[selectedIndex].text;
     console.log(selectElementText + " " + this.state);
     this.state = selectElementText;
     console.log(this.state);

@@ -13,6 +13,7 @@ import { ViewQueryComponent } from './view-query/view-query.component';
 import {LoginRouteGuard} from './service/loginGuard.service';
 import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
+import { ClaimComponent } from './claim/claim.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,8 +28,8 @@ const routes: Routes = [
   { path: 'buypolicy', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
   { path: 'viewpolicy', component: ViewpolicyComponent, canActivate: [LoginRouteGuard]  },
   { path: 'renewpolicy', component: RenewpolicyComponent, canActivate: [LoginRouteGuard]  },
-  { path: 'newclaim', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
-  { path: 'viewclaim', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'newclaim', component: ClaimComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'viewclaim', component: ClaimComponent, canActivate: [LoginRouteGuard]  },
   { path: 'addquery', component: QueryComponent, canActivate: [LoginRouteGuard]  },
   { path: 'viewquery', component: ViewQueryComponent, canActivate: [LoginRouteGuard]  },
   { path: 'logout', component: LogOutComponent, canActivate: [LoginRouteGuard]  },
