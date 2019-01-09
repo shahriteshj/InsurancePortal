@@ -3,6 +3,7 @@ import { Query } from '../model/Query';
 import { QueryService } from '../service/query.service';
 import { NgForm, FormGroup } from '@angular/forms';
 import { User } from '../model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-query',
@@ -13,7 +14,8 @@ export class QueryComponent implements OnInit {
 
   query:Query;
 
-  constructor(private _queryService: QueryService) { }
+
+  constructor(private _queryService: QueryService ,private _router: Router ) { }
 
   ngOnInit() {
    
@@ -48,9 +50,10 @@ export class QueryComponent implements OnInit {
     
     this._queryService.addQuery(query)
       .subscribe(
-        data => {
+        (data:Query) => {
           console.log("Success");
-          //this.router.navigate(['/login']);
+          alert("Thanks for submitting the query. \n Please note Query Ref: " + data.queryId + " for future reference");
+          this._router.navigate(['/viewquery']);
         },
         error => {
               console.log("Failure");     
@@ -71,4 +74,6 @@ export class QueryComponent implements OnInit {
     }
     );
   }
+
+
 }

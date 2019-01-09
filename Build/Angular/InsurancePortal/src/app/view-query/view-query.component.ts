@@ -19,19 +19,19 @@ export class ViewQueryComponent implements OnInit {
   //query:Query={emailId: "", queryDescription: "", status: "",name: "", queryType: "",queryResponse: "",assignedTo: ""};
   query:Query;
   msg: string = null;
-  
+  queryId: number;
     
   constructor(private queryService: QueryService,
     private localStorage: LocalStorageService,
     private sharedDataService: SharedDataService,
     private _router:Router) { }
-    queryId: number;
+    
 
   ngOnInit() {
     this.getQueryList();
     console.log(this.sharedDataService.isCustomerUser);
     document.getElementById("queryDetails").style.display = "none";
-
+    console.log(this.queryId);
 
     
   }
@@ -72,10 +72,12 @@ export class ViewQueryComponent implements OnInit {
       (query:any) => {      
         console.log(query)        
         if (query.response == "Success") {
+          alert("Query update sucessfully. \n Query Ref: " + query.queryId );
           this._router.navigate(['/viewquery']);
-          this.msg = ': Query is updated sucessfully!!!';
+          // this.msg = ': Query is updated sucessfully!!!';
         } else {                         
-          this.msg = 'Failed to Update';
+          alert("Failed to update query.");
+          //this.msg = 'Failed to Update';
             
         }
     })

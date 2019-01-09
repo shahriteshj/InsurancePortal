@@ -2,8 +2,9 @@
 <div id="queryList" class="container"><br>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title" *ngIf !="queryId"><b>Query Lists </b></h3>
-        <h3 class="panel-title" *ngIf ="queryId"><b>Query Lists : </b> <i>Query Id : {{queryId}} {{ msg }}</i></h3>
+      <!-- <h3 class="panel-title" *ngIf ="!queryId"><b>Query Lists </b></h3> -->
+      <h3 class="panel-title" ><b>Query Lists </b></h3>
+        <!-- <h3 class="panel-title" *ngIf ="queryId"><b>Query Lists : </b> <i>Query Id : {{queryId}} {{ msg }}</i></h3> -->
       <!-- <p class="msg_success">{{queryId}} {{ msg }}</p> -->
     </div>
     <div class="panel-body" *ngIf="queries">
