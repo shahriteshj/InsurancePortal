@@ -15,22 +15,6 @@ export class UserService {
 
   constructor(private localStorage: LocalStorageService,private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get('http://localhost:3000/User');
-  }
-
-  // authenticateUser(username:string,password:string){
-  //   return this.http.get("http://localhost:3000/User?username="+username+"&password="+password).pipe(
-  //   map(user => {
-  //               // login successful if there's a jwt token in the response
-  //               if (user) {
-  //                   localStorage.setItem('currentUser', JSON.stringify(user));
-  //               }
-  //               return user;
-  //           }));
-
-  // }
-
   authenticateUser(username:string,password:string){
     return this.http.post<User>("/InsurancePortal/policy/authenticateUser",{ username: username, password: password });
 
@@ -40,6 +24,10 @@ export class UserService {
     let z = Object.assign(user,customer);
     console.log(z);
     return this.http.post("/InsurancePortal/policy/registerUser", z);
+  }
+
+  checkUsernameExists(username:String){
+    return this.http.get("/InsurancePortal/policy/checkUsername");
   }
 
   update(user: User) {
@@ -52,7 +40,6 @@ export class UserService {
 
   public isValid () : boolean
   {
-      
       return this.localStorage.retrieve("valid");
   }
 

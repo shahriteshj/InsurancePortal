@@ -1,25 +1,6 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <div id="wrapper">
 
-    <div id="menu">
-        <ul>
-            <li><a routerLink="/home" class="active">Home</a></li>
-            <li><a routerLink="/about">About us</a></li>
-            <li><a routerLink="/contactus">Contact us</a></li>
-            <li><a routerLink="/login">Sign In</a></li>
-            <li><a routerLink="/support">Support</a></li>
-        </ul>
-        <div class="clear"></div>
-    </div>
+
 
     <div class="container">
         <form class="form-horizontal" role="form" #registerFrm="ngForm" (ngSubmit)="Register(registerFrm)"
@@ -47,8 +28,12 @@
             <div class="form-group">
                 <label for="email" class="col-sm-4 control-label">Username(Email Id) * </label>
                 <div class="col-sm-8">
-                    <input type="email" id="username" name="username" required class="form-control" ngModel
-                        #usernameControl="ngModel">
+                    <input type="email" id="username" name="username" (blur)="checkUserExists(usernameControl.value)"
+                        required class="form-control" [(ngModel)]="username" #usernameControl="ngModel">
+                    <div *ngIf="usernameControl?.touched && usernameControl?.invalid" class="alert alert-danger">
+                        <div *ngIf="usernameControl.errors?.required">Username is required</div>
+                        <div *ngIf="usernameControl.errors?.pattern">Please enter valid Username</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

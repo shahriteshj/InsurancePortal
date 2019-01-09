@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
@@ -23,6 +23,10 @@ export class RegisterComponent implements OnInit {
   cityList:string[];
   regForm:NgForm;
   formBuilder: any;
+  username:string;
+
+
+  @ViewChild('usernameControl') el:ElementRef;
 
   constructor(private router: Router, private _userService: UserService,
     private _masterDataService: MasterDataService) { }
@@ -44,6 +48,8 @@ export class RegisterComponent implements OnInit {
   getCityList(stateName:string){
     this._masterDataService.getCityList(stateName).subscribe(cityList=>{console.log(cityList);this.cityList=<string[]>cityList});
   }
+
+
 
   Register(registerFrm) {
 
@@ -77,26 +83,42 @@ export class RegisterComponent implements OnInit {
     console.log(user);
     console.log(customer);
 
+    
+
+  }
+
+  usernameControl:string;
+
+  checkUserExists(username:string){
+  //  console.log(e.target.value);
+    console.log(username);
+    // e.target.value="";
+    console.log(this.el);
+    //this.el.value="";
+    this.username="";
+    
+  }
+
+  registerUser(user:User,customer:Customer){
     this._userService.create(user, customer)
-      .subscribe(
-        (data:any) => {
-          console.log("post create");
-          console.log(data);
-          if (data.response == "SUCCESS") {
-           
-            this.router.navigate(['/login']);
-          } else if (data.response == "FAILURE") {
-            console.log("failure");
-            this.router.navigate(['/register']);
-            this.loading = false;
-          }
-        },
-        error => {
+    .subscribe(
+      (data:any) => {
+        console.log("post create");
+        console.log(data);
+        if (data.response == "SUCCESS") {
+         
+          this.router.navigate(['/login']);
+        } else if (data.response == "FAILURE") {
+          console.log("failure");
           this.router.navigate(['/register']);
           this.loading = false;
         }
-      );
-
+      },
+      error => {
+        this.router.navigate(['/register']);
+        this.loading = false;
+      }
+    );
 
   }
 

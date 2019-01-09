@@ -1,7 +1,10 @@
 /* CSS Document */
 /*body starts here*/
-body{margin:0px; padding:0px; background:url(../images/bg-strip.gif) repeat-x;
-      font-family:Tahoma,Arial, Helvetica,sans-serif;font-size:11px;color:#000000;}
+body{margin:0px; padding:0px; 
+	  font-family:Tahoma,Arial, Helvetica,sans-serif;font-size:11px;color:#000000;
+	  }
+
+
 #wrapper{width:1000px; margin:0 auto;}
 .clear{clear:both;margin:0px;padding:0px;}
 a{color:#87BC23;text-decoration:underline;}
@@ -73,8 +76,8 @@ h2{
 /*secondary_container ends here*/
 
 /*footer starts here*/
-#footer{background:#5B5B5B url(../images/footer_bg.gif) left top repeat-x; width:auto; margin:auto;}
-.footer-all{height:auto; width:1000px; margin:auto;}
+#footer{background:#5B5B5B url(../images/footer_bg.gif) left top repeat-x; width:100%; margin:auto;}
+.footer-all{height:auto; width:100%; margin:auto;}
 .footermenu{padding:25px 0px 20px 0px;margin:0px 0px 0px 0px;float:left;}
 .footermenu ul{padding:2px 0px 0px 81px;margin:0px 0px 0px 0px;}
 .footermenu li{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;display:inline;list-style:none;}

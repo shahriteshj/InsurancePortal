@@ -8,11 +8,10 @@ export class SharedDataService{
     isOperationsUser: boolean;
     isCustomerUser:boolean;
     isUserLoggedIn : boolean;
-    noOfCartItems : number = 0;
+    
 
     constructor(private localStorage: LocalStorageService){
         this.getStoredValues();
-        console.log(this.isManagerUser);
     }
 
     getStoredValues(){
