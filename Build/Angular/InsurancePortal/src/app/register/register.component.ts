@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
-import { AlertService } from '../service/alert.service';
 import { Customer } from '../model/Customer';
 import { MasterDataService } from '../service/masterDataservice';
 import { State } from '../model/State';
@@ -134,6 +133,18 @@ export class RegisterComponent implements OnInit {
 
     //console.log(this.modelList);
     this.getCityList(this.state);
+  }
+
+  check() {
+      console.log(document.getElementById('password').value);
+    if (document.getElementById('password').value ==
+      document.getElementById('confirmPassword').value) {
+      document.getElementById('message').style.color = 'green';
+      document.getElementById('message').innerHTML = 'matching';
+    } else {
+      document.getElementById('message').style.color = 'red';
+      document.getElementById('message').innerHTML = 'not matching';
+    }
   }
 
 }
