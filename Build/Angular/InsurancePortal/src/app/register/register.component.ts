@@ -114,8 +114,8 @@ export class RegisterComponent implements OnInit {
     let password = document.getElementById("password");
     let confirmPassword = document.getElementById("confirmPassword");
 
-    console.log(password.value);
-    console.log(confirmPassword.value);
+    // console.log(password.value);
+    // console.log(confirmPassword.value);
 
     if(password.value!=confirmPassword.value){
       return false;
@@ -157,7 +157,7 @@ export class RegisterComponent implements OnInit {
   }
 
   check() {
-      console.log(document.getElementById('password').value);
+      //console.log(document.getElementById('password').value);
     if (document.getElementById('password').value ==
       document.getElementById('confirmPassword').value) {
       document.getElementById('message').style.color = 'green';
