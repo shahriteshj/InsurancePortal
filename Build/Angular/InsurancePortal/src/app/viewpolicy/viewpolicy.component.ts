@@ -14,6 +14,7 @@ import { SharedDataService } from '../service/sharedData.service';
 })
 export class ViewpolicyComponent implements OnInit {
 
+  errorMessage:string;
   policyList: Policy[];
   
    customerVehicle: CustomerVehicle;
@@ -40,6 +41,11 @@ export class ViewpolicyComponent implements OnInit {
       .subscribe(policyList => {
         console.log(policyList);
         this.policyList = <Policy[]>policyList;
+      },
+      (error:any)=>{
+        console.log(error);
+        console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+        this.errorMessage="System Error while fetching Policy Details. Please try after sometime";
       });
   }
 
@@ -61,18 +67,34 @@ export class ViewpolicyComponent implements OnInit {
 
   getcustomerVehicleDetails() {
     this._policyService.getCustomerVehicleDetails(this.policyId)
-    .subscribe(customerVehicle => this.customerVehicle = <CustomerVehicle>customerVehicle);
+    .subscribe(customerVehicle => {this.customerVehicle = <CustomerVehicle>customerVehicle
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error while fetching Vehicle Details. Please try after sometime"; 
+    });
 
   }
   getPaymentDetails() {
     this._policyService.getPolicyPaymentDetails(this.policyId).subscribe(
-      policyPayment=> {console.log(policyPayment);this.policyPayment=<PolicyPayment>policyPayment;}
-    );
+      policyPayment=> {console.log(policyPayment);this.policyPayment=<PolicyPayment>policyPayment;
+      },
+      (error:any)=>{
+        console.log(error);
+        console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+        this.errorMessage="System Error while fetching Payment Details. Please try after sometime";
+      });
   }
 
   getCustomerDetails() {
     this._policyService.getCustomerDetails(this.policyId).subscribe(
-      customer=> {console.log(customer);this.customer=<Customer>customer;}
-    );
+      customer=> {console.log(customer);this.customer=<Customer>customer;
+      },
+      (error:any)=>{
+        console.log(error);
+        console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+        this.errorMessage="System Error while fetching Customer Details. Please try after sometime";
+      });
   }
 }
