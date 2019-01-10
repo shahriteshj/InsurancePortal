@@ -31,73 +31,8 @@
                       </td>
                   </tr>
                   <tr>
-                      <td><label>Sub-Model </label> <span> *</span></td>
-                      <td>
-                          <p><select id="SubModel" name="SubModel" (change)="submodelChange($event)" required class="custom-select"
-                                  style="width:200px;">
-                                  <option value="">Submodel</option>
-                                  <option *ngFor="let submo of submodelList" [ngValue]="submo">{{ submo }}</option>
-                              </select></p>
-                      </td>
 
-                      <td><label>CC </label> <span> *</span></td>
-                      <td>
-                          <p><input type="text" id="cc" name="cc" [(ngModel)]="cc" required></p>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td><label>Fuel Type </label> <span> *</span></td>
-                      <td>
-                          <p><select id="fuelType" name="fuelType" [(ngModel)]="fuelType" required class="custom-select"
-                                  style="width:200px;">
-                                  <option value="">FuelType</option>
-                                  <option value="PETROL">Petrol</option>
-                                  <option value="DIESEL">Diesel</option>
-                                  <option value="CNG">CNG</option>
-                              </select></p>
-                      </td>
-
-                      <td><label>Vehicle Registration No. </label><span> *</span></td>
-                      <td>
-                          <p><input type="text" id="vehicleRegNo" name="vehicleRegNo" [(ngModel)]="vehicleRegNo"
-                                  required></p>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td><label>Engine No. </label><span> *</span></td>
-                      <td>
-                          <p><input type="text" id="engineNo" name="engineNo" [(ngModel)]="engineNo" required></p>
-                      </td>
-                      <td><label>Chasis No.</label> <span> *</span></td>
-                      <td>
-                          <p><input type="text" id="chasisNo" name="chasisNo" [(ngModel)]="chasisNo" required></p>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td><label>Manufacturing Year</label> <span> *</span></td>
-                      <td>
-                          <p><input type="text" id="manufacturingYear" name="manufacturingYear" [(ngModel)]="manufacturingYear"
-                                  required></p>
-                      </td>
-
-                      <td><label>Registration Date </label> <span> *</span></td>
-                      <td>
-                          <p><input type="date" id="registrationDate" name="registrationDate" [(ngModel)]="registrationDate"
-                                  required></p>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <label>Vehicle Registration City </label><span> *</span></td>
-                      <td>
-                          <p><input type="text" id="vehicleRegCity" name="vehicleRegCity" [(ngModel)]="vehicleRegCity"
-                                  required></p>
-                      </td>
-
-                      <td></td>
-                      <td></td>
-
-                  </tr>
+   
               </table>
           </div>
 
