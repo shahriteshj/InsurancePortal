@@ -104,9 +104,10 @@ public class PolicyRestController {
 		policy.setStatus("NEW");
 
 		// load payment data
-		payment.setCardExpirtDate((String) inputMap.get("cardExpirtDate"));
+
 		payment.setCardNo((String) inputMap.get("cardNo"));
-		payment.setNameOnCard((String) inputMap.get("cardExpiryMonth") + "/" + (String) inputMap.get("cardExpiryYear"));
+		payment.setNameOnCard((String) inputMap.get("nameOnCard")) ;
+		payment.setCardExpiryDate ((String) inputMap.get("cardExpiryMonth") + "/" + (String) inputMap.get("cardExpiryYear"));
 
 		payment.setPaymentDate(new Date());
 		
@@ -118,6 +119,42 @@ public class PolicyRestController {
 
 		return newPolicy.getPolicyId();
 
+	}
+	
+	
+	@RequestMapping(value = "/renewPolicy", method = RequestMethod.POST, headers = "Accept=application/json")
+	public Long renewPolicy(@RequestBody String input) throws InsuranceException, ParseException {
+		
+		System.out.println(input);
+
+		Policy policy = new Policy();
+		Payment payment = new Payment();
+
+		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
+
+		// load customer details
+		String custEmail = (String) inputMap.get("username");
+		Integer intPolicyId = (Integer)inputMap.get("policyId");
+		Long currentPolicyId = intPolicyId.longValue(); 
+		
+		//load new Policy data
+		policy.setStatus("NEW");
+		
+		// load payment data
+		payment.setCardExpiryDate((String) inputMap.get("cardExpiryMonth") + "/" + (String) inputMap.get("cardExpiryYear"));
+		payment.setCardNo((String) inputMap.get("cardNo"));
+		payment.setNameOnCard((String) inputMap.get("nameOnCard"));
+		
+
+		payment.setPaymentDate(new Date());
+		
+		Double amount =(Double) inputMap.get("policyAmount");
+		
+		payment.setPolicyAmount(amount.floatValue());
+
+		Policy newPolicy = policyService.renewPolicy(custEmail, currentPolicyId,policy, payment);
+		
+		return newPolicy.getPolicyId();
 	}
 
 	@RequestMapping(value = "/getPolicyList", method = RequestMethod.POST, headers = "Accept=application/json")

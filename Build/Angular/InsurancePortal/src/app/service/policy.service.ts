@@ -34,6 +34,14 @@ export class PolicyService {
 
   }
 
+  renewPolicy(username:string,policyId:number,policyPayment:PolicyPayment){
+    console.log("in renewpolicy service");
+
+    let z = Object.assign({ username: username }, {policyId:policyId}, policyPayment);
+    console.log(z);
+    return this.http.post("/InsurancePortal/policy/renewPolicy", z);
+  }
+
   getPolicyList(username: String, role: String) {
 
     return this.http.post("/InsurancePortal/policy/getPolicyList", { username: username, role: role });

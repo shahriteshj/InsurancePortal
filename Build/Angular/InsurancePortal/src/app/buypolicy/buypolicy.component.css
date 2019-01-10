@@ -164,6 +164,8 @@ select.invalid {
 
 	input[type="text"]{ padding: 2px 1px; line-height: 18px; width:200px; border-radius: 10px}
 
+	input[type="number"]{ padding: 2px 1px; line-height: 18px; width:200px; border-radius: 10px}
+
 	input[type="date"]{ padding: 2px 1px; line-height: 18px; width:200px; border-radius: 10px}
 
 	span {

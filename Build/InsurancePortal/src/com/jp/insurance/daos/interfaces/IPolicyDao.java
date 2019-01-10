@@ -12,6 +12,8 @@ public interface IPolicyDao {
 	public List<Policy> getPolicyList(Long customerId) throws InsuranceException;
 
 	public Policy addPolicy(Policy policy) throws InsuranceException;
+	
+	public Policy updatePolicy(Policy currentPolicy) throws InsuranceException;
 
 	public Policy getPolicyDetails(Long policyId) throws InsuranceException;
 

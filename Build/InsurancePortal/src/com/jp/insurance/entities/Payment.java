@@ -18,7 +18,7 @@ public class Payment {
 	private Long policyId;
 	private String nameOnCard;
 	private String cardNo;
-	private String cardExpirtDate;
+	private String cardExpiryDate;
 	private Float policyAmount;
 	private Date paymentDate;
 
@@ -63,12 +63,12 @@ public class Payment {
 	}
 
 	@Column(name = "CardExpiryDate")
-	public String getCardExpirtDate() {
-		return cardExpirtDate;
+	public String getCardExpiryDate() {
+		return cardExpiryDate;
 	}
 
-	public void setCardExpirtDate(String cardExpirtDate) {
-		this.cardExpirtDate = cardExpirtDate;
+	public void setCardExpiryDate(String cardExpirtDate) {
+		this.cardExpiryDate = cardExpirtDate;
 	}
 
 	@Column(name = "PolicyAmount")
@@ -92,7 +92,7 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [paymentId=" + paymentId + ", policyId=" + policyId + ", nameOnCard=" + nameOnCard + ", cardNo="
-				+ cardNo + ", cardExpirtDate=" + cardExpirtDate + ", policyAmount=" + policyAmount + ", paymentDate="
+				+ cardNo + ", cardExpirtDate=" + cardExpiryDate + ", policyAmount=" + policyAmount + ", paymentDate="
 				+ paymentDate + "]";
 	}
 

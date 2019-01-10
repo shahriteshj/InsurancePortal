@@ -64,5 +64,12 @@ public class PolicyDao implements Serializable, IPolicyDao {
 		}
 		return newPolicy;
 	}
+	
+	@Override
+	public Policy updatePolicy(Policy currentPolicy) throws InsuranceException{
+		
+		return entityManager.merge(currentPolicy);
+
+	}
 
 }

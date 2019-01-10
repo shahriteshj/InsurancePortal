@@ -1,5 +1,7 @@
 package com.jp.insurance.services;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +144,61 @@ public class PolicyService implements IPolicyService {
 	@Override
 	public Customer getCustomerDetails(Long customerId) throws InsuranceException {
 		return customerDao.getCustomerById(customerId);
+	}
+
+	@Override
+	@Transactional(rollbackFor = InsuranceException.class)
+	public Policy renewPolicy(String custEmail, Long currentPolicyId,Policy policy, Payment payment) throws InsuranceException {
+		
+		if (custEmail == null || currentPolicyId == null || payment == null) {
+			throw new InsuranceException("Error in saving Policy");
+		}
+		
+		Policy currentPolicy = policyDao.getPolicyDetails(currentPolicyId);
+		
+		if(currentPolicy== null){
+			throw new InsuranceException("Error in getting current Policy");
+		}
+		
+		CustomerVehicle customerVehicle = customerVehicleDao.getCustomerVehicleDetailsByVehicleId(currentPolicy.getVehicleId());
+		
+		if(customerVehicle== null){
+			throw new InsuranceException("Error in getting vehicle Details for PolicyId: " + currentPolicy.getPolicyId());
+		}
+		
+		policy.setCustomerId(currentPolicy.getCustomerId());
+		policy.setVehicleId(currentPolicy.getVehicleId());
+		
+		Date currentPolEndDate = currentPolicy.getPolicyEndDate();
+		Calendar c = Calendar.getInstance();
+		c.setTime(currentPolEndDate);
+		c.add(Calendar.DAY_OF_MONTH, +1);
+		policy.setPolicyStartDate(c.getTime());
+		
+		c.add(Calendar.YEAR, 1);
+		c.add(Calendar.DAY_OF_MONTH, -1);
+		policy.setPolicyEndDate(c.getTime());
+		
+		currentPolicy.setStatus("RENEWED");
+		
+		policyDao.updatePolicy(currentPolicy);
+				
+		policyDao.addPolicy(policy);
+		
+		if (policy.getPolicyId() >0) {
+			payment.setPolicyId(policy.getPolicyId());
+		} else {
+			throw new InsuranceException("Error in saving new Policy");
+		}
+		
+		paymentDao.addPayment(payment);
+		
+		if (payment.getPaymentId()<=0) {
+			throw new InsuranceException("Error in saving Payment Details");
+		}
+		
+		
+		return policy;
 	}
 
 }

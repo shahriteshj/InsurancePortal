@@ -18,6 +18,8 @@ public interface IPolicyService {
 			throws InsuranceException;
 
 	public Policy addNewPolicy(Policy policy) throws InsuranceException;
+	
+	public Policy renewPolicy(String custEmail, Long currentPolicyId, Policy policy,Payment payment) throws InsuranceException;
 
 	public Policy getPolicyDetails(Long policyId) throws InsuranceException;
 
