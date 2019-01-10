@@ -6,6 +6,7 @@ import { CustomerVehicle } from '../model/CustomerVehicle';
 import { PolicyPayment } from '../model/PolicyPayment';
 import { Customer } from '../model/Customer';
 import { SharedDataService } from '../service/sharedData.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-renewpolicy',
@@ -14,7 +15,10 @@ import { SharedDataService } from '../service/sharedData.service';
 })
 export class RenewpolicyComponent implements OnInit {
 
-  constructor(private router: Router, private _policyService: PolicyService,private sharedDataService: SharedDataService) { }
+  constructor(private router: Router, private _policyService: PolicyService,
+    private sharedDataService: SharedDataService) { }
+  
+  errorMessage:string;
   renewPolicyList:Policy[];
   private today: any;
   customerVehicle: CustomerVehicle;
@@ -51,7 +55,13 @@ export class RenewpolicyComponent implements OnInit {
 
   getcustomerVehicleDetails(policyId:number) {
     this._policyService.getCustomerVehicleDetails(policyId)
-    .subscribe(customerVehicle => this.customerVehicle = <CustomerVehicle>customerVehicle);
+    .subscribe(customerVehicle => {this.customerVehicle = <CustomerVehicle>customerVehicle
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error. Please try after sometime";
+    });
 
   }
 
@@ -60,4 +70,25 @@ export class RenewpolicyComponent implements OnInit {
     document.getElementById("policydetails").style.display = "none";
   }
 
+  submit(frm:NgForm){
+    let username= localStorage.getItem("username");
+    console.log(username);
+
+    let policyPayment:PolicyPayment= {cardNo:frm.value.cardNo,nameOnCard:frm.value.nameOnCard,
+      cvv:frm.value.cvv,cardExpiryMonth:frm.value.cardExpiryMonth,cardExpiryYear: frm.value.cardExpiryYear,
+      policyAmount: this.price};
+    
+      console.log(policyPayment);
+      this._policyService.renewPolicy(username,this.policyId,policyPayment).subscribe(policyId=>{console.log(policyId);
+      this.policyId=<number>policyId
+      this.router.navigate(['/viewpolicy']);
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error renewing Policy. Please try after sometime";
+    });
+  }
 }
+
+
