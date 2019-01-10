@@ -16,7 +16,7 @@ import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
 import { ClaimComponent } from './claim/claim.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
