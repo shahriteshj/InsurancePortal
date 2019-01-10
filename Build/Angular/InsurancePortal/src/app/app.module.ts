@@ -17,7 +17,6 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertService } from './service/alert.service';
 import { ProductService } from './service/product.service';
 import { VehicleMasterService } from './service/vehiclemaster.service';
 import { BuypolicyComponent } from './buypolicy/buypolicy.component';
@@ -33,6 +32,7 @@ import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 import {MasterDataService} from './service/masterDataservice';
 import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
 import { ClaimComponent } from './claim/claim.component';
+import {EmailValidator} from './validators/emailValidator';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { ClaimComponent } from './claim/claim.component';
     ViewQueryComponent,
     ViewpolicyComponent,
     RenewpolicyComponent,
-    ClaimComponent
+    ClaimComponent,
+    EmailValidator
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,7 +61,7 @@ import { ClaimComponent } from './claim/claim.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot()
   ],
-  providers: [AuthGuard,UserService,AlertService,ProductService,VehicleMasterService,
+  providers: [AuthGuard,UserService,ProductService,VehicleMasterService,
     PolicyService,QueryService,SharedDataService,UserLoginService,LoginRouteGuard,MasterDataService],
   bootstrap: [AppComponent]
 })
