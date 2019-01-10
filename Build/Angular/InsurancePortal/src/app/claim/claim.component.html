@@ -1,53 +1,57 @@
-
-
 <div id="policylist" class="container"><br>
-  <div class="panel panel-info">
-      <div class="panel-heading">
-          <h3 class="panel-title">Policy</h3>
-      </div>
-  
-  <div class="panel-body">
-      <form #regForm="ngForm" (ngSubmit)="submit(regForm)" ngNativeValidate>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Policy</h3>
+        </div>
+
+        <div class="panel-body">
+            <form #regForm="ngForm" (ngSubmit)="submit(regForm)" ngNativeValidate>
 
 
-          <!-- One "tab" for each step in the form: -->
+                <!-- One "tab" for each step in the form: -->
 
-          <div id="tab1" class="tab">
-              <h3>Claim Details:</h3>
+                <div id="tab1" class="tab">
+                    <h3>Claim Details:</h3>
 
-              <table class="table" border="0">
-                  <tr>
-                      <td><label for="policyId">Policy ID </label> <span> *</span></td>
-                      <td>
-                          <p><select id="policyId" name="policyId" required class="custom-select"
-                                  style="width:200px;">
-                                  <option value="">Select Policy</option>
-                                  <option *ngFor="let p of renewPolicyList" [ngValue]="p.policyId">{{ p.policyId }}</option>
-                              </select></p>
-                      </td>
-                      <td></td>
-                      <td>
-                          
-                      </td>
-                  </tr>
-                  <tr>
-
-   
-              </table>
-          </div>
-
-          <!-- One "tab" for each step in the form: -->
+                    <table class="table" border="0">
+                        <tr>
+                            <td><label for="policyId">Policy ID </label> <span> *</span></td>
+                            <td>
+                                <p><select id="policyId" name="policyId" required class="custom-select" style="width:200px;">
+                                        <option value="">Select Policy</option>
+                                        <option *ngFor="let p of renewPolicyList" [ngValue]="p.policyId">{{ p.policyId
+                                            }}</option>
+                                    </select></p>
+                            </td>
 
 
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="accidentDate">Accident Date </label> <span> *</span>
+                            </td>
+                            <td>
+                                <input type="date" id="accidentDate" name="accidentDate" 
+                                [(ngModel)]="this.accidentDate" required>
+                            </td>
 
-          <div id="tab5" style="overflow:auto;">
-              <div style="float:right;">
-                  <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
-                  <button type="submit" id="submit">Submit</button>
-              </div>
-          </div>
- 
-      </form>
-  </div>
-</div>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <!-- One "tab" for each step in the form: -->
+
+
+
+                <div id="tab5" style="overflow:auto;">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn" (click)="handleClick($event,-1)">Previous</button>
+                        <button type="submit" id="submit">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
