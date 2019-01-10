@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th>Policy Id</th>
+            <th *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">Customer Name</th>
             <th>Policy Start Date</th>
             <th>Policy End Date</th>
             <th>Policy Status</th>
@@ -22,6 +23,7 @@
           <tr *ngFor="let p of policyList;">
 
             <td>{{p.policyId}}</td>
+            <td *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">{{p.name}}</td>
             <td>{{p.policyStartDate | date:'EEE, d MMM,y' }}</td>
             <td>{{p.policyEndDate | date:'EEE, d MMM,y'}}</td>
             <td>{{p.status }}</td>

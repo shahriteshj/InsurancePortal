@@ -25,6 +25,7 @@ import com.jp.insurance.exceptions.InsuranceException;
 import com.jp.insurance.services.interfaces.IPolicyQuoteService;
 import com.jp.insurance.services.interfaces.IPolicyService;
 import com.jp.insurance.utilities.JsonUtilsJackson;
+import com.jp.insurance.view.entities.ViewPolicy;
 
 @RestController
 public class PolicyRestController {
@@ -158,9 +159,10 @@ public class PolicyRestController {
 	}
 
 	@RequestMapping(value = "/getPolicyList", method = RequestMethod.POST, headers = "Accept=application/json")
-	public List<Policy> getPolicyList(@RequestBody String input) throws InsuranceException {
+	public List<ViewPolicy> getPolicyList(@RequestBody String input) throws InsuranceException {
 
-		List<Policy> policyList = null;
+		List<Policy> policyList ;
+		List<ViewPolicy> viewPolicyList = new ArrayList<ViewPolicy>();
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
 
 		// load user details
@@ -169,11 +171,39 @@ public class PolicyRestController {
 
 		if (role.equalsIgnoreCase("CUSTOMER")) {
 			policyList = policyService.getPolicyList(username);
+			for(Policy policy:policyList){
+				ViewPolicy viewPolicy = new ViewPolicy();
+				viewPolicy.setCustomerId(policy.getCustomerId());
+				viewPolicy.setPolicyEndDate(policy.getPolicyEndDate());
+				viewPolicy.setPolicyStartDate(policy.getPolicyStartDate());
+				viewPolicy.setPolicyId(policy.getPolicyId());
+				viewPolicy.setStatus(policy.getStatus());
+				viewPolicy.setVehicleId(policy.getVehicleId());
+				
+				Customer customer = policyService.getCustomerDetails(policy.getCustomerId());
+				viewPolicy.setEmailId(username);
+				viewPolicy.setName(username);
+				viewPolicyList.add(viewPolicy);
+			}
 		} else if (role.equalsIgnoreCase("MANAGER") || role.equalsIgnoreCase("OPERATIONS")) {
 			policyList = policyService.getPolicyList();
+			for(Policy policy:policyList){
+				ViewPolicy viewPolicy = new ViewPolicy();
+				viewPolicy.setCustomerId(policy.getCustomerId());
+				viewPolicy.setPolicyEndDate(policy.getPolicyEndDate());
+				viewPolicy.setPolicyStartDate(policy.getPolicyStartDate());
+				viewPolicy.setPolicyId(policy.getPolicyId());
+				viewPolicy.setStatus(policy.getStatus());
+				viewPolicy.setVehicleId(policy.getVehicleId());
+				
+				Customer customer = policyService.getCustomerDetails(policy.getCustomerId());
+				viewPolicy.setEmailId(customer.getEmailId());
+				viewPolicy.setName(customer.getFirstName()+" " + customer.getLastName());
+				viewPolicyList.add(viewPolicy);
+			}
 		}
 
-		return policyList;
+		return viewPolicyList;
 	}
 	
 	
