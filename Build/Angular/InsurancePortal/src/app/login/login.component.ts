@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', data.roleName);
         console.log(data.roleName);
          if (data.responseText == "SUCCESS") {
-        //if (data.responseTextText == "SUCCESS") {
           console.log("I insert in admin")
           if (data.roleName.toLowerCase() == 'admin') {
 
