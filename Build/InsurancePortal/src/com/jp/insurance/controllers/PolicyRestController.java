@@ -1,5 +1,7 @@
 package com.jp.insurance.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +38,7 @@ public class PolicyRestController {
 	private IPolicyService policyService;
 
 	@RequestMapping(value = "/getQuote", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Float getQuote(@RequestBody String input) throws InsuranceException {
+	public Float getQuote(@RequestBody String input) throws InsuranceException, ParseException {
 		System.out.println(input);
 		CustomerVehicle customerVehicle = new CustomerVehicle();
 		HashMap<String, Object> inputMap = (HashMap<String, Object>) JsonUtilsJackson.jsonToMap(input);
@@ -49,7 +51,10 @@ public class PolicyRestController {
 		customerVehicle.setEngineNo((String) inputMap.get("engineNo"));
 		customerVehicle.setFuelType((String) inputMap.get("fuelType"));
 		customerVehicle.setManufacturingYear((Integer) inputMap.get("manufacturingYear"));
-		customerVehicle.setRegistrationDate(new Date((String) inputMap.get("registrationDate")));
+		
+		Date regDate = new SimpleDateFormat("yyyy-MM-dd").parse((String) inputMap.get("registrationDate"));
+		
+		customerVehicle.setRegistrationDate(regDate);
 		customerVehicle.setVehicleRegCity((String) inputMap.get("vehicleRegCity"));
 		customerVehicle.setVehicleRegNo((String) inputMap.get("vehicleRegNo"));
 		System.out.println(customerVehicle);
@@ -59,7 +64,7 @@ public class PolicyRestController {
 	}
 
 	@RequestMapping(value = "/savePolicy", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Long savePolicy(@RequestBody String input) throws InsuranceException {
+	public Long savePolicy(@RequestBody String input) throws InsuranceException, ParseException {
 		System.out.println(input);
 		CustomerVehicle customerVehicle = new CustomerVehicle();
 		Policy policy = new Policy();
@@ -79,7 +84,8 @@ public class PolicyRestController {
 		customerVehicle.setEngineNo((String) inputMap.get("engineNo"));
 		customerVehicle.setFuelType((String) inputMap.get("fuelType"));
 		customerVehicle.setManufacturingYear((Integer) inputMap.get("manufacturingYear"));
-		customerVehicle.setRegistrationDate(new Date((String) inputMap.get("registrationDate")));
+		Date regDate = new SimpleDateFormat("yyyy-MM-dd").parse((String) inputMap.get("registrationDate"));
+		customerVehicle.setRegistrationDate(regDate);
 		customerVehicle.setVehicleRegCity((String) inputMap.get("vehicleRegCity"));
 		customerVehicle.setVehicleRegNo((String) inputMap.get("vehicleRegNo"));
 		System.out.println(customerVehicle);
@@ -103,7 +109,10 @@ public class PolicyRestController {
 		payment.setNameOnCard((String) inputMap.get("cardExpiryMonth") + "/" + (String) inputMap.get("cardExpiryYear"));
 
 		payment.setPaymentDate(new Date());
-		payment.setPolicyAmount((Float) inputMap.get("policyAmount"));
+		
+		Double amount =(Double) inputMap.get("policyAmount");
+		
+		payment.setPolicyAmount(amount.floatValue());
 
 		Policy newPolicy = policyService.addNewPolicy(custEmail, policy, customerVehicle, payment);
 

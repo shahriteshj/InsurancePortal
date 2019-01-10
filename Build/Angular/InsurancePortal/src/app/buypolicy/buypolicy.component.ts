@@ -16,6 +16,10 @@ import { PolicyPayment } from '../model/PolicyPayment';
 })
 export class BuypolicyComponent implements OnInit {
 
+  registrationYearList=[2000,2001,2002,2003,2004,2005,2006,2007];
+
+
+  errorMessage:string;
   vehicleMasterList: VehicleMaster[];
   customerVehicle: CustomerVehicle;
   currentTab = 0;
@@ -40,11 +44,11 @@ export class BuypolicyComponent implements OnInit {
   datepipe: DatePipe;
 
   //Payment Data
-  cardNo: string = "1234-5678-9101";
-  nameOnCard: string = "Name";
+  cardNo: string = "";
+  nameOnCard: string = "";
   cvv: number;
-  cardExpiryMonth: number = 10;
-  cardExpiryYear: number = 2020;
+  cardExpiryMonth: number ;
+  cardExpiryYear: number ;
 
   policyId:number;
 
@@ -63,13 +67,22 @@ export class BuypolicyComponent implements OnInit {
     this._VehicleMasterService.getVehicleList().subscribe(data => {
       this.vehicleMasterList = <VehicleMaster[]>data
 
-    });
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error. Please try after sometime";
+  });
   }
 
   getVehicleMake() {
     this._VehicleMasterService.getVehicleMake().subscribe(data => {
       this.makeList = <string[]>data
-
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error fetching Vehicle Make. Please try after sometime";
     });
   }
 
@@ -117,6 +130,11 @@ export class BuypolicyComponent implements OnInit {
     this._policyService.addPolicy(username,this.customerVehicle,policyPayment).subscribe(policyId=>{console.log(policyId);
       this.policyId=<number>policyId
       this.router.navigate(['/viewpolicy']);
+    },
+    (error:any)=>{
+      console.log(error);
+      console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+      this.errorMessage="System Error saving Policy. Please try after sometime";
     });
 
   }
@@ -137,12 +155,17 @@ export class BuypolicyComponent implements OnInit {
     console.log("currentTab: " + this.currentTab);
     if (this.currentTab == 1) {
       // Get policy Quote
-      console.log("inside Loop");
+      
       this.loadCustomerVehcle();
       console.log(this.customerVehicle);
       this._policyService.getQuote(this.customerVehicle).subscribe(quote => {
         console.log(quote);
         this.price = Number(quote)
+      },
+      (error:any)=>{
+        console.log(error);
+        console.log((error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error');
+        this.errorMessage="System Error fetching Premium. Please try after sometime";
       });
     }
     // Otherwise, display the correct tab:
@@ -219,7 +242,7 @@ export class BuypolicyComponent implements OnInit {
   }
 
   loadCustomerVehcle() {
-    console.log(this.chasisNo);
+    if (!this.validateForm()) return false;
     let customerVehicle1: CustomerVehicle = {
       make: this.make,
       model: this.model,
@@ -234,22 +257,7 @@ export class BuypolicyComponent implements OnInit {
       vehicleRegCity: this.vehicleRegCity
     }
 
-
-    let customerVehicle2: CustomerVehicle = {
-      make: "HYUNDAI",
-      model: "i10",
-      submodel: "Dlite",
-      cc: "1866",
-      fuelType: "PETROL",
-      engineNo: "123456789",
-      chasisNo: "123456789",
-      vehicleRegNo: "123456789",
-      manufacturingYear: Number("2016"),
-      registrationDate: "01/01/2016",
-      vehicleRegCity: "Mumbai"
-    }
-
-    this.customerVehicle = customerVehicle2;
+    this.customerVehicle = customerVehicle1;
     console.log(this.customerVehicle);
   }
 
@@ -289,7 +297,7 @@ export class BuypolicyComponent implements OnInit {
   }
   modelChange(evt) {
     // console.log(evt.target.value)
-    this.submodel = evt.target.value;
+    this.model = evt.target.value;
     let i = 0;
     this.submodelList = [];
     this.vehicleMasterList.forEach(element => {
@@ -354,6 +362,23 @@ export class BuypolicyComponent implements OnInit {
         z.className="";
       }
 
+  }
+
+  fuelTypeChange(){
+    let z = document.getElementById("fuelType");
+    console.log(z);
+    var opt = z['options'];
+    var sel = opt.selectedIndex;
+    let selectedValue = opt[sel].value;
+    //var opt = z.options[sel].value;
+    console.log(selectedValue);
+     if (selectedValue == "") {
+        // add an "invalid" class to the field:
+        z.className = " invalid";
+        // and set the current valid status to false
+      }else{
+        z.className="";
+      }
   }
 
 }
