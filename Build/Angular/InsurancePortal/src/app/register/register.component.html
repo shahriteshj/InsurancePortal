@@ -1,7 +1,4 @@
 <div id="wrapper">
-
-
-
     <div class="container">
         <form class="form-horizontal" role="form" #registerFrm="ngForm" (ngSubmit)="Register(registerFrm)"
             ngNativeValidate>
@@ -12,7 +9,7 @@
                     <input type="text" name="firstName" id="firstName" pattern="[a-zA-Z0-9]+" required ngModel
                         #firstNameControl="ngModel" class="form-control" autofocus>
                     <div *ngIf="firstNameControl?.touched && firstNameControl?.invalid" class="alert alert-danger">
-                        <div *ngIf="firstNameControl.errors?.required">First Name is required</div>
+                        <div *ngIf="firstNameControl.errors?.required">First Name cannot be blank!</div>
                         <div *ngIf="firstNameControl.errors?.pattern">Please enter valid First Name</div>
                     </div>
                 </div>
@@ -23,37 +20,60 @@
                 <div class="col-sm-8">
                     <input type="text" id="lastName" name="lastName" pattern="[a-zA-Z0-9]+" required ngModel
                         #lastNameControl="ngModel" class="form-control" autofocus>
+                    <div *ngIf="lastNameControl?.touched && lastNameControl?.invalid" class="alert alert-danger">
+                        <div *ngIf="lastNameControl.errors?.required">Last Name cannot be blank!</div>
+                        <div *ngIf="lastNameControl.errors?.pattern">Please enter valid Last Name</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-4 control-label">Username(Email Id) * </label>
                 <div class="col-sm-8">
-                    <input type="email" id="username" name="username" (blur)="checkUserExists(usernameControl.value)"
-                        required class="form-control" [(ngModel)]="username" #usernameControl="ngModel">
+                    <input type="email" id="username" name="username" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                        (blur)="checkUserExists(usernameControl.value)" required class="form-control" [(ngModel)]="username"
+                        #usernameControl="ngModel">
                     <div *ngIf="usernameControl?.touched && usernameControl?.invalid" class="alert alert-danger">
-                        <div *ngIf="usernameControl.errors?.required">Username is required</div>
-                        <div *ngIf="usernameControl.errors?.pattern">Please enter valid Username</div>
+                        <div *ngIf="usernameControl.errors?.required">Username cannot be blank!</div>
+                        <div *ngIf="usernameControl.errors?.pattern">Username must contain only Email Address!</div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-4 control-label">Password *</label>
+
                 <div class="col-sm-8">
-                    <input type="password" id="password" name="password" required ngModel #passwordControl="ngModel"
-                        class="form-control">
+                    <input type="password" id="password" name="password" minlength="6" required pattern="[a-zA-Z0-9]+"
+                        required ngModel #passwordControl="ngModel" class="form-control" (keyup)="check()">
+                    <div *ngIf="passwordControl?.touched && passwordControl?.invalid" class="alert alert-danger">
+                        <div *ngIf="passwordControl.errors?.required">Password cannot be blank!</div>
+                        <div *ngIf="passwordControl.errors?.pattern">Please enter valid Password</div>
+                        <div *ngIf="passwordControl.errors?.minlength">Password must contain at least six
+                            characters!"</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-4 control-label">Confirm Password *</label>
+                <label for="confirmPassword" class="col-sm-4 control-label">Confirm Password *</label>
                 <div class="col-sm-8">
-                    <input type="password" id="confirmPassword" name="confirmPassword" required ngModel
-                        #passwordControl="ngModel" class="form-control">
+                    <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" required (keyup)="check()"
+                        pattern="[a-zA-Z0-9]+" required ngModel #confirmPasswordControl="ngModel" class="form-control">
+                    <div *ngIf="confirmPasswordControl?.touched && confirmPasswordControl?.invalid" class="alert alert-danger">
+                        <div *ngIf="confirmPasswordControl.errors?.required">Password cannot be blank!</div>
+                        <div *ngIf="confirmPasswordControl.errors?.pattern">Please enter valid Password</div>
+                        <div *ngIf="confirmPasswordControl.errors?.minlength">Password must contain at least six
+                            characters!"</div>
+                    </div>
+                    <div id='message'></div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="dob" class="col-sm-4 control-label">Date of Birth*</label>
                 <div class="col-sm-8">
                     <input type="date" id="dob" name="dob" ngModel #DOBControl="ngModel" required class="form-control">
+                    <div *ngIf="DOBControl?.touched && DOBControl?.invalid" class="alert alert-danger">
+                        <div *ngIf="DOBControl.errors?.required">Date of Birth cannot be blank!</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -61,6 +81,10 @@
                 <div class="col-sm-8">
                     <input type="phoneNumber" id="mobileNo" name="mobileNo" pattern="^[0-9]{10}$" required ngModel
                         #mobileNoControl="ngModel" class="form-control">
+                        <div *ngIf="mobileNoControl?.touched && mobileNoControl?.invalid" class="alert alert-danger">
+                                <div *ngIf="mobileNoControl.errors?.pattern">Please enter valid Mobile number!</div>
+                                <div *ngIf="mobileNoControl.errors?.required">Phone number cannot be blank!</div>
+                            </div>
                     <span class="help-block">Your phone number won't be disclosed anywhere </span>
                 </div>
             </div>
@@ -69,19 +93,32 @@
                 <div class="col-sm-8">
                     <input type="text" name="address1" ngModel pattern="[a-zA-Z0-9 ,/]+" #address1Control="ngModel"
                         required class="form-control">
+                        <div *ngIf="address1Control?.touched && address1Control?.invalid" class="alert alert-danger">
+                                <div *ngIf="address1Control.errors?.required">Addresss cannot be blank!</div>
+                                <div *ngIf="address1Control.errors?.pattern">Addresss must contain valid characters!</div>
+                            </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="address2" class="col-sm-4 control-label">Address2 *</label>
                 <div class="col-sm-8">
-                    <input type="text" name="address2" ngModel pattern="[a-zA-Z0-9 ]+" #address2Control="ngModel"
+                    <input type="text" name="address2" ngModel pattern="[a-zA-Z0-9 ,/]+" #address2Control="ngModel"
                         required class="form-control">
+                        <div *ngIf="address2Control?.touched && address2Control?.invalid" class="alert alert-danger">
+                                <div *ngIf="address2Control.errors?.required">Addresss cannot be blank!</div>
+                                <div *ngIf="address2Control.errors?.pattern">Addresss must contain valid characters!</div>
+                            </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="address3" class="col-sm-4 control-label">Address3</label>
                 <div class="col-sm-8">
-                    <input type="text" name="address3" ngModel pattern="[a-zA-Z0-9 ]+" #address3Control="ngModel" class="form-control">
+                    <input type="text" name="address3" ngModel pattern="[a-zA-Z0-9 ,/]+" #address3Control="ngModel" 
+                    required class="form-control">
+                    <div *ngIf="address3Control?.touched && address3Control?.invalid" class="alert alert-danger">
+                            <div *ngIf="address3Control.errors?.required">Addresss cannot be blank!</div>
+                            <div *ngIf="address3Control.errors?.pattern">Addresss must contain valid characters!</div>
+                        </div>
                 </div>
             </div>
             <div class="form-group">
@@ -105,8 +142,13 @@
             <div class="form-group">
                 <label for="pincode" class="col-sm-4 control-label">Pincode *</label>
                 <div class="col-sm-8">
-                    <input type="text" name="pincode" ngModel pattern="^[0-9]{6}$" #pincodeControl="ngModel" required
+                    <input type="text" name="pincode" ngModel pattern="^[0-9]{6}$" minlength="6" #pincodeControl="ngModel" required
                         class="form-control">
+                        <div *ngIf="pincodeControl?.touched && pincodeControl?.invalid" class="alert alert-danger">
+                                <div *ngIf="pincodeControl.errors?.required">Pincode cannot be blank!</div>
+                                <div *ngIf="pincodeControl.errors?.pattern">Please enter numbers only!</div>
+                                <div *ngIf="pincodeControl.errors?.pattern">Pincode cannot be more than 6 digits!"</div>
+                            </div>
 
                 </div>
             </div>
@@ -114,8 +156,7 @@
                 <label for="securityQuestion" class="col-sm-4 control-label">Security Question *</label>
                 <div class="col-sm-8">
                     <select id="securityQuestion" name="securityQuestion" ngModel required>
-                        <option value="">Select Security Question</option>
-                        <!-- <option *ngFor="let q of securityQuestionList" [ngValue]="q.securityId">{{  }}</option> -->
+                        <option value="">Select Security Question</option>                       
                         <option value="1">Mothers maiden name</option>
                         <option value="2">Favorite color</option>
                         <option value="3">Favorite City</option>
@@ -127,6 +168,9 @@
                 <div class="col-sm-8">
                     <input type="text" name="securityAnswer" ngModel pattern="[a-zA-Z0-9 ]+" #answerControl="ngModel"
                         required class="form-control">
+                        <div *ngIf="answerControl?.touched && answerControl?.invalid" class="alert alert-danger">
+                                <div *ngIf="answerControl.errors?.required">Security Answer cannot be blank!</div>                                
+                            </div>
                 </div>
             </div>
             <div class="form-group">
