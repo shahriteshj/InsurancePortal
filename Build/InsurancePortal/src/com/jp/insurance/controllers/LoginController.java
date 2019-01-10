@@ -84,10 +84,10 @@ public class LoginController {
 
 		String newUserName = (String) inputMap.get("username");
 		newUserName = newUserName.toUpperCase();
-		user = userService.checkUserExists(newUserName);
-		String existingUserName = user.getUsername();
+		User existingUser = userService.checkUserExists(newUserName);
 
-		if (existingUserName.equals(newUserName)) {
+
+		if ( existingUser!= null && existingUser.getUsername().equals(newUserName)) {
 			return "{\"response\":\"FAILURE\"}";
 		} else {
 			user.setUsername(((String) inputMap.get("username")).toUpperCase());
