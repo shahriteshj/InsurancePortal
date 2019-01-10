@@ -52,6 +52,8 @@ export class RegisterComponent implements OnInit {
 
   Register(registerFrm) {
 
+    if (!this.validateForm()) return false;
+
     this.loading = true;
 
     let customer: Customer = {
@@ -103,6 +105,28 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  validateForm(){
+    let valid = true;
+   
+
+    let x, y, i, z;
+
+    let password = document.getElementById("password");
+    let confirmPassword = document.getElementById("confirmPassword");
+
+    console.log(password.value);
+    console.log(confirmPassword.value);
+
+    if(password.value!=confirmPassword.value){
+      return false;
+    }
+
+    
+
+    
+    return valid;
+  }
+
   usernameControl: string;
 
   checkUserExists(username: string) {
@@ -117,10 +141,7 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  registerUser(user: User, customer: Customer) {
 
-
-  }
 
   stateChange(e) {
     this.state = e.target.value;
@@ -140,10 +161,10 @@ export class RegisterComponent implements OnInit {
     if (document.getElementById('password').value ==
       document.getElementById('confirmPassword').value) {
       document.getElementById('message').style.color = 'green';
-      document.getElementById('message').innerHTML = 'matching';
+      document.getElementById('message').innerHTML = 'Password and Confirm Password matching';
     } else {
       document.getElementById('message').style.color = 'red';
-      document.getElementById('message').innerHTML = 'not matching';
+      document.getElementById('message').innerHTML = 'Password and Confirm Password not matching';
     }
   }
 

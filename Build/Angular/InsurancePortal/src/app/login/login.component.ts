@@ -49,9 +49,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(data));
         localStorage.setItem('username', data.username);
         localStorage.setItem('role', data.roleName);
+        this.sharedDataService.username=data.name;
+        this.sharedDataService.lastSuccessfulLoginDate=data.lastSuccessfulLoginDate;
         console.log(data.roleName);
          if (data.responseText == "SUCCESS") {
-          console.log("I insert in admin")
+        //if (data.responseTextText == "SUCCESS") {
+          
           if (data.roleName.toLowerCase() == 'admin') {
 
             this.sharedDataService.isAdminUser = true;
@@ -80,6 +83,8 @@ export class LoginComponent implements OnInit {
         }
         else {
           console.log(data.responseText);
+          isValid = false;
+          this.sharedDataService.isUserLoggedIn = false;
           if (data.responseText != null) {
             this.errorMessage = data.responseText;
           } else {

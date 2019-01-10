@@ -8,6 +8,8 @@ export class SharedDataService{
     isOperationsUser: boolean;
     isCustomerUser:boolean;
     isUserLoggedIn : boolean;
+    username:string;
+    lastSuccessfulLoginDate:string;
     
 
     constructor(private localStorage: LocalStorageService){
@@ -20,6 +22,7 @@ export class SharedDataService{
         this.isManagerUser =   (this.localStorage.retrieve("user")== null) ? false : (<String>this.localStorage.retrieve("user").toLowerCase()== 'manager' ? true: false);
         this.isOperationsUser =   (this.localStorage.retrieve("user")== null) ? false : (<String>this.localStorage.retrieve("user").toLowerCase()== 'operations' ? true: false);
         this.isCustomerUser =   (this.localStorage.retrieve("user")== null) ? false : (<String>this.localStorage.retrieve("user").toLowerCase()== 'customer' ? true: false);
+        this.username = this.localStorage.retrieve("username");
     }
 
     clear(){

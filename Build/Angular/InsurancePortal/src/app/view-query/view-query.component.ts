@@ -71,7 +71,9 @@ export class ViewQueryComponent implements OnInit {
       (query:any) => {      
         console.log(query)        
         if (query.response == "Success") {
+          this.getQueryList();
           alert("Query Ref # " + this.queryId +" updated sucessfully.");
+
           this._router.navigate(['/viewquery']);          
         } else {                         
           alert("Failed to update query.");

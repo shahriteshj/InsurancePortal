@@ -97,10 +97,12 @@ public class UserService implements Serializable, IUserService {
 			} else {
 				// password invalid
 				user.setFailedLoginAttempt(user.getFailedLoginAttempt() + 1);
+				user.setResponseText("INVALID PASSWORD");
 				if (user.getFailedLoginAttempt() >= 5) {
 					user.setAccountLocked('Y');
 				}
 				userDao.updateUser(user);
+				return user;
 			}
 		}
 		return null;

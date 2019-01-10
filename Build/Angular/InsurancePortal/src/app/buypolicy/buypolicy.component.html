@@ -70,8 +70,8 @@
                             <td>
                                 <p><input type="text" id="vehicleRegNo" name="vehicleRegNo" pattern="[a-zA-Z0-9-]+"
                                         [(ngModel)]="vehicleRegNo" required #vehicleRegNoControl="ngModel"></p>
-                                <div *ngIf="vehicleRegNoControl?.touched && vehicleRegNoControl?.invalid" class="alert alert-danger">
-                                    <div *ngIf="vehicleRegNoControl.errors?.pattern">Please enter valid Vehicle Reg no</div>
+                                <div *ngIf="vehicleRegNoControl?.touched && vehicleRegNoControl.errors?.pattern" class="alert alert-danger">
+                                    <div>Please enter valid Vehicle Reg no</div>
                                 </div>
                             </td>
                         </tr>
