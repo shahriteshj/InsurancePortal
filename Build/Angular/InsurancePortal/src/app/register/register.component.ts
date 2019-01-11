@@ -128,35 +128,12 @@ export class RegisterComponent implements OnInit {
     let password = document.getElementById("password");
     let confirmPassword = document.getElementById("confirmPassword");
 
-    // console.log(password.value);
-    // console.log(confirmPassword.value);
-
     if(password.value!=confirmPassword.value){
       return false;
     }
 
-//     var date = new Date();
-
-// let birthdate = document.getElementById("dob");
-// if(date > birthdate.value) {
-//   return false;
-// }
-
     return valid;
   }
-
-  // birthdateError:boolean=false;
-
-  // validateDate(birthdate:Date){
-  //   console.log("in bday validate");
-  //   let today = new Date();
-  //   if(birthdate> today){
-  //     this.birthdateError=true;
-  //   }else{
-  //     this.birthdateError=false;
-  //   }
-
-  // }
 
   usernameControl: string;
 
