@@ -15,6 +15,7 @@
             <th>QUERY ID</th>
             <th>NAME</th>
             <th>TYPE</th>
+            <th *ngIf="sharedDataService.isManagerUser">ASSIGNED TO</th>
             <th>STATUS</th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
             <td style="height: 50px">{{q.queryId}}</td>
             <td style="height: 50px">{{q.emailId}}</td>
             <td style="height: 50px">{{q.queryType}}</td>
+            <td *ngIf="sharedDataService.isManagerUser" style="height: 50px" >{{q.assignedTo}}</td>
             <td style="height: 50px">{{q.status}}</td>
             <td style="height: 50px"><button (click)="viewQueryDetails(q.queryId)">View Details</button></td>
           </tr>

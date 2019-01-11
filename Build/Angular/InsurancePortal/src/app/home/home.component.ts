@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from '../service/sharedData.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   userVerified:Boolean=true;
-  constructor() { }
+  constructor( private sharedDataService: SharedDataService) { }
 
   ngOnInit() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    this.sharedDataService.clear();
   }
 
 }

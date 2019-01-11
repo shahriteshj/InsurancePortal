@@ -29,10 +29,10 @@
             <!-- <td>{{p.status }}</td> -->
             <td *ngIf="(p.status=='NEW') && (p.policyStartDate < this.today) 
             && (p.policyEndDate>this.today)">ACTIVE</td>
-  
-  <td *ngIf="(p.status=='RENEWED') && p.policyEndDate < this.today">EXPIRED</td>
-  <td *ngIf="(p.status=='RENEWED') && p.policyEndDate > this.today">ACTIVE</td>
-  <td *ngIf="(p.status=='NEW' ) && p.policyStartDate > this.today">FUTURE</td>
+            <td *ngIf="(p.status=='NEW') && p.policyStartDate < this.today && p.policyEndDate < this.today">EXPIRED</td>
+            <td *ngIf="(p.status=='RENEWED') && p.policyEndDate < this.today">EXPIRED</td>
+            <td *ngIf="(p.status=='RENEWED') && p.policyEndDate > this.today">ACTIVE</td>
+            <td *ngIf="(p.status=='NEW' ) && p.policyStartDate > this.today">FUTURE</td>
             <td><button (click)="viewDetails(p.policyId)">View Details</button></td>
           </tr>
           <tr *ngIf="!policyList || policyList.length==0">

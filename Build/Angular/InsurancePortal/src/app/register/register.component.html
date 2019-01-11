@@ -33,7 +33,7 @@
                         (blur)="checkUserExists(usernameControl.value)" required class="form-control" [(ngModel)]="username"
                         #usernameControl="ngModel">
                     <div *ngIf="usernameControl?.touched && usernameControl?.invalid" class="alert alert-danger">
-                        <div *ngIf="usernameControl.errors?.required">Username cannot be blank!</div>
+                        <div *ngIf="usernameControl.errors?.required">Username already exists!</div>
                         <div *ngIf="usernameControl.errors?.pattern">Username must contain only Email Address!</div>
                     </div>
                 </div>
