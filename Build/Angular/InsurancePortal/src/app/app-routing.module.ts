@@ -14,6 +14,8 @@ import {LoginRouteGuard} from './service/loginGuard.service';
 import { ViewpolicyComponent } from './viewpolicy/viewpolicy.component';
 import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
 import { ClaimComponent } from './claim/claim.component';
+import { ContactusComponent } from './contactus/contactus.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'admin', component: MenuComponent, canActivate: [LoginRouteGuard]  },
   { path: 'customer', component: MenuComponent, canActivate: [LoginRouteGuard]  },
   { path: 'manager', component: MenuComponent, canActivate: [LoginRouteGuard]  },
+  { path: 'contact-us', component: ContactusComponent, canActivate: [LoginRouteGuard]  },
   { path: 'operations', component: MenuComponent, canActivate: [LoginRouteGuard]  },
   { path: 'buypolicy', component: BuypolicyComponent, canActivate: [LoginRouteGuard]  },
   { path: 'viewpolicy', component: ViewpolicyComponent, canActivate: [LoginRouteGuard]  },

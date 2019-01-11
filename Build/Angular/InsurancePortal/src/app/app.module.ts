@@ -33,6 +33,7 @@ import {MasterDataService} from './service/masterDataservice';
 import { RenewpolicyComponent } from './renewpolicy/renewpolicy.component';
 import { ClaimComponent } from './claim/claim.component';
 import {EmailValidator} from './validators/emailValidator';
+import { ContactusComponent } from './contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {EmailValidator} from './validators/emailValidator';
     ViewpolicyComponent,
     RenewpolicyComponent,
     ClaimComponent,
-    EmailValidator
+    EmailValidator,
+    ContactusComponent
   ],
   imports: [
     BrowserAnimationsModule,

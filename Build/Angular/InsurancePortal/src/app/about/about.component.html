@@ -1,0 +1,142 @@
+<!-- <div class="main">
+
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <img src="../../assets/images/Ritesh.png" alt="Ritesh" style="width:50%">
+            <div class="container">
+                <h2>Ritesh Shah</h2>
+                <p class="title">CEO &amp; Founder</p>
+                <p></p>
+                <p>Ritesh.shah@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <img src="../../assets/images/Darsh.png" alt="Darsh" style="width:50%">
+            <div class="container">
+                <h2>Darshan Chaudhari</h2>
+                <p class="title">Art Director</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>darshan.chaudhari@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        .column {
+            float: left;
+            width: 33.3%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+        }
+
+        @media screen and (max-width: 650px) {
+            .column {
+                width: 100%;
+                display: block;
+            }
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 0 16px;
+        }
+
+        .container::after,
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .title {
+            color: grey;
+        }
+
+        .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>About Us</h2>
+    <p><i>Insure Motion Insurance Co. Limited , is the first private sector Motor
+            insurance company in India to be licensed in October 2000 by the Insurance Regulatory and Development
+            Authority of India. 
+
+            Insure Motion has been providing innovative Motor insurance solutions directly as well as through its intermediaries and affinity partners. The company offers Motor,
+            Insurance to individual customers.
+
+            Insure Motion’s Accident claims process received ISO 9001-2015 certification for effective
+            customer service delivery. The company has also won the "Celent Model Insurer Asia Award" for 2013 and 2014
+            for developing an intelligent claims management system to improve staff productivity and increased customer
+            satisfaction..</i></p>
+    <br>
+
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="../../assets/images/Ritesh.png" alt="Ritesh" style="width:50%">
+                <div class="container">
+                    <h2>Ritesh</h2>                   
+                    <p></p>
+                    <p>ritesh@gmail.com</p>
+                    <p><button class="button">Contact</button></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="../../assets/images/Darsh.png" alt="Darsh" style="width:50%">
+                <div class="container">
+                    <h2>Darshan</h2>                   
+                    <p></p>
+                    <p>darshan@gmail.com</p>
+                    <p><button class="button">Contact</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
