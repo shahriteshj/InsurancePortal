@@ -33,7 +33,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
 
     this.getStateList();
+    let today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    
+    var yyyy = today.getFullYear();
+    let strToday;
+    if(mm<10){
+      strToday = yyyy + "-0"+ mm+"-"+dd;
+    }else{
+      strToday = yyyy + "-"+ mm+"-"+dd;
+    }
+    
+    let element = document.getElementById('dob');
 
+    element.setAttribute("max",strToday);
 
   }
   validateUsername(): any {
@@ -41,11 +55,11 @@ export class RegisterComponent implements OnInit {
   }
 
   getStateList() {
-    this._masterDataService.getStateList().subscribe(stateList => { console.log(stateList); this.stateList = <string[]>stateList });
+    this._masterDataService.getStateList().subscribe(stateList => {  this.stateList = <string[]>stateList });
   }
 
   getCityList(stateName: string) {
-    this._masterDataService.getCityList(stateName).subscribe(cityList => { console.log(cityList); this.cityList = <string[]>cityList });
+    this._masterDataService.getCityList(stateName).subscribe(cityList => {  this.cityList = <string[]>cityList });
   }
 
 
@@ -121,11 +135,28 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    
+//     var date = new Date();
 
-    
+// let birthdate = document.getElementById("dob");
+// if(date > birthdate.value) {
+//   return false;
+// }
+
     return valid;
   }
+
+  // birthdateError:boolean=false;
+
+  // validateDate(birthdate:Date){
+  //   console.log("in bday validate");
+  //   let today = new Date();
+  //   if(birthdate> today){
+  //     this.birthdateError=true;
+  //   }else{
+  //     this.birthdateError=false;
+  //   }
+
+  // }
 
   usernameControl: string;
 
@@ -150,14 +181,11 @@ export class RegisterComponent implements OnInit {
     let selectElementText = selectedOptions[selectedIndex].text;
     console.log(selectElementText + " " + this.state);
     this.state = selectElementText;
-    console.log(this.state);
-
-    //console.log(this.modelList);
+    
     this.getCityList(this.state);
   }
 
   check() {
-      //console.log(document.getElementById('password').value);
     if (document.getElementById('password').value ==
       document.getElementById('confirmPassword').value) {
       document.getElementById('message').style.color = 'green';
