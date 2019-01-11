@@ -26,7 +26,7 @@
             <td *ngIf="sharedDataService.isOperationsUser || sharedDataService.isManagerUser">{{p.name}}</td>
             <td>{{p.policyStartDate | date:'EEE, d MMM,y' }}</td>
             <td>{{p.policyEndDate | date:'EEE, d MMM,y'}}</td>
-            <td>{{p.status }}</td>
+            <!-- <td>{{p.status }}</td> -->
             <td *ngIf="(p.status=='NEW') && (p.policyStartDate < this.today) 
             && (p.policyEndDate>this.today)">ACTIVE</td>
   
