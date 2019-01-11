@@ -37,4 +37,12 @@ export class MenuBarComponent implements OnInit {
     console.log(this.sharedDataService.isManagerUser);
   }
 
+  logout(){
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    this.sharedDataService.clear();
+    this._router.navigate(['/home']);
+  }
+
 }

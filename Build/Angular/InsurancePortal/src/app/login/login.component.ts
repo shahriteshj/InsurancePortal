@@ -49,9 +49,14 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(data));
         localStorage.setItem('username', data.username);
         localStorage.setItem('role', data.roleName);
+        this.localStorage.store('currentUser', JSON.stringify(data));
+        this.localStorage.store('username', data.username);
+        this.localStorage.store('role', data.roleName);
+        this.localStorage.store('user', data.roleName);
         this.sharedDataService.username=data.name;
         this.sharedDataService.lastSuccessfulLoginDate=data.lastSuccessfulLoginDate;
         console.log(data.roleName);
+        
          if (data.responseText == "SUCCESS") {
         //if (data.responseTextText == "SUCCESS") {
           
@@ -82,16 +87,20 @@ export class LoginComponent implements OnInit {
 
         }
         else {
-          console.log(data.responseText);
+          //console.log(data.responseText);
           isValid = false;
           this.sharedDataService.isUserLoggedIn = false;
+          if(data.responseText==null){
+            console.log("username not found");
+            this.errorMessage = "Username not found";
+          }else{
           if (data.responseText != null) {
             this.errorMessage = data.responseText;
           } else {
             this.errorMessage = "Username not found";
-          }
+          }}
 
-          this._router.navigate(['/login']);
+          //this._router.navigate(['/login']);
           this.loading = false;
         }
         this.localStorage.store("valid", isValid);
